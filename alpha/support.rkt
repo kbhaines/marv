@@ -102,15 +102,10 @@
 
 (define (config-reduce cfg attrs) (hash-take cfg attrs))
 
-(define (make-full-ref full-id attrs)
-  (string->symbol (format "~a/~a" full-id attrs)))
-
 (define (handle-override base op verb confex)
   (case op
     ['equals confex]
     ['overlay (config-overlay confex (base verb))]))
-
-(define STATE (make-parameter (hash)))
 
 (define (dot-op tgt attr)
   (log-marv-debug "dot-op: ~a . ~a" tgt attr)
@@ -133,6 +128,7 @@
 
   (define (try-resolve e)
 
+    ; TODO45 - resolve-ref here vs resources.rkt version
     (define (resolve-ref r)
       (log-marv-debug "-> attempting to resolve: ~a" r)
       (hash-nref

@@ -81,6 +81,7 @@ assertion: /"assert" /"(" expression comparison-operator expression /")"
 
 ; type is explicitly allowed as it's common, and we need 'type' as a lexical token
 ; also allow STRING to allow user to avoid marv keywords
+; TODO45 - remove?
 named-parameter: ( STRING | IDENTIFIER | "type" ) /"=" expression
 
 type-decl: /"type" type-id /"=" ( /"{" func-decl+ [ type-wild ]* /"}" | type-parameters )

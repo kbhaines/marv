@@ -276,6 +276,8 @@
 
       ; TODO45 - add type checking
       [(_ term:string) (syntax/loc stx term)]
+      ; TODO45 - for compile speed, add some concrete type checks
+      ; e.g. string, to avoid calling check-for-ref
       [(_ term) (syntax/loc stx (check-for-ref term))]
       ))
 
@@ -357,6 +359,7 @@
     (syntax-parse stx
       [(_ attr:attr-decl ...)
        ; TODO45 - should resolve-terms wrap make-imm-hash and 'list'?
+       ; TODO45 - compile speed; the internal lambda might be causing slow-down
        #'(make-immutable-hasheq
           (list (cons 'attr.name (resolve-terms (lambda(x)x) attr.expr)) ...)) ]
       [_ (displayln stx)(raise "m-map-spec")]))

@@ -5,6 +5,7 @@
 (require racket/pretty)
 (require racket/string)
 (require marv/core/config)
+(require marv/log)
 (require marv/utils/hash)
 (require marv/core/values)
 
@@ -92,14 +93,17 @@
   (foldl flat '() attrs))
 
 (define (resolve-ref r get-by-gid)
-  ; (log-marv-debug "-> attempting to resolve: ~a" r)
+  ; TODO45 - refs can be values (which are only immutables, atm)
   (if (ref? r)
-      (hash-nref (get-by-gid (ref-gid r)) (id->list (ref-path r)) (lambda()(raise "arg")))
+      (hash-nref
+       (get-by-gid (ref-gid r))
+       (id->list (ref-path r))
+       (lambda()(raise "arg")))
       r))
 
 (define (resolve-deferred d get-by-gid)
 
-  ; (log-marv-debug "Resolving: ~a:~a:~a" op term1 term2)
+  (log-marv-debug "resolve-deferred: ~a" d)
 
   (define (handle-term t)
     (define tr (resolve-ref t get-by-gid))
@@ -113,5 +117,8 @@
 (define (config-resolve cfg get-by-gid)
   (define (process _ v)
     ; (displayln (format "===> LOOKING at (~a) ~a " (deferred? v) (pretty-format v)))
-    (if (deferred? v) (resolve-deferred v get-by-gid) (resolve-ref v get-by-gid)))
+    ; TODO45 - can be values (which are only immutables, atm)
+    (if (deferred? (unpack-value v))
+        (update-val v (lambda(vv)(resolve-deferred vv get-by-gid)))
+        (update-val v (lambda(vv)(resolve-ref vv get-by-gid)))))
   (hash-apply cfg process))
