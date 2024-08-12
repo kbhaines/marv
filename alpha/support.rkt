@@ -22,9 +22,7 @@
 (provide getenv-or-raise
          def-res
          with-src-handlers
-         set-return
          send-to-driver
-         module-call
          b64enc b64dec
          handle-override
          config-overlay config-reduce
@@ -48,9 +46,6 @@
 (define (error:excn msg)
   (raise (format "ERROR at ~a:~a :  ~a" 1 2 msg))) ;(syntax-source stx) (syntax-line stx)))
 
-; TODO45 - simplification of resource assembly probably means code to manage
-; namespace stuff isn't needed.
-
 (define (init-resources) (list null (hash)))
 (define RESOURCES (make-parameter (init-resources)))
 (define (add-resource id res)
@@ -60,7 +55,6 @@
   (RESOURCES (list (cons id idx) (hash-set hs id res)))
   res)
 (define (ordered-resource-ids) (reverse (car (RESOURCES))))
-(define (get-resource id) (hash-ref (cadr (RESOURCES)) id))
 (define (get-resources) (cadr (RESOURCES)))
 
 (define MODULE-PREFIX (make-parameter 'main))
@@ -69,17 +63,10 @@
 (define VAR-DEPS (make-parameter (init-var-deps)))
 (define (add-dep d) (VAR-DEPS (set-add (VAR-DEPS) d)))
 (define (get-deps) (set->list(VAR-DEPS)))
-(define (get-deps-set) (VAR-DEPS))
-
-(define (prefix-mod-id i) (core:prefix-id (MODULE-PREFIX) i))
-
-; TODO45 - module calls are simplified?
 
 (define (with-module-ctx params proc)
   (log-marv-debug "Switching into module-context: ~a" (MODULE-PREFIX))
-  (parameterize ([PARAMS params]
-                 )
-    ;  [RESOURCES (init-resources)])
+  (parameterize ([PARAMS params])
     (proc)))
 
 (define (with-resource-prefix id proc)
@@ -111,38 +98,6 @@
      (format "~a at ~a~nActual exception:~n~a~n)" expected src-locn e) given))
   (with-handlers ([exn? handle-exn]) (thunk)))
 
-; TODO45 module returns simpler
-(define RETURNS (make-parameter (hash)))
-(define (set-return v)
-  (log-marv-debug "** CURRENT RETURNS: ~a" (RETURNS))
-  (define id (MODULE-PREFIX))
-  (RETURNS (for/fold ([hs (RETURNS)])
-                     ([k (in-list (hash-keys v))])
-             (define new-id (make-full-ref id k))
-             (define val (hash-ref v k))
-             (log-marv-debug "Setting return value: ~a -> ~a" new-id val)
-             (hash-set hs new-id val)
-             )))
-
-; TODO45 - review if future-refs are still needed?
-(define (try-resolve-future-ref id #:fail-on-missing (fail-on-missing #f))
-  (define fail (if fail-on-missing
-                   (lambda() (log-marv-error "future-ref not found: ~a~n  in ~a" id (RETURNS))
-                     (error:excn "future-ref not found"))
-                   (lambda() (log-marv-warn "future-ref not yet resolved (~a)" id)(future-ref id))))
-  (hash-ref (RETURNS) id fail))
-
-
-(struct future-ref (ref) #:prefab)
-
-; TODO45 - is this still needed?
-(define (module-call var-id mod-proc params)
-  (log-marv-debug "Registering future invocation of ~a=~a(~a)" (prefix-mod-id var-id) mod-proc params)
-  (add-resource var-id (lambda(_)
-                         (log-marv-debug "calling ~a (~a)" var-id mod-proc)
-                         (mod-proc (prefix-mod-id var-id) params)))
-  (future-ref #f))
-
 (define (config-overlay top bottom) (hash-union top bottom #:combine (lambda (t _) t)))
 
 (define (config-reduce cfg attrs) (hash-take cfg attrs))
@@ -163,10 +118,6 @@
     (cond
       [(resource? tgt) (ref (resource-gid tgt) attr)]
       [(hash? tgt) (hash-ref tgt attr)]
-      [(future-ref? tgt)
-       (define resolved (try-resolve-future-ref attr))
-       (log-marv-debug "(future-ref, being re-linked to ~a)" resolved)
-       resolved]
       [else (raise "unsupported ref type")]))
   (when (ref? r) (add-dep r))
   r)
@@ -237,5 +188,5 @@
 (define (raise/src locn msg) (raise (~a "Error:" msg " at " locn) ))
 
 (define (check-operator-types locn test1? test2? term1 term2)
-  ;TODO45 - check that indirection isn't needed, term1 & 2 should have been evaluated by now
-  (unless (and (test1? term1) (test2? term2)) (raise (~a "terms not valid at:" locn "~n got " term1 "~n and " term2))))
+  (unless (and (test1? term1) (test2? term2))
+    (raise (~a "terms not valid at:" locn "~n got " term1 "~n and " term2))))

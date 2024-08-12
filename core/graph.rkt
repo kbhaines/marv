@@ -20,7 +20,6 @@
 (define/contract (resources-dag modl)
   (resource-set/c . -> . graph?)
   (define edges (append-map (lambda (k) (resource-edges k (resource-ref modl k))) (resource-keys modl)))
-  (displayln edges)
   (define graph (validated-graph edges modl))
   (remove-vertex! graph root)
   graph)

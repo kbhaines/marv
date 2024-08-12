@@ -79,8 +79,6 @@ urivars: /"strvars" /"(" string-expression /")"
 uritemplate: /"expandvars" /"(" expression @opt-comma map-expression /")"
 assertion: /"assert" /"(" expression comparison-operator expression /")"
 
-module-invoke: IDENTIFIER /"=" ( MODULE-IDENTIFIER | IDENTIFIER ) /"(" (named-parameter [ /"," ] )* /")"
-
 ; type is explicitly allowed as it's common, and we need 'type' as a lexical token
 ; also allow STRING to allow user to avoid marv keywords
 named-parameter: ( STRING | IDENTIFIER | "type" ) /"=" expression

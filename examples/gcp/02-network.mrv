@@ -13,32 +13,32 @@ module main {
     primary-cidr = "10.0.1.0/24"
     proxy-cidr="10.0.2.0/24"
 
-    vpc = compute:network defaults <- {
+    vpc := compute:network defaults <- {
         name = imm: name
         description = strf("VPC for ~a" name)
         autoCreateSubnetworks = false
         routingConfig = { routingMode = "REGIONAL" }
     } 
 
-    primary-sn = compute:subnetwork defaults <- {
+    primary-sn := compute:subnetwork defaults <- {
         name = strf("~a-primary" name)
         description = strf("Primary subnet for ~a" name)
-        network = imm: vpc.selfLink
-        ipCidrRange =  imm: primary-cidr
+        network =  vpc.selfLink
+        ipCidrRange =   primary-cidr
     }
 
-    proxy-sn = compute:subnetwork defaults <- {
+    proxy-sn := compute:subnetwork defaults <- {
         name = strf("~a-proxy" name)
         description = strf("Proxy subnet for ~a" name)
-        ipCidrRange = imm: proxy-cidr
-        network = imm: vpc.selfLink
+        ipCidrRange =  proxy-cidr
+        network =  vpc.selfLink
         purpose = "REGIONAL_MANAGED_PROXY"
         role = "ACTIVE"
     }
 
     google-source-range = [ "130.211.0.0/22", "35.191.0.0/16" ]
     
-    fw-health-check = compute:firewall defaults <- {
+    fw-health-check := compute:firewall defaults <- {
         name = strf("~a-fw-allow-health-check" name)
         sourceRanges = google-source-range
         targetTags =  [ "load-balanced-backend" ]
@@ -46,7 +46,7 @@ module main {
         direction = "INGRESS"
     }
 
-    fw-proxies = compute:firewall defaults <- {
+    fw-proxies := compute:firewall defaults <- {
         name = strf("~a-fw-allow-proxies" name)
         sourceRanges = [ proxy-sn.ipCidrRange ]
         targetTags =  [ "load-balanced-backend" ]

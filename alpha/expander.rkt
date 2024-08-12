@@ -86,7 +86,6 @@
 
   (define (m-module-return stx)
     (syntax-parse stx
-      ; TODO45 - module returns can be simpler
       [(_ RETURNS ...) (syntax/loc stx (make-immutable-hasheq (list RETURNS ...)))]
       [_ (raise "m-module-return f*")]))
 
@@ -178,8 +177,6 @@
                 (append
                  (hash->list wildcard) ...
                  (list
-                  ; TODO45 'tid is wrong
-                  (cons '$type 'tid)
                   (cons 'body.func-id body.func-id) ...)))))))]
       [(_ (type-id tid) (type-parameters (type-id template-id) params ...))
        (syntax/loc stx (define tid (template-id params ... )))]
@@ -197,7 +194,6 @@
             (append
              (hash->list wildcard) ...
              (list
-              (cons '$type 'tid)
               (cons 'body.func-id body.func-id) ...)))))]
       ))
 
@@ -271,15 +267,12 @@
       ))
 
   (define (m-expression stx)
-    ; TODO45 - operator precedence, probably have to collapse everything
-    ; into this function
     (syntax-parse stx
       [(_ term1 "|" term2)
        (syntax/loc stx
          (with-handlers
              ([exn:fail? (lambda(_) term2)]) term1))]
       [(_ "[" terms ... "]") (syntax/loc stx (resolve-terms list terms ...))]
-      ; [(_ (expression e) "[" (num-expression ne) "]") (syntax/loc stx (resolve-terms list-ref e ne))]
 
       ; TODO45 - add type checking
       [(_ term:string) (syntax/loc stx term)]
@@ -407,12 +400,6 @@
                  (lambda() (def-res tid cfg))))))]
       ))
 
-  (define (m-module-invoke stx)
-    (syntax-parse stx
-      [(_ var-id:expr mod-id:expr PARAMS ...)
-       (syntax/loc stx
-         (define var-id (module-call 'var-id mod-id (make-immutable-hasheq (list PARAMS ...)) )))]))
-
   (define (m-named-parameter stx)
     (syntax-parse stx
       ; NB string has to be first!
@@ -437,7 +424,6 @@
 (define-syntax type-decl m-type-decl)
 (define-syntax type-template m-type-template)
 (define-syntax res-decl m-res-decl)
-(define-syntax module-invoke m-module-invoke)
 (define-syntax named-parameter m-named-parameter)
 (define-syntax func-call m-func-call)
 (define-syntax func-ident m-func-ident)
@@ -473,7 +459,7 @@
 (define-syntax type-wild m-generic-placeholder)
 
 (provide marv-spec outer-decl marv-module module-parameter decl var-decl res-decl
-         module-invoke named-parameter module-return return-parameter
+         named-parameter module-return return-parameter
          module-import
          module-export
          api-id transformer-id type-id
