@@ -181,7 +181,7 @@
 
 (define (has-immutable-ref-to-replaced-resource? new acc-ops)
   (define (match? _ v)
-    (and (iref? v) (op-replace? (hash-ref acc-ops (ref->id v)))))
+    (and (iref? v) (op-replace? (hash-ref acc-ops (ref-gid (unpack-value v))))))
   (match-resource-attr? new match?))
 
 (define (has-immutable-ref-to-updated-attr? new acc-ops) (ref-updated-attr? iref? new acc-ops))
@@ -195,7 +195,10 @@
   (match-resource-attr? new match?))
 
 (define (get-ref-diff ref acc-ops)
-  (define-values (id attr) (ref-split ref))
+  ; (define-values (id attr) (ref-split ref))
+  (define uref (unpack-value ref))
+  (define id (ref-gid uref))
+  (define attr (ref-path uref))
   (match (hash-ref acc-ops id)
     [(op-update _ diff) (hash-ref diff attr #f)]
     [(op-replace _ diff) (hash-ref diff attr #f)]

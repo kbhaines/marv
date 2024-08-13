@@ -56,7 +56,7 @@
   (vref? . -> . (values symbol? symbol?))
   (match (map string->symbol (string-split (symbol->string (ref-path (unpack-value r))) "/"))
     [(list id attrs) (values id attrs)]
-    [else (raise (format "Bad reference format:~a" (ref-path r)))]))
+    [else (raise (format "Bad reference format:~a" r))]))
 
 (define/contract (ref->id ref)
   (vref? . -> . symbol?)
