@@ -1,5 +1,6 @@
 #lang racket/base
 
+(require racket/string)
 (require racket/format)
 (require (for-syntax racket/base
                      racket/syntax
@@ -203,6 +204,7 @@
     (syntax-parse stx
       [(_ "lowercase" expr ) (syntax/loc stx (resolve-terms string-downcase expr))]
       [(_ "uppercase" expr ) (syntax/loc stx (resolve-terms string-downcase expr))]
+      [(_ "replace" expr from to ) (syntax/loc stx (resolve-terms string-replace expr (regexp from) to))]
       [(_ BUILTIN) (syntax/loc stx BUILTIN)]
       [_ (raise "nowt-builtin")]))
 

@@ -131,10 +131,11 @@
     ; TODO45 - resolve-ref here vs resources.rkt version
     (define (resolve-ref r)
       (log-marv-debug "-> attempting to resolve: ~a" r)
-      (hash-nref
-       (resource-config (hash-ref (get-resources) (ref-gid r)))
-       (id->list (ref-path r))
-       r))
+      (unpack-value
+       (hash-nref
+        (resource-config (hash-ref (get-resources) (ref-gid r)))
+        (id->list (ref-path r))
+        r)))
 
     (cond
       [(ref? e) (add-dep e) (resolve-ref e)]

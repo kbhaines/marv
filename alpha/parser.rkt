@@ -10,7 +10,7 @@ module-export: /"export" [ IDENTIFIER+ [ "as" IDENTIFIER ] ]+
 
 marv-module: [ "private" ] /"module" IDENTIFIER ["(" module-parameter+ ")"] /"{" statement+ [ module-return ] /"}"
 module-parameter: IDENTIFIER [ "=" expression ]
-module-return: /"return" /"{" (return-parameter /opt-comma)+ /"}"
+module-return: /"return" /"{" (return-parameter opt-comma)+ /"}"
 return-parameter: ( STRING | IDENTIFIER | "type" ) /"=" expression
 
 statement: decl | pprint | assertion
@@ -19,7 +19,7 @@ decl: var-decl | res-decl | func-decl
 pprint: /"pprint" expression
 comment: COMMENT
 var-decl: IDENTIFIER /"=" expression
-opt-comma: [ /"," ]
+@opt-comma: [ /"," ]
 
 res-decl: IDENTIFIER /":=" type-id map-expression
 
@@ -70,13 +70,14 @@ dot-expression: map-term /"." [ IDENTIFIER | @indexed-identifier ] [ @func-call-
 built-in: env-read | strf | base64encode | base64decode | urivars | uritemplate |assertion
         | "lowercase" /"(" string-expression /")"
         | "uppercase" /"(" string-expression /")"
+        | "replace" /"(" string-expression opt-comma string-expression opt-comma string-expression /")"
 
 env-read: /"env" /"(" STRING /")"
 strf: /"strf" /"(" string-expression [ /"," ]( expression [ /"," ] ) + /")"
 base64encode: /"base64encode" /"(" string-expression /")"
 base64decode: /"base64decode" /"(" string-expression /")"
 urivars: /"strvars" /"(" string-expression /")"
-uritemplate: /"expandvars" /"(" expression @opt-comma map-expression /")"
+uritemplate: /"expandvars" /"(" expression opt-comma map-expression /")"
 assertion: /"assert" /"(" expression comparison-operator expression /")"
 
 ; type is explicitly allowed as it's common, and we need 'type' as a lexical token

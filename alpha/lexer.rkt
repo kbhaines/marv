@@ -24,7 +24,7 @@
          "==" "!=" ":=" "++"
          "for/list"  "module" "private" "import" "export" "as" "return" "strf"
          "strvars" "expandvars" "base64encode" "base64decode" "using" "overlays" "abstracts" "assert"
-         "lowercase" "uppercase"
+         "lowercase" "uppercase" "replace"
          "type" "in" "pprint" "env" "true" "false"
          "imm:" ) (token lexeme lexeme)]
    [(:= 1 (char-set "+-/*.[](){}=:,|")) lexeme]
