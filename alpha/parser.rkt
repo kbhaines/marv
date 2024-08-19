@@ -8,10 +8,12 @@ outer-decl: func-decl | type-decl | type-template | var-decl | module-export
 
 module-export: /"export" [ IDENTIFIER+ [ "as" IDENTIFIER ] ]+
 
-marv-module: [ "private" ] /"module" IDENTIFIER ["(" module-parameter+ ")"] /"{" statement+ [ module-return ] /"}"
+marv-module: [ "private" ] /"module" IDENTIFIER "(" @arguments ")" /"{" statement+ [ module-return ] /"}"
 module-parameter: IDENTIFIER [ "=" expression ]
 module-return: /"return" /"{" (return-parameter opt-comma)+ /"}"
 return-parameter: ( STRING | IDENTIFIER | "type" ) /"=" expression
+
+arguments: (IDENTIFIER opt-comma)* (IDENTIFIER "=" expression opt-comma)*
 
 statement: decl | pprint | assertion
 decl: var-decl | res-decl | func-decl
@@ -25,7 +27,7 @@ res-decl: IDENTIFIER /":=" type-id map-expression
 
 ; TODO - mandatory at least one parameter, or func calls of e.g. C2.xxx(C1.yyy(B.zzz))
 ; may fail to parse correctly.
-func-decl: IDENTIFIER /"(" (IDENTIFIER [ /"," ])+ /")" /"=" expression
+func-decl: IDENTIFIER /"(" @arguments /")" /"=" expression
 func-call: IDENTIFIER @func-call-parameters
 
 func-call-parameters: /"(" (expression [ /"," ])+ /")"

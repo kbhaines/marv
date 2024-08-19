@@ -52,27 +52,28 @@
       [(_ spec:export-spec ...) (syntax/loc stx (provide spec.spec ...))]
       [_ (raise "nowt-module-export")]))
 
+  (define-splicing-syntax-class named-argument
+    #:attributes (name value)
+    #:literals (expression)
+    (pattern (~seq name:id "=" value)))
+
   (define (m-marv-module stx)
+
     (syntax-parse stx #:datum-literals (statement module-return)
       [(_ (~optional (~and private? "private"))
-          mod-id:expr (~optional (~seq "(" PARAMS ... ")")
-                                 #:defaults ([(PARAMS 1) null]))
+          mod-id:expr (~seq "(" IDS:id ... NAMED-ARGUMENTS:named-argument ... ")")
           (statement STMT) ...
           (~optional RETURN #:defaults ([RETURN #'(hash)])))
        #:with MAYBE-PRIVATE (if (attribute private?) #'(void) #'(provide mod-id))
        (syntax/loc stx
          (begin
-           (define (mod-id params)
+           (define (mod-id IDS ... [keywp (hash)])
+             (define NAMED-ARGUMENTS.name
+               (hash-ref keywp 'NAMED-ARGUMENTS.name NAMED-ARGUMENTS.value)) ...
              (define resid-prefix (get-resource-prefix))
-             (log-marv-debug "** Invoking module: ~a=~a(~a)" resid-prefix 'mod-id params)
-             (define returns
-               (with-module-ctx params
-                 (lambda ()
-                   PARAMS ...
-                   STMT ...
-                   ;   (gen-resources)
-                   RETURN
-                   )))
+             (log-marv-debug "** Invoking module: ~a=~a(~a)" resid-prefix 'mod-id keywp)
+             STMT ...
+             (define returns RETURN)
              (log-marv-debug "** module invocation completed for ~a.~a" resid-prefix 'mod-id)
              (log-marv-debug "-> resources: ~a" (ordered-resource-ids))
              (log-marv-debug "-> returns: ~a" returns)
@@ -156,9 +157,12 @@
 
   (define (m-func-decl stx)
     (syntax-parse stx
-      [(_ id:expr param ... BODY)
+      [(_ id:expr IDS:id ... NAMED-ARGUMENTS:named-argument ... BODY)
        (syntax/loc stx
-         (define (id param ...) BODY))]
+         (define (id IDS ... [ keywp (hash)])
+           (define NAMED-ARGUMENTS.name
+             (hash-ref keywp 'NAMED-ARGUMENTS.name NAMED-ARGUMENTS.value)) ...
+           BODY))]
       [_ (raise "func-decl")]))
 
   (define-splicing-syntax-class type-body
