@@ -30,7 +30,7 @@ res-decl: IDENTIFIER /":=" type-id map-expression
 func-decl: IDENTIFIER /"(" @arguments /")" /"=" expression
 func-call: IDENTIFIER @func-call-parameters
 
-func-call-parameters: /"(" (expression [ /"," ])+ /")"
+func-call-parameters: /"(" (expression opt-comma)* (IDENTIFIER "=" expression opt-comma)* /")"
 
 type-id: IDENTIFIER
 

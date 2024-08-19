@@ -140,8 +140,14 @@
       [_ (raise "config-func-decl")]))
 
   (define (m-func-call stx)
+    (displayln stx)
     (syntax-parse stx
-      [(_ func param ...) (syntax/loc stx (func param ...))]
+      #:literals (expression)
+      [(_ func (expression exprs) ... NAMED-PARAMETERS:named-argument ...)
+       (syntax/loc stx
+         (func (expression exprs) ...
+               (make-immutable-hash
+                (list (cons 'NAMED-PARAMETERS.name NAMED-PARAMETERS.value) ...))))]
       [_ (raise "func-call")]))
 
   (define (m-func-ident stx)
