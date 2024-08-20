@@ -140,14 +140,17 @@
       [_ (raise "config-func-decl")]))
 
   (define (m-func-call stx)
-    (displayln stx)
     (syntax-parse stx
       #:literals (expression)
-      [(_ func (expression exprs) ... NAMED-PARAMETERS:named-argument ...)
+      [(_ func "(" (expression exprs) ... NAMED-PARAMETERS:named-argument ... ")")
        (syntax/loc stx
-         (func (expression exprs) ...
-               (make-immutable-hash
-                (list (cons 'NAMED-PARAMETERS.name NAMED-PARAMETERS.value) ...))))]
+         (apply func (expression exprs) ...
+                (make-immutable-hash
+                 (list (cons 'NAMED-PARAMETERS.name NAMED-PARAMETERS.value) ...))))]
+      ; TODO45 - possibly not needed, but might be optimal
+      [(_ func "(" (expression exprs) ... ")")
+       (syntax/loc stx
+         (apply func (expression exprs) ...))]
       [_ (raise "func-call")]))
 
   (define (m-func-ident stx)
@@ -280,11 +283,11 @@
 
   (define (m-expression stx)
     (syntax-parse stx
+      #:literals (expression)
       [(_ term1 "|" term2)
        (syntax/loc stx
          (with-handlers
              ([exn:fail? (lambda(_) term2)]) term1))]
-      [(_ "[" terms ... "]") (syntax/loc stx (resolve-terms list terms ...))]
 
       ; TODO45 - add type checking
       [(_ term:string) (syntax/loc stx term)]
@@ -292,6 +295,26 @@
       ; e.g. string, to avoid calling check-for-ref
       [(_ term) (syntax/loc stx (check-for-ref term))]
       ))
+
+  (define (m-root-term stx)
+    (syntax-parse stx
+      #:literals (expression)
+      [(_ func-exp "(" (expression exprs) ... ")")
+       (syntax/loc stx (apply func-exp (list (expression exprs) ...)))]
+
+      ; [(_ map-expr "." ident:id)
+      ;  (syntax/loc stx (resolve-terms dot-op map-expr 'ident))]
+
+      [(_ list-exp "[" expr "]")
+       (syntax/loc stx (resolve-terms list-ref list-exp expr ))]
+      [(_ id:id) #'id]
+      [(dot-apply e) #'e]
+      ))
+
+  (define (m-dot-apply stx)
+    (syntax-parse stx
+      [(_ map-expr "." ident:id)
+       (syntax/loc stx (resolve-terms dot-op map-expr 'ident))]))
 
   (define (m-boolean-expression stx)
     (syntax-parse stx
@@ -321,6 +344,11 @@
       [(_ term1 "*" term2) (syntax/loc stx (resolve-terms * term1 term2))]
       [(_ term1 "/" term2) (syntax/loc stx (resolve-terms / term1 term2))]
       ))
+
+  (define (m-list-expression stx)
+    (syntax-parse stx
+      [(_ "[" expr ... "]") #'(resolve-terms list expr ...)]
+      [(_ expr) #'expr]))
 
   (define (m-map-expression stx)
 
@@ -444,8 +472,11 @@
 (define-syntax func-ident m-func-ident)
 (define-syntax indexed-identifier m-indexed-identifier)
 (define-syntax expression m-expression)
+(define-syntax root-term m-root-term)
+(define-syntax dot-apply m-dot-apply)
 (define-syntax boolean-expression m-boolean-expression)
 (define-syntax string-expression m-string-expression)
+(define-syntax list-expression m-list-expression)
 (define-syntax map-expression m-map-expression)
 (define-syntax num-expression m-num-expression)
 (define-syntax num-term m-num-term)
@@ -480,7 +511,7 @@
          api-id transformer-id type-id
          func-call func-ident config-func-decl func-decl type-decl type-template
          indexed-identifier
-         expression boolean-expression string-expression num-expression num-term
-         map-expression dot-expression statement map-spec alist attr-list attribute-name
+         expression root-term dot-apply boolean-expression string-expression num-expression num-term
+         list-expression map-expression dot-expression statement map-spec alist attr-list attribute-name
          config-expr
          keyword built-in assertion env-read pprint strf urivars uritemplate  base64encode base64decode)

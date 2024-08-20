@@ -13,12 +13,17 @@ module-parameter: IDENTIFIER [ "=" expression ]
 module-return: /"return" /"{" (return-parameter opt-comma)+ /"}"
 return-parameter: ( STRING | IDENTIFIER | "type" ) /"=" expression
 
-arguments: (IDENTIFIER opt-comma)* (IDENTIFIER "=" expression opt-comma)*
+arguments: (IDENTIFIER opt-comma)* (@named-parameter opt-comma)*
+
+; type is explicitly allowed as it's common, and we need 'type' as a lexical token
+; also allow STRING to allow user to avoid marv keywords
+; TODO45 - remove?
+named-parameter: ( STRING | IDENTIFIER | "type" ) "=" expression
 
 statement: decl | pprint | assertion
 decl: var-decl | res-decl | func-decl
 
-pprint: /"pprint" expression
+pprint: /"pprint" /"(" expression /")"
 comment: COMMENT
 var-decl: IDENTIFIER /"=" expression
 @opt-comma: [ /"," ]
@@ -28,19 +33,23 @@ res-decl: IDENTIFIER /":=" type-id map-expression
 ; TODO - mandatory at least one parameter, or func calls of e.g. C2.xxx(C1.yyy(B.zzz))
 ; may fail to parse correctly.
 func-decl: IDENTIFIER /"(" @arguments /")" /"=" expression
-func-call: IDENTIFIER @func-call-parameters
+func-call: expression "(" @func-call-parameters ")"
 
-func-call-parameters: /"(" (expression opt-comma)* (IDENTIFIER "=" expression opt-comma)* /")"
+func-call-parameters: (expression opt-comma)* (@named-parameter opt-comma)*
 
 type-id: IDENTIFIER
 
-@complex-ident: IDENTIFIER | indexed-identifier | dot-expression
-indexed-identifier: IDENTIFIER "[" @num-expression "]"
+expression: STRING | num-expression | list-expression | map-expression |alternate-expression
 
-expression: boolean-expression | string-expression | num-expression | map-expression | alternate-expression | complex-ident | expr-list
-@expr-list: "[" (expression [ /"," ])* "]"
+; TODO lambda?
 
-@list-expression: expression "[" num-expression "]"
+root-term: @func-apply | dot-apply | @list-apply | IDENTIFIER
+func-apply: ( IDENTIFIER | dot-apply | list-expression ) "(" @func-call-parameters ")"
+dot-apply:  (IDENTIFIER | list-apply | map-expression ) "." @attribute-name
+list-apply: (IDENTIFIER | list-expression ) "[" num-expression "]"
+
+attribute-name: ( STRING | IDENTIFIER | "type" )
+
 
 boolean-expression: boolean | ( expression comparison-operator expression )
 @boolean: "true" | "false"
@@ -48,26 +57,25 @@ boolean-expression: boolean | ( expression comparison-operator expression )
 
 string-expression: string-term [ string-operator string-term ]
 @string-operator: '++'
-@string-term: (STRING | complex-ident | built-in | func-call)
+@string-term: STRING | root-term
 
 num-expression: num-term ( "+" | "-" ) num-expression | num-term
 num-term: num-primary ( "*" | "/" ) num-term | num-primary
-@num-primary: /"(" num-expression /")" | INTEGER | complex-ident | built-in | func-call
+@num-primary: root-term | /"(" num-expression /")" | INTEGER
+
+list-expression: list-spec | root-term
+@list-spec: "[" (expression [ /"," ])* "]"
 
 map-expression: map-term ( [ map-operator map-term ] | "<<" attr-list )
 @map-operator: "<-" | "->"
-@map-term: map-spec | complex-ident | func-call | map-parens-expr | map-expression | dot-expression
-
-; TODO45 - complex-ident not dot-expression?
+@map-term: map-spec | /"(" map-expression /")" | root-term
 map-spec: /"{" [( STRING | IDENTIFIER | "type" ) /"=" [ "imm:" ] expression [ /"," ]]* /"}"
-@map-parens-expr: /"(" map-expression /")"
 
 attr-list: /"[" ( attribute-name [ /"," ] )* /"]"
-attribute-name: ( STRING | IDENTIFIER | "type" )
 
 @alternate-expression: expression '|' expression | /'(' expression '|' expression /')'
 
-dot-expression: map-term /"." [ IDENTIFIER | @indexed-identifier ] [ @func-call-parameters ]
+; dot-expression: map-term /"." [ IDENTIFIER | @indexed-identifier ] [ @func-call-parameters ]
 
 built-in: env-read | strf | base64encode | base64decode | urivars | uritemplate |assertion
         | "lowercase" /"(" string-expression /")"
@@ -81,11 +89,6 @@ base64decode: /"base64decode" /"(" string-expression /")"
 urivars: /"strvars" /"(" string-expression /")"
 uritemplate: /"expandvars" /"(" expression opt-comma map-expression /")"
 assertion: /"assert" /"(" expression comparison-operator expression /")"
-
-; type is explicitly allowed as it's common, and we need 'type' as a lexical token
-; also allow STRING to allow user to avoid marv keywords
-; TODO45 - remove?
-named-parameter: ( STRING | IDENTIFIER | "type" ) /"=" expression
 
 type-decl: /"type" type-id /"=" ( /"{" func-decl+ [ type-wild ]* /"}" | type-parameters )
 type-wild: /"*" /"=" IDENTIFIER /"." /"*"
