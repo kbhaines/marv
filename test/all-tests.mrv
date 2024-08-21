@@ -2,10 +2,10 @@
 
 import "expression-tests.mrv" as expression
 import "type-tests.mrv" as types
+import "func-params-tests.mrv" as fparam
 
-module main {
-
+module main() {
     e = expression:main()
     t = types:main()
-
+    f = fparam:main()
 }

@@ -41,6 +41,7 @@ type template1<P1> = {
 type t4=template1<t1>
 
 module main() {
+    pprint("** TYPE TESTS **")
     assert(t1.identity(x).extra == "extra")
     assert(t2.identity(x).extra == "extra")
     assert(t3.create(x).t2config == x)
@@ -53,5 +54,4 @@ module main() {
     assert(t4.create(x) == t1.create(x))
     
     pprint(t4.delete({selfLink="abcd"}))
-    pprint("** DONE **")
 }

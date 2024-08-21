@@ -1,17 +1,18 @@
 #lang marv
 
 import types/gcp/compute as compute
+import types/gcp/storage as storage
 
 defaults = {
     project = env("MARV_GCP_PROJECT") 
     region = env("MARV_GCP_REGION") 
 }
 
-module main {
+module main() {
 
     name = "my-network"
     primary-cidr = "10.0.1.0/24"
-    proxy-cidr="10.0.2.0/24"
+    proxy-cidr="10.0.3.0/24"
 
     vpc := compute:network defaults <- {
         name = imm: name
@@ -23,15 +24,15 @@ module main {
     primary-sn := compute:subnetwork defaults <- {
         name = strf("~a-primary" name)
         description = strf("Primary subnet for ~a" name)
-        network =  vpc.selfLink
-        ipCidrRange =   primary-cidr
+        network = imm: vpc.selfLink
+        ipCidrRange = imm: primary-cidr
     }
 
     proxy-sn := compute:subnetwork defaults <- {
         name = strf("~a-proxy" name)
         description = strf("Proxy subnet for ~a" name)
-        ipCidrRange =  proxy-cidr
-        network =  vpc.selfLink
+        ipCidrRange = imm: proxy-cidr
+        network = vpc.selfLink
         purpose = "REGIONAL_MANAGED_PROXY"
         role = "ACTIVE"
     }

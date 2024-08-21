@@ -311,9 +311,10 @@
        (syntax/loc stx (apply func-exp (list (expression exprs) ...)))]
       [(_ func "(" (expression exprs) ... NAMED-PARAMETERS:named-argument ... ")")
        (syntax/loc stx
-         (apply func (expression exprs) ...
-                (make-immutable-hash
-                 (list (cons 'NAMED-PARAMETERS.name NAMED-PARAMETERS.value) ...))))]
+         (apply func
+                (list (expression exprs) ...
+                      (make-immutable-hash
+                       (list (cons 'NAMED-PARAMETERS.name NAMED-PARAMETERS.value) ...)))))]
       ))
 
   (define (m-dot-apply stx)

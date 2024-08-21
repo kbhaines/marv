@@ -6,12 +6,13 @@ module-import: /"import" [ STRING | MODULE-IDENTIFIER ] [ "as" IDENTIFIER ]
 
 outer-decl: func-decl | type-decl | type-template | var-decl | module-export
 
-module-export: /"export" [ IDENTIFIER+ [ "as" IDENTIFIER ] ]+
 
 marv-module: [ "private" ] /"module" IDENTIFIER "(" @arguments ")" /"{" statement+ [ module-return ] /"}"
 module-parameter: IDENTIFIER [ "=" expression ]
 module-return: /"return" /"{" (return-parameter opt-comma)+ /"}"
 return-parameter: ( STRING | IDENTIFIER | "type" ) /"=" expression
+
+module-export: /"export" [ IDENTIFIER+ [ "as" IDENTIFIER ] ]+
 
 arguments: (IDENTIFIER opt-comma)* (@named-parameter opt-comma)*
 
