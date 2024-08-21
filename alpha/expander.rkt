@@ -377,11 +377,15 @@
 
     (syntax-parse stx
       [(_ term)
-       (with-syntax ([stxa (src-location stx)])
-         (syntax/loc stx
-           (begin
-             (unless (hash? term)
-               (raise (~a "not a map:" term "~n" stxa))) term)))]
+       (syntax/loc stx term)]
+      ; TODO45 - map-expr can support resources too?
+
+      ;  (with-syntax ([stxa (src-location stx)])
+      ;  (syntax/loc stx
+      ;  (begin
+      ;  (unless (or (hash? term) (resource? term))
+      ;  (raise (~a "not a map:" term "~n" stxa))) term)))]
+
       [(_ term1 "<-" term2) (check-terms stx #'hash? #'hash? #'config-overlay #'term2 #'term1)]
       [(_ term1 "->" term2) (check-terms stx #'hash? #'hash? #'config-overlay #'term1 #'term2)]
       [(_ term1 "<<" term2) (check-terms stx #'hash? #'(listof symbol?) #'config-reduce #'term1 #'term2)]

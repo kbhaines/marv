@@ -73,7 +73,6 @@ func-call-parameters: (expression opt-comma)* (@named-parameter opt-comma)*
 
 attribute-name: ( STRING | IDENTIFIER | "type" )
 
-
 ; TODO45 - should nested maps be handled here, or above? map-expressions should yield maps, shrug, but then IDENTIFIERS wouldn't necessarily do so either....
 
 attr-list: /"[" ( attribute-name [ /"," ] )* /"]"
