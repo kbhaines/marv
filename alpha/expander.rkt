@@ -275,12 +275,6 @@
     (syntax-parse stx
       [(_ exp:expr) (syntax/loc stx (pretty-print exp))]))
 
-  (define (m-indexed-identifier stx)
-    (syntax-parse stx
-      [(_ ident:id "[" expr "]" ) (syntax/loc stx (resolve-terms list-ref ident expr))]
-      [(_ ident) (syntax/loc stx ident)]
-      ))
-
   (define (m-expression stx)
     (syntax-parse stx
       #:literals (expression)
@@ -456,12 +450,7 @@
                  (lambda() (def-res tid cfg))))))]
       ))
 
-  (define (m-named-parameter stx)
-    (syntax-parse stx
-      ; NB string has to be first!
-      [(_ param-name:string EXPR) (syntax/loc stx (cons (string->symbol param-name) EXPR))]
-      [(_ param-name:expr EXPR) (syntax/loc stx (cons 'param-name EXPR))]
-      ))
+
   )
 
 (define-syntax marv-spec m-marv-spec)
@@ -475,15 +464,11 @@
 (define-syntax statement m-statement)
 (define-syntax decl m-decl)
 (define-syntax var-decl m-var-decl)
-(define-syntax config-func-decl m-config-func-decl)
 (define-syntax func-decl m-func-decl)
 (define-syntax type-decl m-type-decl)
 (define-syntax type-template m-type-template)
 (define-syntax res-decl m-res-decl)
-(define-syntax named-parameter m-named-parameter)
 (define-syntax func-call m-func-call)
-(define-syntax func-ident m-func-ident)
-(define-syntax indexed-identifier m-indexed-identifier)
 (define-syntax expression m-expression)
 (define-syntax root-term m-root-term)
 (define-syntax func-apply m-func-apply)
@@ -511,20 +496,16 @@
 (define-syntax pprint m-pprint)
 (define-syntax config-expr m-config-expr)
 
-(define-syntax api-id m-generic-placeholder)
-(define-syntax transformer-id m-generic-placeholder)
 (define-syntax type-id m-generic-placeholder)
-(define-syntax func-id m-generic-placeholder)
 (define-syntax type-parameters m-generic-placeholder)
 (define-syntax type-wild m-generic-placeholder)
 
 (provide marv-spec outer-decl marv-module module-parameter decl var-decl res-decl
-         named-parameter module-return return-parameter
+         module-return return-parameter
          module-import
          module-export
-         api-id transformer-id type-id
-         func-call func-ident config-func-decl func-decl type-decl type-template
-         indexed-identifier
+         type-id
+         func-call func-decl type-decl type-template
          expression root-term func-apply dot-apply list-apply boolean-expression string-expression num-expression num-term
          list-expression map-expression statement map-spec alist attr-list attribute-name
          config-expr

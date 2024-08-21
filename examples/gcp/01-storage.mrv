@@ -7,9 +7,9 @@ defaults = {
     region = env("MARV_GCP_REGION") 
 }
 
-module main {
+module main() {
 
-    my-bucket = storage:bucket defaults <- {
+    my-bucket := storage:bucket defaults <- {
         name = strf("~a-mybucket" defaults.project)
         storageClass = "NEARLINE"
     }

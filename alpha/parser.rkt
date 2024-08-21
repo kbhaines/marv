@@ -1,11 +1,8 @@
 #lang brag
 
 marv-spec: module-import* outer-decl* marv-module*
-
 module-import: /"import" [ STRING | MODULE-IDENTIFIER ] [ "as" IDENTIFIER ]
-
 outer-decl: func-decl | type-decl | type-template | var-decl | module-export
-
 
 marv-module: [ "private" ] /"module" IDENTIFIER "(" @arguments ")" /"{" statement+ [ module-return ] /"}"
 module-parameter: IDENTIFIER [ "=" expression ]
@@ -14,12 +11,12 @@ return-parameter: ( STRING | IDENTIFIER | "type" ) /"=" expression
 
 module-export: /"export" [ IDENTIFIER+ [ "as" IDENTIFIER ] ]+
 
-arguments: (IDENTIFIER opt-comma)* (@named-parameter opt-comma)*
+arguments: (IDENTIFIER opt-comma)* (named-parameter opt-comma)*
 
 ; type is explicitly allowed as it's common, and we need 'type' as a lexical token
 ; also allow STRING to allow user to avoid marv keywords
 ; TODO45 - remove?
-named-parameter: ( STRING | IDENTIFIER | "type" ) "=" expression
+@named-parameter: ( STRING | IDENTIFIER | "type" ) "=" expression
 
 statement: decl | pprint | assertion
 decl: var-decl | res-decl | func-decl
@@ -71,16 +68,13 @@ func-apply: (dot-apply | list-apply | IDENTIFIER) "(" @func-call-parameters ")"
 dot-apply:  (IDENTIFIER | map-expression) "." @attribute-name ;[ func-apply ]
 list-apply: (IDENTIFIER | list-expression) "[" num-expression "]" ;[ func-apply ]
 
-func-call-parameters: (expression opt-comma)* (@named-parameter opt-comma)*
+func-call-parameters: (expression opt-comma)* (named-parameter opt-comma)*
 
 attribute-name: ( STRING | IDENTIFIER | "type" )
-
-; TODO45 - should nested maps be handled here, or above? map-expressions should yield maps, shrug, but then IDENTIFIERS wouldn't necessarily do so either....
 
 attr-list: /"[" ( attribute-name [ /"," ] )* /"]"
 
 @alternate-expression: expression '|' expression | /'(' expression '|' expression /')'
-
 
 built-in: env-read | strf | base64encode | base64decode | urivars | uritemplate |assertion
         | "lowercase" /"(" string-expression /")"
