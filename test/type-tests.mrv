@@ -28,7 +28,7 @@ type t3 = {
 }
 
 delete-self(state, oapi) = {
-  api= oapi.api <- { url=state.selfLink }
+  api= oapi.api <- { returnedUrl=state.selfLink }
   config = {}
 }
 

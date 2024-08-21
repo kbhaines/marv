@@ -289,8 +289,6 @@
          (with-handlers
              ([exn:fail? (lambda(_) term2)]) term1))]
 
-      [(func-apply e) #'e]
-
       ; TODO45 - add type checking
       [(_ term:string) (syntax/loc stx term)]
       ; TODO45 - for compile speed, add some concrete type checks
@@ -307,7 +305,6 @@
       ))
 
   (define (m-func-apply stx)
-    (displayln stx)
     (syntax-parse stx
       #:literals (expression)
       [(_ func-exp "(" (expression exprs) ... ")")
@@ -317,21 +314,19 @@
          (apply func (expression exprs) ...
                 (make-immutable-hash
                  (list (cons 'NAMED-PARAMETERS.name NAMED-PARAMETERS.value) ...))))]
-      [(_ e) #'e]
       ))
 
   (define (m-dot-apply stx)
     (syntax-parse stx
       [(_ map-expr "." ident:id)
        (syntax/loc stx (resolve-terms dot-op map-expr 'ident))]
-      [(_ e) #'e]
+      ; [(_ map-expr "." ident:id (func-apply ))
       ))
 
   (define (m-list-apply stx)
     (syntax-parse stx
       [(_ list-exp "[" expr "]")
        (syntax/loc stx (resolve-terms list-ref list-exp expr ))]
-      [(_ e) #'e]
       ))
 
   (define (m-boolean-expression stx)
@@ -381,10 +376,12 @@
             (resolve-terms op term1 term2)))))
 
     (syntax-parse stx
-      [(_ term) (syntax/loc stx
-                  (begin
-                    (unless (hash? term)
-                      (raise (~a "not a map:" term))) term))]
+      [(_ term)
+       (with-syntax ([stxa (src-location stx)])
+         (syntax/loc stx
+           (begin
+             (unless (hash? term)
+               (raise (~a "not a map:" term "~n" stxa))) term)))]
       [(_ term1 "<-" term2) (check-terms stx #'hash? #'hash? #'config-overlay #'term2 #'term1)]
       [(_ term1 "->" term2) (check-terms stx #'hash? #'hash? #'config-overlay #'term1 #'term2)]
       [(_ term1 "<<" term2) (check-terms stx #'hash? #'(listof symbol?) #'config-reduce #'term1 #'term2)]

@@ -39,18 +39,21 @@ func-decl: IDENTIFIER /"(" @arguments /")" /"=" expression
 
 type-id: IDENTIFIER
 
-expression: num-expression | string-expression | list-expression | map-expression |boolean-expression |alternate-expression | built-in
+; Hmm, added @xterm here and type-tests starts working...
+; Order of map/num expression matters...
+
+expression: @xterm | map-expression | list-expression | num-expression | string-expression | boolean-expression |alternate-expression | built-in
 
 num-expression: num-term ( "+" | "-" ) num-expression | num-term
 num-term: num-primary ( "*" | "/" ) num-term | num-primary
-@num-primary: /"(" num-expression /")" | INTEGER | @xterm
+@num-primary: INTEGER | @xterm | /"(" num-expression /")"
 
 string-expression: string-term [ string-operator string-term ]
 @string-operator: '++'
-@string-term: STRING | expression
+@string-term: STRING | @xterm
 
 boolean-expression: boolean | ( expression comparison-operator expression )
-@boolean: "true" | "false"
+@boolean: "true" | "false" | @xterm
 @comparison-operator: "==" | "!="
 
 list-expression: list-spec
@@ -58,13 +61,13 @@ list-expression: list-spec
 
 map-expression: map-term [ map-operator map-term | "<<" attr-list ]
 @map-operator: "<-" | "->"
-@map-term: map-spec | /"(" map-expression /")" | @xterm
+@map-term: map-spec | @xterm | /"(" map-expression /")"
 map-spec: /"{" [( STRING | IDENTIFIER | "type" ) /"=" [ "imm:" ] expression [ /"," ]]* /"}"
 
-xterm: func-apply | dot-apply | list-apply | IDENTIFIER
-func-apply: (IDENTIFIER | dot-apply | list-apply) "(" @func-call-parameters ")"
-dot-apply:  map-expression "." @attribute-name
-list-apply: list-expression "[" num-expression "]"
+xterm: (func-apply | dot-apply | list-apply | IDENTIFIER )
+func-apply: (dot-apply | list-apply | IDENTIFIER) "(" @func-call-parameters ")"
+dot-apply:  map-expression "." @attribute-name ;[ func-apply ]
+list-apply: list-expression "[" num-expression "]" ;[ func-apply ]
 
 func-call-parameters: (expression opt-comma)* (@named-parameter opt-comma)*
 
