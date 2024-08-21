@@ -54,7 +54,7 @@ string-expression: string-term [ string-operator string-term ]
 @string-term: STRING | @xterm
 
 boolean-expression: boolean | ( expression comparison-operator expression )
-@boolean: "true" | "false" | @xterm
+@boolean: "true" | "false"
 @comparison-operator: "==" | "!="
 
 list-expression: list-spec
@@ -62,13 +62,14 @@ list-expression: list-spec
 
 map-expression: map-term [ map-operator map-term | "<<" attr-list ]
 @map-operator: "<-" | "->"
-@map-term: map-spec | @xterm | /"(" map-expression /")"
+; Order is important - xterm first
+@map-term: @xterm | map-spec | /"(" map-expression /")"
 map-spec: /"{" [( STRING | IDENTIFIER | "type" ) /"=" [ "imm:" ] expression [ /"," ]]* /"}"
 
 xterm: (func-apply | dot-apply | list-apply | IDENTIFIER )
 func-apply: (dot-apply | list-apply | IDENTIFIER) "(" @func-call-parameters ")"
-dot-apply:  map-expression "." @attribute-name ;[ func-apply ]
-list-apply: list-expression "[" num-expression "]" ;[ func-apply ]
+dot-apply:  (IDENTIFIER | map-expression) "." @attribute-name ;[ func-apply ]
+list-apply: (IDENTIFIER | list-expression) "[" num-expression "]" ;[ func-apply ]
 
 func-call-parameters: (expression opt-comma)* (@named-parameter opt-comma)*
 

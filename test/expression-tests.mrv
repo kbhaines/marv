@@ -62,12 +62,11 @@ module maps() {
     assert(18 == ((1 + { one=1,two=2}.two + list[2]) * (4 -1)))
 
     pprint("** MAP EXPRESSIONS **")
-    pprint(map)
     map2 = { a= { one=123, two=456} }
     assert( { one=1, two=2, submap={three=3}, a={one=123, two=456}} == map <- map2)
-    pprint((map <- map2).a)
     assert({one=123, two=456, submap={three=3}} == map <- { one=123, two=456})
     assert({one=123, two=456, submap={three=3}} == map <- map2.a)
+    assert({one=123, two=456} == (map <- map2).a)
     assert({one=123,two=789} == map2.a <- { two = 789})
 }
 
