@@ -289,6 +289,8 @@
          (with-handlers
              ([exn:fail? (lambda(_) term2)]) term1))]
 
+      [(func-apply e) #'e]
+
       ; TODO45 - add type checking
       [(_ term:string) (syntax/loc stx term)]
       ; TODO45 - for compile speed, add some concrete type checks
@@ -299,22 +301,38 @@
   (define (m-root-term stx)
     (syntax-parse stx
       #:literals (expression)
+      ; [(_ func-exp "(" (expression exprs) ... ")")
+      ;  (syntax/loc stx (apply func-exp (list (expression exprs) ...)))]
+      ;[(_ id:id) #'id]
+      ))
+
+  (define (m-func-apply stx)
+    (displayln stx)
+    (syntax-parse stx
+      #:literals (expression)
       [(_ func-exp "(" (expression exprs) ... ")")
        (syntax/loc stx (apply func-exp (list (expression exprs) ...)))]
-
-      ; [(_ map-expr "." ident:id)
-      ;  (syntax/loc stx (resolve-terms dot-op map-expr 'ident))]
-
-      [(_ list-exp "[" expr "]")
-       (syntax/loc stx (resolve-terms list-ref list-exp expr ))]
-      [(_ id:id) #'id]
-      [(dot-apply e) #'e]
+      [(_ func "(" (expression exprs) ... NAMED-PARAMETERS:named-argument ... ")")
+       (syntax/loc stx
+         (apply func (expression exprs) ...
+                (make-immutable-hash
+                 (list (cons 'NAMED-PARAMETERS.name NAMED-PARAMETERS.value) ...))))]
+      [(_ e) #'e]
       ))
 
   (define (m-dot-apply stx)
     (syntax-parse stx
       [(_ map-expr "." ident:id)
-       (syntax/loc stx (resolve-terms dot-op map-expr 'ident))]))
+       (syntax/loc stx (resolve-terms dot-op map-expr 'ident))]
+      [(_ e) #'e]
+      ))
+
+  (define (m-list-apply stx)
+    (syntax-parse stx
+      [(_ list-exp "[" expr "]")
+       (syntax/loc stx (resolve-terms list-ref list-exp expr ))]
+      [(_ e) #'e]
+      ))
 
   (define (m-boolean-expression stx)
     (syntax-parse stx
@@ -363,21 +381,14 @@
             (resolve-terms op term1 term2)))))
 
     (syntax-parse stx
-      [(_ term) (syntax/loc stx term)]
+      [(_ term) (syntax/loc stx
+                  (begin
+                    (unless (hash? term)
+                      (raise (~a "not a map:" term))) term))]
       [(_ term1 "<-" term2) (check-terms stx #'hash? #'hash? #'config-overlay #'term2 #'term1)]
       [(_ term1 "->" term2) (check-terms stx #'hash? #'hash? #'config-overlay #'term1 #'term2)]
       [(_ term1 "<<" term2) (check-terms stx #'hash? #'(listof symbol?) #'config-reduce #'term1 #'term2)]
       ))
-
-  (define (m-dot-expression stx)
-    (syntax-parse stx
-      ; [(_ map-expr ident:id) (syntax/loc stx (hash-ref map-expr 'ident))]
-      [(_ map-expr ident:id) (syntax/loc stx (resolve-terms dot-op map-expr 'ident))]
-      [(_ map-expr ident:id "[" idx "]")
-       (syntax/loc stx (resolve-terms
-                        list-ref
-                        (resolve-terms dot-op map-expr 'ident) idx))]
-      [(_ map-expr ident:id params ...) (syntax/loc stx ((hash-ref map-expr 'ident) params ...))]))
 
   (define (m-map-spec stx)
 
@@ -473,14 +484,15 @@
 (define-syntax indexed-identifier m-indexed-identifier)
 (define-syntax expression m-expression)
 (define-syntax root-term m-root-term)
+(define-syntax func-apply m-func-apply)
 (define-syntax dot-apply m-dot-apply)
+(define-syntax list-apply m-list-apply)
 (define-syntax boolean-expression m-boolean-expression)
 (define-syntax string-expression m-string-expression)
 (define-syntax list-expression m-list-expression)
 (define-syntax map-expression m-map-expression)
 (define-syntax num-expression m-num-expression)
 (define-syntax num-term m-num-term)
-(define-syntax dot-expression m-dot-expression)
 (define-syntax map-spec m-map-spec)
 (define-syntax alist m-alist)
 (define-syntax attr-list m-attr-list)
@@ -511,7 +523,7 @@
          api-id transformer-id type-id
          func-call func-ident config-func-decl func-decl type-decl type-template
          indexed-identifier
-         expression root-term dot-apply boolean-expression string-expression num-expression num-term
-         list-expression map-expression dot-expression statement map-spec alist attr-list attribute-name
+         expression root-term func-apply dot-apply list-apply boolean-expression string-expression num-expression num-term
+         list-expression map-expression statement map-spec alist attr-list attribute-name
          config-expr
          keyword built-in assertion env-read pprint strf urivars uritemplate  base64encode base64decode)

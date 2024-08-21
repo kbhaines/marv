@@ -32,50 +32,51 @@ res-decl: IDENTIFIER /":=" type-id map-expression
 
 ; TODO - mandatory at least one parameter, or func calls of e.g. C2.xxx(C1.yyy(B.zzz))
 ; may fail to parse correctly.
-func-decl: IDENTIFIER /"(" @arguments /")" /"=" expression
-func-call: expression "(" @func-call-parameters ")"
-
-func-call-parameters: (expression opt-comma)* (@named-parameter opt-comma)*
-
-type-id: IDENTIFIER
-
-expression: STRING | num-expression | list-expression | map-expression |alternate-expression
 
 ; TODO lambda?
 
-root-term: @func-apply | dot-apply | @list-apply | IDENTIFIER
-func-apply: ( IDENTIFIER | dot-apply | list-expression ) "(" @func-call-parameters ")"
-dot-apply:  (IDENTIFIER | list-apply | map-expression ) "." @attribute-name
-list-apply: (IDENTIFIER | list-expression ) "[" num-expression "]"
+func-decl: IDENTIFIER /"(" @arguments /")" /"=" expression
 
-attribute-name: ( STRING | IDENTIFIER | "type" )
+type-id: IDENTIFIER
 
+expression: num-expression | string-expression | list-expression | map-expression |boolean-expression |alternate-expression | built-in
+
+num-expression: num-term ( "+" | "-" ) num-expression | num-term
+num-term: num-primary ( "*" | "/" ) num-term | num-primary
+@num-primary: /"(" num-expression /")" | INTEGER | @xterm
+
+string-expression: string-term [ string-operator string-term ]
+@string-operator: '++'
+@string-term: STRING | expression
 
 boolean-expression: boolean | ( expression comparison-operator expression )
 @boolean: "true" | "false"
 @comparison-operator: "==" | "!="
 
-string-expression: string-term [ string-operator string-term ]
-@string-operator: '++'
-@string-term: STRING | root-term
+list-expression: list-spec
+@list-spec: "[" (expression [ /"," ])* "]" | @xterm
 
-num-expression: num-term ( "+" | "-" ) num-expression | num-term
-num-term: num-primary ( "*" | "/" ) num-term | num-primary
-@num-primary: root-term | /"(" num-expression /")" | INTEGER
-
-list-expression: list-spec | root-term
-@list-spec: "[" (expression [ /"," ])* "]"
-
-map-expression: map-term ( [ map-operator map-term ] | "<<" attr-list )
+map-expression: map-term [ map-operator map-term | "<<" attr-list ]
 @map-operator: "<-" | "->"
-@map-term: map-spec | /"(" map-expression /")" | root-term
+@map-term: map-spec | /"(" map-expression /")" | @xterm
 map-spec: /"{" [( STRING | IDENTIFIER | "type" ) /"=" [ "imm:" ] expression [ /"," ]]* /"}"
+
+xterm: func-apply | dot-apply | list-apply | IDENTIFIER
+func-apply: (IDENTIFIER | dot-apply | list-apply) "(" @func-call-parameters ")"
+dot-apply:  map-expression "." @attribute-name
+list-apply: list-expression "[" num-expression "]"
+
+func-call-parameters: (expression opt-comma)* (@named-parameter opt-comma)*
+
+attribute-name: ( STRING | IDENTIFIER | "type" )
+
+
+; TODO45 - should nested maps be handled here, or above? map-expressions should yield maps, shrug, but then IDENTIFIERS wouldn't necessarily do so either....
 
 attr-list: /"[" ( attribute-name [ /"," ] )* /"]"
 
 @alternate-expression: expression '|' expression | /'(' expression '|' expression /')'
 
-; dot-expression: map-term /"." [ IDENTIFIER | @indexed-identifier ] [ @func-call-parameters ]
 
 built-in: env-read | strf | base64encode | base64decode | urivars | uritemplate |assertion
         | "lowercase" /"(" string-expression /")"

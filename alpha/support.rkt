@@ -113,7 +113,7 @@
     (cond
       [(resource? tgt) (ref (resource-gid tgt) attr)]
       [(hash? tgt) (hash-ref tgt attr)]
-      [else (raise "unsupported ref type")]))
+      [else (raise (~a "unsupported ref type:" tgt attr))]))
   (when (ref? r) (add-dep r))
   r)
 
