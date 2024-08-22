@@ -16,12 +16,10 @@ module-export: /"export" [ IDENTIFIER+ [ "as" IDENTIFIER ] ]+
 arguments: identifier-list? [/"," named-parameter-list?] | named-parameter-list
 @identifier-list: IDENTIFIER (/"," IDENTIFIER)*
 @named-parameter-list: named-parameter (/"," named-parameter)*
-
-
-; type is explicitly allowed as it's common, and we need 'type' as a lexical token
-; also allow STRING to allow user to avoid marv keywords
-; TODO45 - remove?
 @named-parameter: ( STRING | IDENTIFIER | "type" ) "=" expression
+
+; type is explicitly allowed as it's common, but we need 'type' as a lexical token
+; also allow STRING to allow user to avoid marv keywords
 
 statement: decl | pprint | assertion
 decl: var-decl | res-decl | func-decl
@@ -29,7 +27,6 @@ decl: var-decl | res-decl | func-decl
 pprint: /"pprint" /"(" expression /")"
 comment: COMMENT
 var-decl: IDENTIFIER /"=" expression
-@opt-comma: [ /"," ]
 
 res-decl: IDENTIFIER /":=" type-id map-expression
 
@@ -69,7 +66,8 @@ map-expression: map-term [ map-operator map-term | "<<" attr-list ]
 @map-operator: "<-" | "->"
 ; Order is important - xterm first
 @map-term: @xterm | map-spec | /"(" map-expression /")"
-map-spec: /"{" [( STRING | IDENTIFIER | "type" ) /"=" [ "imm:" ] expression [ /"," ]]* /"}"
+map-spec: /"{" (map-element [ /"," map-element]*)* /"}"
+@map-element:( STRING | IDENTIFIER | "type" ) /"=" [ "imm:" ] expression
 
 xterm: (func-apply | dot-apply | list-apply | IDENTIFIER )
 func-apply: (IDENTIFIER | dot-apply | list-apply | func-apply) @func-call-parameters
@@ -86,18 +84,18 @@ attr-list: /"[" ( attribute-name [ /"," ] )* /"]"
 built-in: env-read | strf | base64encode | base64decode | urivars | uritemplate |assertion
         | "lowercase" /"(" string-expression /")"
         | "uppercase" /"(" string-expression /")"
-        | "replace" /"(" string-expression opt-comma string-expression opt-comma string-expression /")"
+        | "replace" /"(" string-expression /"," string-expression /"," string-expression /")"
 
 env-read: /"env" /"(" STRING /")"
 strf: /"strf" /"(" string-expression [ /"," ]( expression [ /"," ] ) + /")"
 base64encode: /"base64encode" /"(" string-expression /")"
 base64decode: /"base64decode" /"(" string-expression /")"
 urivars: /"strvars" /"(" string-expression /")"
-uritemplate: /"expandvars" /"(" expression opt-comma map-expression /")"
+uritemplate: /"expandvars" /"(" expression /"," map-expression /")"
 assertion: /"assert" /"(" expression comparison-operator expression /")"
 
 type-decl: /"type" type-id /"=" ( /"{" func-decl+ [ type-wild ]* /"}" | type-parameters )
 type-wild: /"*" /"=" IDENTIFIER /"." /"*"
 
-type-parameters: type-id /"<" ( IDENTIFIER [/","] )+ /">"
+type-parameters: type-id /"<" identifier-list /">"
 type-template: /"type" type-parameters /"=" /"{" func-decl+ [ type-wild ]* /"}"

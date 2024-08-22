@@ -45,7 +45,6 @@ module lists() {
     assert(18 == ((1 + list[1] + list[2]) * (4 -1)))
     assert(18 == ((1 + [1,2,3,4][1] + list[2]) * (4 -1)))
 
-    pprint("** NESTED LISTS **")
     nestedList = [[1,2,3], [4,5,6], list]
 
     assert (nestedList[0][2]*2 == nestedList[1][2])
@@ -61,7 +60,6 @@ module maps() {
     assert(18 == ((1 + map.two + list[2]) * (4 -1)))
     assert(18 == ((1 + { one=1,two=2}.two + list[2]) * (4 -1)))
 
-    pprint("** MAP EXPRESSIONS **")
     map2 = { a= { one=123, two=456} }
     assert( { one=1, two=2, submap={three=3}, a={one=123, two=456}} == map <- map2)
     assert({one=123, two=456, submap={three=3}} == map <- { one=123, two=456})
@@ -73,9 +71,10 @@ module maps() {
 module funcs() {
     pprint("** FUNCS **")
     func1(a,b) = a - b
+
     mapFunc1(a,b) = {
          b = [ a, b, a + b], 
-         f = func1,
+         f = func1
     }
     
     assert( [1,2,3] == mapFunc1(1,2).b)
@@ -85,6 +84,10 @@ module funcs() {
     mpf = mapFunc1(1,2).f
     nested(a) = func1(20, mpf(a,2))
     assert(12 == nested(10))
+
+    func2(param1=1) = param1 * 2
+    assert(2 == func2())
+    assert(20 == func2(param1=10))
 
     lam = lambda(x,y,z) = x + y + z
     assert(6 == lam(1,2,3))

@@ -51,8 +51,8 @@ module main() {
         name = strf("~a-fw-allow-proxies" name)
         sourceRanges = [ proxy-sn.ipCidrRange ]
         targetTags =  [ "load-balanced-backend" ]
-        allowed = [ { IPProtocol = "tcp" ports = [ "80" ] }
-                    { IPProtocol = "tcp" ports = [ "443" ] }
+        allowed = [ { IPProtocol = "tcp" ports = [ "80" ] },
+                    { IPProtocol = "tcp" ports = [ "443" ] },
                     { IPProtocol = "tcp" ports = [ "8080" ] } ]
         direction = "INGRESS"
     }

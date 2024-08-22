@@ -53,5 +53,6 @@ module main() {
     assert(t4.identity(x).template == "template")
     assert(t4.create(x) == t1.create(x))
     
-    pprint(t4.delete({selfLink="abcd"}))
+    state={ selfLink="abcd" }
+    assert(delete-self(state, t1.delete(state)) == t4.delete(state))
 }
