@@ -60,8 +60,8 @@ boolean-expression: boolean | ( expression comparison-operator expression )
 @comparison-operator: "==" | "!="
 
 list-expression: list-spec
-@list-spec: "[" @expression-list? "]" | @xterm
-expression-list: expression ( /"," expression )*
+@list-spec: "[" expression-list? "]" | @xterm
+@expression-list: expression ( /"," expression )*
 ; Wonder if this list/comma separation being option has been a root
 ; factor in the parsing problems?
 
@@ -76,7 +76,7 @@ func-apply: (IDENTIFIER | dot-apply | list-apply | func-apply) @func-call-parame
 dot-apply:  (IDENTIFIER | map-expression) "." @attribute-name
 list-apply: (IDENTIFIER | list-expression) "[" num-expression "]"
 
-func-call-parameters: "(" (expression opt-comma)* (named-parameter opt-comma)* ")"
+func-call-parameters: "(" (expression-list? [ /"," named-parameter-list] | named-parameter-list) ")"
 
 attribute-name: ( STRING | IDENTIFIER | "type" )
 attr-list: /"[" ( attribute-name [ /"," ] )* /"]"
