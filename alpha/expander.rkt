@@ -132,13 +132,6 @@
          (define id (with-resource-prefix 'id (lambda()EXPR))))]
       [_ (raise "nowt-var-decl")]))
 
-  (define (m-config-func-decl stx)
-    (syntax-parse stx
-      [(_ id:expr param ... CONF-OBJ)
-       (syntax/loc stx
-         (define (id param ...) CONF-OBJ))]
-      [_ (raise "config-func-decl")]))
-
   (define (m-func-call stx)
     (syntax-parse stx
       #:literals (expression)
@@ -153,40 +146,37 @@
          (apply func (expression exprs) ...))]
       [_ (raise "func-call")]))
 
-  (define (m-func-ident stx)
-    (syntax-parse stx
-      [(_ ident)
-       (define id-parts (split-symbol (syntax-e #'ident)))
-       (define root (format-id stx "~a" (car id-parts)))
-       (define rst (datum->syntax stx (cdr id-parts)))
-       (with-syntax ([root root]
-                     [rst rst])
-         (syntax/loc stx (find-function root 'root 'rst)))]
-      [_ (raise "func-ident")]))
+  (define-syntax-class func-decl-class
+    (pattern (func-decl ID:id fs:func-spec-class)
+      #:attr func-id #'ID
+      #:attr func-lambda (attribute fs.funcspec)
+      #:attr func-body (attribute fs.BODY)
+      #:attr decl #'(define ID fs.funcspec)))
+
+  (define-syntax-class func-spec-class
+    (pattern (func-spec IDS:id ... NAMED-ARGUMENTS:named-argument ... BODY)
+      #:attr funcspec
+      #'(lambda (IDS ... [ keywp (hash)])
+          (define NAMED-ARGUMENTS.name
+            (hash-ref keywp 'NAMED-ARGUMENTS.name NAMED-ARGUMENTS.value)) ...
+          BODY)))
 
   (define (m-func-decl stx)
-    (syntax-parse stx
-      [(_ id:expr IDS:id ... NAMED-ARGUMENTS:named-argument ... BODY)
-       (syntax/loc stx
-         (define (id IDS ... [ keywp (hash)])
-           (define NAMED-ARGUMENTS.name
-             (hash-ref keywp 'NAMED-ARGUMENTS.name NAMED-ARGUMENTS.value)) ...
-           BODY))]
-      [_ (raise "func-decl")]))
+    (syntax-parse stx [fd:func-decl-class (attribute fd.decl)]))
 
   (define-splicing-syntax-class type-body
     #:description "body declaration"
-    #:literals (func-decl expression)
+    #:literals (func-decl-class expression)
     (pattern (func-decl func-id:id param-id ... (expression confex))))
 
   (define (m-type-decl stx)
     (syntax-parse stx
       #:datum-literals (type-parameters type-wild type-id)
-      [(_ (type-id tid:expr) body:type-body ... (type-wild wildcard) ...)
+      [(_ (type-id tid:expr) body:func-decl-class ... (type-wild wildcard) ...)
        (with-syntax ([srcloc (src-location stx)])
          (syntax/loc stx
            (define tid
-             (let* ([ body.func-id (lambda(body.param-id ...) body.confex) ] ...)
+             (let* ([ body.func-id body.func-lambda ] ...)
                (make-immutable-hasheq
                 (append
                  (hash->list wildcard) ...
@@ -199,11 +189,11 @@
   (define (m-type-template stx)
     (syntax-parse stx
       #:datum-literals (type-parameters type-id type-wild)
-      [(_ (type-parameters (type-id template-id) params ...) body:type-body ... (type-wild wildcard) ...)
+      [(_ (type-parameters (type-id template-id) params ...) body:func-decl-class ... (type-wild wildcard) ...)
        (syntax/loc stx
          (define (template-id params ... [allow-missing? #f])
            (log-marv-debug "type-template ~a" 'template-id)
-           (define (body.func-id body.param-id ...) body.confex) ...
+           body.decl  ...
            (make-immutable-hasheq
             (append
              (hash->list wildcard) ...
@@ -282,7 +272,7 @@
        (syntax/loc stx
          (with-handlers
              ([exn:fail? (lambda(_) term2)]) term1))]
-
+      [(_ "lambda" fs:func-spec-class) (attribute fs.funcspec) ]
       ; TODO45 - add type checking
       [(_ term:string) (syntax/loc stx term)]
       ; TODO45 - for compile speed, add some concrete type checks

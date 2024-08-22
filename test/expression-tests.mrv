@@ -73,7 +73,10 @@ module maps() {
 module funcs() {
     pprint("** FUNCS **")
     func1(a,b) = a - b
-    mapFunc1(a,b) = { b = [ a, b, a + b], f = func1}
+    mapFunc1(a,b) = {
+         b = [ a, b, a + b], 
+         f = func1,
+    }
     
     assert( [1,2,3] == mapFunc1(1,2).b)
     assert(3 == mapFunc1(1,2).b[2])
@@ -82,6 +85,16 @@ module funcs() {
     mpf = mapFunc1(1,2).f
     nested(a) = func1(20, mpf(a,2))
     assert(12 == nested(10))
+
+    lam = lambda(x,y,z) = x + y + z
+    assert(6 == lam(1,2,3))
+
+    closure(a) = lambda(b) = [a + b, a - b]
+    assert([15,5] == closure(10)(5))
+    assert(15 == closure(10)(5)[0])
+
+    lcs = [closure(5), closure(10)]
+    #assert([7,3] == lcs[0](2))
 
 #   pprint(bucket1.size + 2 <- should prohibit because it's non-assignment?)
 #   pprint([bucket1.link, bucket1.name])

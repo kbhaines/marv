@@ -28,19 +28,19 @@ var-decl: IDENTIFIER /"=" expression
 
 res-decl: IDENTIFIER /":=" type-id map-expression
 
-; TODO - mandatory at least one parameter, or func calls of e.g. C2.xxx(C1.yyy(B.zzz))
-; may fail to parse correctly.
-
 ; TODO lambda?
-
-func-decl: IDENTIFIER /"(" @arguments /")" /"=" expression
+@lambda-func: "lambda" func-spec
+func-decl: IDENTIFIER func-spec
+func-spec: /"(" @arguments /")" /"=" expression
 
 type-id: IDENTIFIER
 
-; Hmm, added @xterm here and type-tests starts working...
+; NOTES:
+; added @xterm here and type-tests starts working...
 ; Order of map/num expression matters...
+; lambda-func before map doesn't work
 
-expression: @xterm | map-expression | list-expression | num-expression | string-expression | boolean-expression |alternate-expression | built-in
+expression: @xterm | map-expression | lambda-func | list-expression | num-expression | string-expression | boolean-expression |alternate-expression | built-in
 
 num-expression: num-term ( "+" | "-" ) num-expression | num-term
 num-term: num-primary ( "*" | "/" ) num-term | num-primary
@@ -64,14 +64,13 @@ map-expression: map-term [ map-operator map-term | "<<" attr-list ]
 map-spec: /"{" [( STRING | IDENTIFIER | "type" ) /"=" [ "imm:" ] expression [ /"," ]]* /"}"
 
 xterm: (func-apply | dot-apply | list-apply | IDENTIFIER )
-func-apply: (dot-apply | list-apply | IDENTIFIER) "(" @func-call-parameters ")"
-dot-apply:  (IDENTIFIER | map-expression) "." @attribute-name ;[ func-apply ]
-list-apply: (IDENTIFIER | list-expression) "[" num-expression "]" ;[ func-apply ]
+func-apply: (IDENTIFIER | dot-apply | list-apply | func-apply) @func-call-parameters
+dot-apply:  (IDENTIFIER | map-expression) "." @attribute-name
+list-apply: (IDENTIFIER | list-expression) "[" num-expression "]"
 
-func-call-parameters: (expression opt-comma)* (named-parameter opt-comma)*
+func-call-parameters: "(" (expression opt-comma)* (named-parameter opt-comma)* ")"
 
 attribute-name: ( STRING | IDENTIFIER | "type" )
-
 attr-list: /"[" ( attribute-name [ /"," ] )* /"]"
 
 @alternate-expression: expression '|' expression | /'(' expression '|' expression /')'
