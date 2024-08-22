@@ -6,12 +6,17 @@ outer-decl: func-decl | type-decl | type-template | var-decl | module-export
 
 marv-module: [ "private" ] /"module" IDENTIFIER "(" @arguments ")" /"{" statement+ [ module-return ] /"}"
 module-parameter: IDENTIFIER [ "=" expression ]
-module-return: /"return" /"{" (return-parameter opt-comma)+ /"}"
+module-return: /"return" /"{" return-parameter-list /"}"
+
+@return-parameter-list: return-parameter (/"," return-parameter)*
 return-parameter: ( STRING | IDENTIFIER | "type" ) /"=" expression
 
 module-export: /"export" [ IDENTIFIER+ [ "as" IDENTIFIER ] ]+
 
-arguments: (IDENTIFIER opt-comma)* (named-parameter opt-comma)*
+arguments: identifier-list? [/"," named-parameter-list?] | named-parameter-list
+@identifier-list: IDENTIFIER (/"," IDENTIFIER)*
+@named-parameter-list: named-parameter (/"," named-parameter)*
+
 
 ; type is explicitly allowed as it's common, and we need 'type' as a lexical token
 ; also allow STRING to allow user to avoid marv keywords
@@ -55,7 +60,10 @@ boolean-expression: boolean | ( expression comparison-operator expression )
 @comparison-operator: "==" | "!="
 
 list-expression: list-spec
-@list-spec: "[" (expression [ /"," ])* "]" | @xterm
+@list-spec: "[" @expression-list? "]" | @xterm
+expression-list: expression ( /"," expression )*
+; Wonder if this list/comma separation being option has been a root
+; factor in the parsing problems?
 
 map-expression: map-term [ map-operator map-term | "<<" attr-list ]
 @map-operator: "<-" | "->"
