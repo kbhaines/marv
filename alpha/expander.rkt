@@ -192,7 +192,7 @@
       [(_ (type-parameters (type-id template-id) params ...) body:func-decl-class ... (type-wild wildcard) ...)
        (syntax/loc stx
          (define (template-id params ... [allow-missing? #f])
-           (log-marv-debug "type-template ~a" 'template-id)
+           ;  (log-marv-debug "type-template ~a" 'template-id)
            body.decl  ...
            (make-immutable-hasheq
             (append
@@ -278,14 +278,6 @@
       ; TODO45 - for compile speed, add some concrete type checks
       ; e.g. string, to avoid calling check-for-ref
       [(_ term) (syntax/loc stx (check-for-ref term))]
-      ))
-
-  (define (m-root-term stx)
-    (syntax-parse stx
-      #:literals (expression)
-      ; [(_ func-exp "(" (expression exprs) ... ")")
-      ;  (syntax/loc stx (apply func-exp (list (expression exprs) ...)))]
-      ;[(_ id:id) #'id]
       ))
 
   (define (m-func-apply stx)
@@ -460,7 +452,6 @@
 (define-syntax res-decl m-res-decl)
 (define-syntax func-call m-func-call)
 (define-syntax expression m-expression)
-(define-syntax root-term m-root-term)
 (define-syntax func-apply m-func-apply)
 (define-syntax dot-apply m-dot-apply)
 (define-syntax list-apply m-list-apply)
@@ -496,7 +487,7 @@
          module-export
          type-id
          func-call func-decl type-decl type-template
-         expression root-term func-apply dot-apply list-apply boolean-expression string-expression num-expression num-term
+         expression func-apply dot-apply list-apply boolean-expression string-expression num-expression num-term
          list-expression map-expression statement map-spec alist attr-list attribute-name
          config-expr
          keyword built-in assertion env-read pprint strf urivars uritemplate  base64encode base64decode)

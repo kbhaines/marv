@@ -13,8 +13,6 @@
 (require marv/core/drivers)
 (require marv/utils/base64)
 (require marv/core/resources)
-(require marv/core/modules)
-
 
 (require (prefix-in core: marv/core/resources))
 (require (prefix-in drv: marv/core/drivers))
@@ -89,7 +87,13 @@
 (define (def-res type-id cfg)
   (define gid (get-resource-prefix))
   (log-marv-debug "Defining resource: ~a" gid)
-  (add-resource gid (mk-resource gid type-id (get-deps) cfg)))
+  (define refs
+    (remove-duplicates
+     (filter ref?
+             (map (lambda(v)(unpack-value (cdr v)))
+                  (hash->flatlist cfg)))))
+  (log-marv-debug "dependencies: ~a" refs)
+  (add-resource gid (mk-resource gid type-id refs cfg)))
 
 (define (with-src-handlers src-locn expected given thunk)
   (define (handle-exn e)
@@ -98,7 +102,8 @@
      (format "~a at ~a~nActual exception:~n~a~n)" expected src-locn e) given))
   (with-handlers ([exn? handle-exn]) (thunk)))
 
-(define (config-overlay top bottom) (hash-union top bottom #:combine (lambda (t _) t)))
+(define (config-overlay top bottom)
+  (hash-union top bottom #:combine (lambda (t _)  t)))
 
 (define (config-reduce cfg attrs) (hash-take cfg attrs))
 
@@ -114,13 +119,17 @@
       [(resource? tgt) (ref (resource-gid tgt) attr)]
       [(hash? tgt) (hash-ref tgt attr)]
       [else (raise (~a "unsupported ref type:" tgt attr))]))
-  (when (ref? r) (add-dep r))
+  (cond [(ref? r) (add-dep r)]
+        ; TODO45
+        ; [(vref? r) (add-dep (unpack-value r))])
+        )
   r)
 
 (define (check-for-ref term)
   (log-marv-debug "-> checking ref: ~a" term)
   (cond
     [(ref? term) (add-dep term)]
+    [(vref? term) (add-dep (unpack-value term))]
     [(deferred? term) (map add-dep (deferred-deps term))])
   term)
 
@@ -139,6 +148,8 @@
 
     (cond
       [(ref? e) (add-dep e) (resolve-ref e)]
+      ; TODO45
+      ;[(vref? e) (add-dep (unpack-value e)) (resolve-ref (unpack-value e))]
       [else e]))
 
   (log-marv-debug "Resolving terms: ~a ~a" op terms)

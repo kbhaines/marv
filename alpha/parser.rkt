@@ -66,7 +66,7 @@ map-expression: map-term [ map-operator map-term | "<<" attr-list ]
 @map-operator: "<-" | "->"
 ; Order is important - xterm first
 @map-term: @xterm | map-spec | /"(" map-expression /")"
-map-spec: /"{" (map-element [ /"," map-element]*)* /"}"
+map-spec: /"{" (map-element [ /"," map-element]*)? /"}"
 @map-element:( STRING | IDENTIFIER | "type" ) /"=" [ "imm:" ] expression
 
 xterm: (func-apply | dot-apply | list-apply | IDENTIFIER )
