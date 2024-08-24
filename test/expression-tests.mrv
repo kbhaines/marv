@@ -70,6 +70,10 @@ module maps() {
 
 module funcs() {
     pprint("** FUNCS **")
+
+    func0() = 1 + 2
+    assert(3 == func0())
+
     func1(a,b) = a - b
 
     mapFunc1(a,b) = {

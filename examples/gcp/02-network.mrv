@@ -22,13 +22,12 @@ module main() {
     } 
 
     networkDefaults = defaults <- {
-        network = imm: vpc.selfLink
+        network = vpc.selfLink
     }
 
     primary-sn := compute:subnetwork networkDefaults <- {
         name = strf("~a-primary" name),
         description = strf("Primary subnet for ~a" name),
-        network = imm: vpc.selfLink,
         ipCidrRange = imm: primary-cidr
     }
 

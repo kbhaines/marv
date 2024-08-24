@@ -88,10 +88,13 @@
   (define gid (get-resource-prefix))
   (log-marv-debug "Defining resource: ~a" gid)
   (define refs
-    (remove-duplicates
-     (filter ref?
-             (map (lambda(v)(unpack-value (cdr v)))
-                  (hash->flatlist cfg)))))
+    (for/fold ([acc (list)])
+              ([kvs (hash->flatlist cfg)])
+      (define v (cdr kvs))
+      ; Using the list-handling properties of set-add/set-union :)
+      (cond ([vref? v] (set-add acc (unpack-value v)))
+            ([deferred? v] (set-union acc (deferred-deps v)))
+            [else acc])))
   (log-marv-debug "dependencies: ~a" refs)
   (add-resource gid (mk-resource gid type-id refs cfg)))
 
@@ -167,7 +170,7 @@
          (apply deferred op all-deferred-deps resolved-terms)]
         [else
          (log-marv-debug "-> resolved, invoking operation: ~a" op)
-         (define r (apply op resolved-terms))
+         (define r (if op (apply op resolved-terms) resolved-terms))
          (log-marv-debug "<- finished resolving: ~a" r)
          r ]
         ))
