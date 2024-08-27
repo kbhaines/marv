@@ -18,27 +18,27 @@ type labelledBucket = {
 }
 
 defaults = {
-    project = env("MARV_GCP_PROJECT") 
+    project = env("MARV_GCP_PROJECT"),
     region = env("MARV_GCP_REGION") 
 }
 
-module main {
+module main(){
 
-    bucket1 = labelledBucket defaults <- {
+    bucket1 := labelledBucket defaults <- {
         name = imm: strf("~a-hello-world1" defaults.project)
     }
 
-    bucket2 = labelledBucket defaults <- {
+    bucket2 := labelledBucket defaults <- {
         name = imm: strf("~a-hello-world2" defaults.project)
     }
     
-    secret1 = secret:secret defaults <- {
-        name = "my-little-secret1"
+    secret1 := secret:secret defaults <- {
+        name = "my-little-secret1",
         replication = { automatic = {} }
     }
 
-    secret2 = secret:secret defaults <- {
-        name = "my-little-secret2"
+    secret2 := secret:secret defaults <- {
+        name = "my-little-secret2",
         replication = { automatic = {} }
     }
 
@@ -58,13 +58,13 @@ type labelledSecret = {
 
     ...
 
-    secret1 = labelledSecret defaults <- {
-        name = "my-little-secret1"
+    secret1 := labelledSecret defaults <- {
+        name = "my-little-secret1",
         replication = { automatic = {} }
     }
 
-    secret2 = labelledSecret defaults <- {
-        name = "my-little-secret2"
+    secret2 := labelledSecret defaults <- {
+        name = "my-little-secret2",
         replication = { automatic = {} }
     }
 
@@ -119,27 +119,28 @@ type bucket = LabelResource<storage:bucket>
 type secret = LabelResource<secret:secret>
 
 defaults = {
-    project = env("MARV_GCP_PROJECT") 
+    project = env("MARV_GCP_PROJECT"),
     region = env("MARV_GCP_REGION") 
 }
 
-module main {
+module main(){
+    
 
-    bucket1 = bucket defaults <- {
+    bucket1 := bucket defaults <- {
         name = imm: strf("~a-hello-world1" defaults.project)
     }
 
-    bucket2 = bucket defaults <- {
+    bucket2 := bucket defaults <- {
         name = imm: strf("~a-hello-world2" defaults.project)
     }
     
-    secret1 = secret defaults <- {
-        name = "my-little-secret1"
+    secret1 := secret defaults <- {
+        name = "my-little-secret1",
         replication = { automatic = {} }
     }
 
-    secret2 = secret defaults <- {
-        name = "my-little-secret2"
+    secret2 := secret defaults <- {
+        name = "my-little-secret2",
         replication = { automatic = {} }
     }
 
@@ -216,27 +217,28 @@ type bucket = C3<Label, Defaults, storage:bucket>
 type secret = C3<Label, Defaults, secret:secret>
 
 defaults = {
-    project = env("MARV_GCP_PROJECT") 
+    project = env("MARV_GCP_PROJECT"),
     region = env("MARV_GCP_REGION") 
 }
 
-module main {
+module main(){
+    
 
-    bucket1 = bucket {
+    bucket1 := bucket {
         name = strf("~a-hello-world1" defaults.project)
     }
 
-    bucket2 = bucket {
+    bucket2 := bucket {
         name = strf("~a-hello-world2" defaults.project)
     }
     
-    secret1 = secret {
-        name = "my-little-secret1"
+    secret1 := secret {
+        name = "my-little-secret1",
         replication = { automatic = {} }
     }
 
-    secret2 = secret {
-        name = "my-little-secret2"
+    secret2 := secret {
+        name = "my-little-secret2",
         replication = { automatic = {} }
     }
 
@@ -277,30 +279,32 @@ export secret
 
 We can use this module anywhere in our project; any changes to the `labels` will be pushed outwards from this single point.
 
-Our main module is:
+Our main()module is:
+
 
 ```
 #lang marv
 
 import lib/types
 
-module main {
+module main(){
+    
 
-    bucket1 = bucket {
+    bucket1 := bucket {
         name = strf("~a-hello-world1" defaults.project)
     }
 
-    bucket2 = bucket {
+    bucket2 := bucket {
         name = strf("~a-hello-world2" defaults.project)
     }
     
-    secret1 = secret {
-        name = "my-little-secret1"
+    secret1 := secret {
+        name = "my-little-secret1",
         replication = { automatic = {} }
     }
 
-    secret2 = secret {
-        name = "my-little-secret2"
+    secret2 := secret {
+        name = "my-little-secret2",
         replication = { automatic = {} }
     }
 

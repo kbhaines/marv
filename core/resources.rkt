@@ -92,37 +92,40 @@
 
   (foldl flat '() attrs))
 
-(define (resolve-ref r get-by-gid)
-  ; TODO45 - refs can be values (which are only immutables, atm)
-  (with-value r
-    (lambda(v)
-      (if (ref? v)
-          (hash-nref
-           (get-by-gid (ref-gid v))
-           (id->list (ref-path v))
-           (lambda()(raise "arg")))
-          v))))
 
+; used to finalise all deferred computations and references in the
+; given 'cfg', making the values concrete so they can be sent to an API (for example).
 ; This resolver is NOT allowed to fail, as opposed to the resolver in
 ; support.rkt
-(define (resolve-deferred d get-by-gid)
-
-  (log-marv-debug "resolve-deferred: ~a" d)
-
-  (define (handle-term t)
-    (define tr (resolve-ref t get-by-gid))
-    (if (deferred? tr) (resolve-deferred tr get-by-gid) tr))
-
-  ; (displayln (format "===> DTs: ~a" (pretty-format (deferred-terms d))))
-  (define resolved (map handle-term (deferred-terms d)))
-  (when (memf deferred? resolved) (raise "aiiiieee"))
-  (if (deferred-op d) (apply (deferred-op d) resolved) (car resolved)))
 
 (define (config-resolve cfg get-by-gid)
+
   (define (process _ v)
-    ; (displayln (format "===> LOOKING at (~a) ~a " (deferred? v) (pretty-format v)))
-    ; TODO45 - can be values (which are only immutables, atm)
-    (if (deferred? (unpack-value v))
-        (update-val v (lambda(vv)(resolve-deferred vv get-by-gid)))
-        (update-val v (lambda(vv)(resolve-ref vv get-by-gid)))))
+    (when (and (value? v) (deferred? (unpack-value v))) (raise "invariant violation; value wraps deferred"))
+    (if (deferred? v)
+        (resolve-deferred v)
+        (resolve-ref v)))
+
+  (define (resolve-deferred d)
+
+    (log-marv-debug "resolve-deferred: ~a" d)
+
+    (define (handle-term t)
+      ; We can still have values packed inside deferred terms
+      (define tr (resolve-ref (unpack-value t)))
+      (if (deferred? tr) (resolve-deferred tr) tr))
+
+    (define resolved (map handle-term (deferred-terms d)))
+    (when (memf deferred? resolved) (raise "unabled to compute deferred term"))
+    (if (deferred-op d) (apply (deferred-op d) resolved) (car resolved)))
+
+  (define (resolve-ref v)
+    (define uv (unpack-value v))
+    (if (ref? uv)
+        (hash-nref
+         (get-by-gid (ref-gid uv))
+         (id->list (ref-path uv))
+         (lambda()(raise "resolve-ref: unable to resolve")))
+        uv))
+
   (hash-apply cfg process))

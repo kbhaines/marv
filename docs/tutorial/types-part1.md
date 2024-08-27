@@ -9,19 +9,19 @@ Let's start from the bucket example in the last tutorial, and add a second bucke
 
 import types/gcp/storage as storage
 
-module main {
+module main(){
 
     my-project = env("MARV_GCP_PROJECT")
 
-    bucket1 = storage:bucket {
-        project = my-project
-        region = env("MARV_GCP_REGION")
+    bucket1 := storage:bucket {
+        project = my-project,
+        region = env("MARV_GCP_REGION"),
         name = strf("~a-hello-world1" my-project)
     }
 
-    bucket2 = storage:bucket {
-        project = my-project
-        region = env("MARV_GCP_REGION")
+    bucket2 := storage:bucket {
+        project = my-project,
+        region = env("MARV_GCP_REGION"),
         name = strf("~a-hello-world2" my-project)
     }
 }
@@ -32,15 +32,15 @@ Clearly we are repeating ourselves: the `project` and `region` fields are replic
 ... 
 
 defaults = {
-    project = env("MARV_GCP_PROJECT")
+    project = env("MARV_GCP_PROJECT"),
     region = env("MARV_GCP_REGION")
 }
 
-bucket1 = storage:bucket defaults <- {
+bucket1 := storage:bucket defaults <- {
     name = strf("~a-hello-world1" defaults.project)
 }
 
-bucket2 = storage:bucket defaults <- {
+bucket2 := storage:bucket defaults <- {
     name = strf("~a-hello-world2" defaults.project)
 }
 ...
@@ -50,8 +50,8 @@ That's better. Now let's add some common labels to the buckets. There are a few 
 
 ```
 defaults = {
-    project = env("MARV_GCP_PROJECT")
-    region = env("MARV_GCP_REGION")
+    project = env("MARV_GCP_PROJECT"),
+    region = env("MARV_GCP_REGION"),
     labels = { costcentre = "abc123", environment="dev" }
 }
 ```
@@ -59,8 +59,8 @@ defaults = {
 However, this wouldn't work if we wanted our buckets to have other labels as well:
 
 ```
-bucket1 = storage:bucket defaults <- {
-    name = strf("~a-hello-world1" defaults.project)
+bucket1 := storage:bucket defaults <- {
+    name = strf("~a-hello-world1" defaults.project),
     labels = { purpose = "xyz" }
 }
 ```
@@ -70,8 +70,8 @@ bucket1 = storage:bucket defaults <- {
 We could work around this by changing our bucket specification so that labels are combined with the `<-` operator:
 
 ```
-bucket1 = storage:bucket defaults <- {
-    name = strf("~a-hello-world1" defaults.project)
+bucket1 := storage:bucket defaults <- {
+    name = strf("~a-hello-world1" defaults.project),
     labels = defaults.labels <- { purpose = "xyz" }
 }
 ```
@@ -100,7 +100,7 @@ Basically, all resources in `marv` have a corresponding type defined for them - 
 
 When you declare a resource in marv, you are associating the type to the data inside the `{...}`. 
 
-    bucket1 = storage:bucket { ... }
+    bucket1 := storage:bucket { ... }
 
 Marv's resource mangement system expects types to define certain functions so that it can manage the lifecycle of resources. One of these functions is `identity`. This function gets called very early on in the processing, and receives the resource's configuration (the config inside `{ ... }` ) in the `cfg` parameter. The function can update this - if it wants to. The result of the function is passed back to marv.
 
@@ -152,17 +152,17 @@ type labelledBucket = {
 }
 
 defaults = {
-    project = env("MARV_GCP_PROJECT") 
+    project = env("MARV_GCP_PROJECT"),
     region = env("MARV_GCP_REGION") 
 }
 
-module main {
+module main() {
 
-    bucket1 = labelledBucket defaults <- {
+    bucket1 := labelledBucket defaults <- {
         name = strf("~a-hello-world1" defaults.project)
     }
 
-    bucket2 = labelledBucket defaults <- {
+    bucket2 := labelledBucket defaults <- {
         name = strf("~a-hello-world2" defaults.project)
     }
     

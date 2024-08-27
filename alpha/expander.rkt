@@ -295,6 +295,8 @@
 
   (define (m-dot-apply stx)
     (syntax-parse stx
+      [(_ map-expr "." ident:id "|" alternative)
+       (syntax/loc stx (resolve-terms dot-op map-expr 'ident alternative))]
       [(_ map-expr "." ident:id)
        (syntax/loc stx (resolve-terms dot-op map-expr 'ident))]
       ; [(_ map-expr "." ident:id (func-apply ))

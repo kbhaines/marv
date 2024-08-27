@@ -71,7 +71,7 @@ map-spec: /"{" (map-element [ /"," map-element]*)? /"}"
 
 xterm: (func-apply | dot-apply | list-apply | IDENTIFIER )
 func-apply: (IDENTIFIER | dot-apply | list-apply | func-apply) @func-call-parameters
-dot-apply:  (IDENTIFIER | map-expression) "." @attribute-name
+dot-apply:  (IDENTIFIER | map-expression) "." @attribute-name [ "|" expression ]
 list-apply: (IDENTIFIER | list-expression) "[" num-expression "]"
 
 func-call-parameters: "(" (expression-list? [ /"," named-parameter-list] | named-parameter-list) ")"

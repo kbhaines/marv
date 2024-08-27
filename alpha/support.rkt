@@ -121,12 +121,12 @@
     ['equals confex]
     ['overlay (config-overlay confex (base verb))]))
 
-(define (dot-op tgt attr)
-  (log-marv-debug "dot-op: ~a . ~a" tgt attr)
+(define (dot-op tgt attr [alternative #f])
+  (log-marv-debug "dot-op: ~a . ~a (alternative: ~a)" tgt attr alternative)
   (define r
     (cond
       [(resource? tgt) (ref (resource-gid tgt) attr)]
-      [(hash? tgt) (hash-ref tgt attr)]
+      [(hash? tgt) (hash-ref tgt attr alternative)]
       [else (raise (~a "unsupported ref type:" tgt attr))]))
   (cond [(ref? r) (add-dep r)]
         ; TODO45
