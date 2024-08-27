@@ -57,10 +57,16 @@
 
 (define MODULE-PREFIX (make-parameter 'main))
 
-(define init-var-deps set)
+; VAR-DEPS gets built per-resource, when references to other resources are
+; encountered. It's necessary because when we encounter a reference to a hard
+; value, that value is replaced by the resolver which means we lose the
+; reference before the final scan over the resource (in def-res, which collects
+; everything else).
+
+(define init-var-deps list)
 (define VAR-DEPS (make-parameter (init-var-deps)))
 (define (add-dep d) (VAR-DEPS (set-add (VAR-DEPS) d)))
-(define (get-deps) (set->list(VAR-DEPS)))
+(define (get-deps) (VAR-DEPS))
 
 (define (with-module-ctx params proc)
   (log-marv-debug "Switching into module-context: ~a" (MODULE-PREFIX))
@@ -88,7 +94,7 @@
   (define gid (get-resource-prefix))
   (log-marv-debug "Defining resource: ~a" gid)
   (define refs
-    (for/fold ([acc (list)])
+    (for/fold ([acc (get-deps)])
               ([kvs (hash->flatlist cfg)])
       (define v (cdr kvs))
       ; Using the list-handling properties of set-add/set-union :)
