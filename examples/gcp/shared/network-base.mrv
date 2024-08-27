@@ -6,8 +6,8 @@
 
 import types/gcp/compute as compute
 
-module network-base(defaults name 
-        primary-cidr="10.0.1.0/24" 
+module network-base(defaults, name,
+        primary-cidr="10.0.1.0/24",
         proxy-cidr="10.0.2.0/24") {
 
     # <type> - driver-specific resource type 
@@ -25,17 +25,17 @@ module network-base(defaults name
     # So here we will create a VPC network, using the 'defaults' as a basis but
     # merging them with the CONFIG-OBJECT (between { and })
     
-    vpc = compute:network defaults <- {
+    vpc := compute:network defaults <- {
 
         # imm: declares that this attribute is immutable; if it changes, then the
         # resource will need to be recreated.  (this is a work-around because
         # marv's GCP driver doesn't know which attributes are immutable in GCP)
         
-        name = imm: name
+        name = imm: name,
 
         # strf is a string-template function, '~a' is replaced by 'name'
-        description = strf("VPC for ~a" name)
-        autoCreateSubnetworks = false
+        description = strf("VPC for ~a" name),
+        autoCreateSubnetworks = false,
 
         routingConfig = { routingMode = "REGIONAL" }
     } 
@@ -54,46 +54,46 @@ module network-base(defaults name
         network = imm: vpc.selfLink
     }
 
-    primary-sn = compute:subnetwork vpc-defaults <- {
-        name = strf("~a-primary" name)
-        description = strf("Primary subnet for ~a" name)
+    primary-sn := compute:subnetwork vpc-defaults <- {
+        name = strf("~a-primary" name),
+        description = strf("Primary subnet for ~a" name),
         ipCidrRange =  imm: primary-cidr
     }
 
-    proxy-sn = compute:subnetwork vpc-defaults <- {
-        name = strf("~a-proxy" name)
-        description = strf("Proxy subnet for ~a" name)
-        ipCidrRange = imm: proxy-cidr
-        purpose = "REGIONAL_MANAGED_PROXY"
+    proxy-sn := compute:subnetwork vpc-defaults <- {
+        name = strf("~a-proxy" name),
+        description = strf("Proxy subnet for ~a" name),
+        ipCidrRange = imm: proxy-cidr,
+        purpose = "REGIONAL_MANAGED_PROXY",
         role = "ACTIVE"
     }
 
     # lists are space separated
-    google-source-range = [ "130.211.0.0/22" "35.191.0.0/16" ]
+    google-source-range = [ "130.211.0.0/22", "35.191.0.0/16" ]
     
-    fw-health-check = compute:firewall vpc-defaults <- {
-        name = strf("~a-fw-allow-health-check" name)
-        sourceRanges = google-source-range
-        targetTags =  [ "load-balanced-backend" ]
-        allowed = [ { IPProtocol = "tcp" } ]
+    fw-health-check := compute:firewall vpc-defaults <- {
+        name = strf("~a-fw-allow-health-check" name),
+        sourceRanges = google-source-range,
+        targetTags =  [ "load-balanced-backend" ],
+        allowed = [ { IPProtocol = "tcp" } ],
         direction = "INGRESS"
     }
 
-    fw-proxies = compute:firewall vpc-defaults <- {
-        name = strf("~a-fw-allow-proxies" name)
-        sourceRanges = [ proxy-sn.ipCidrRange ]
-        targetTags =  [ "load-balanced-backend" ]
-        allowed = [ { IPProtocol = "tcp" ports = [ "80" ] }
-                    { IPProtocol = "tcp" ports = [ "443" ] }
-                    { IPProtocol = "tcp" ports = [ "8080" ] } ]
+    fw-proxies := compute:firewall vpc-defaults <- {
+        name = strf("~a-fw-allow-proxies" name),
+        sourceRanges = [ proxy-sn.ipCidrRange ],
+        targetTags =  [ "load-balanced-backend" ],
+        allowed = [ { IPProtocol = "tcp", ports = [ "80" ] },
+                    { IPProtocol = "tcp", ports = [ "443" ] },
+                    { IPProtocol = "tcp", ports = [ "8080" ] } ],
         direction = "INGRESS"
     }
 
     # a module can provide return values to its caller
     
     return {
-        vpc = vpc.selfLink
-        primary-subnet = primary-sn.selfLink
+        vpc = vpc.selfLink,
+        primary-subnet = primary-sn.selfLink,
         proxy-subnet = proxy-sn.selfLink
     }
 }

@@ -22,7 +22,7 @@ module main() {
     } 
 
     networkDefaults = defaults <- {
-        network = vpc.selfLink
+        network = imm: vpc.selfLink
     }
 
     primary-sn := compute:subnetwork networkDefaults <- {

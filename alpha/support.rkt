@@ -143,23 +143,25 @@
     ; TODO45 - resolve-ref here vs resources.rkt version
     (define (resolve-ref r)
       (log-marv-debug "-> attempting to resolve: ~a" r)
-      (unpack-value
-       (hash-nref
-        (resource-config (hash-ref (get-resources) (ref-gid r)))
-        (id->list (ref-path r))
-        r)))
+      (hash-nref
+       (resource-config (hash-ref (get-resources) (ref-gid r)))
+       (id->list (ref-path r))
+       r))
 
-    (cond
-      [(ref? e) (add-dep e) (resolve-ref e)]
-      ; TODO45
-      ;[(vref? e) (add-dep (unpack-value e)) (resolve-ref (unpack-value e))]
-      [else e]))
+    ; TODO45
+    (with-value e
+      (lambda(v)
+        (cond
+          [(ref? v) (add-dep v) (resolve-ref v)]
+          [else v]))))
 
   (log-marv-debug "Resolving terms: ~a ~a" op terms)
+  (when (and (not op) (> (length terms) 1))
+    (raise "resolve-terms has #f and more than one term"))
   (define resolved-terms (map try-resolve terms))
   (log-marv-debug "-> terms: ~a" resolved-terms)
 
-  (cond [(memf (lambda(x) (or (ref? x) (deferred? x))) resolved-terms)
+  (cond [(memf (lambda(x) (or (vref? x) (deferred? x))) resolved-terms)
          (log-marv-debug "-> couldn't resolve, deferred")
          (define all-deferred-deps
            (for/fold
@@ -170,7 +172,7 @@
          (apply deferred op all-deferred-deps resolved-terms)]
         [else
          (log-marv-debug "-> resolved, invoking operation: ~a" op)
-         (define r (if op (apply op resolved-terms) resolved-terms))
+         (define r (if op (apply op resolved-terms) (car resolved-terms)))
          (log-marv-debug "<- finished resolving: ~a" r)
          r ]
         ))

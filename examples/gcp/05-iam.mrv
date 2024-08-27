@@ -3,19 +3,19 @@
 import types/gcp/iam as iam
 
 defaults = {
-    project = env("MARV_GCP_PROJECT")
+    project = env("MARV_GCP_PROJECT"),
     region = env("MARV_GCP_REGION")
 }
 
-module main {
+module main() {
 
-    service-account = iam:serviceAccount defaults <- {
-        name = "service-account1"
-        displayName = "service-account1"
+    service-account := iam:serviceAccount defaults <- {
+        name = "service-account1",
+        displayName = "service-account1",
         description = "example service account"
     }
 
-   service-account-key = iam:serviceAccountKey defaults <- {
+   service-account-key  := iam:serviceAccountKey defaults <- {
        serviceAccountEmail = service-account.email
    }
 }

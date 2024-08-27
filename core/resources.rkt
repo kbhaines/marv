@@ -94,13 +94,17 @@
 
 (define (resolve-ref r get-by-gid)
   ; TODO45 - refs can be values (which are only immutables, atm)
-  (if (ref? r)
-      (hash-nref
-       (get-by-gid (ref-gid r))
-       (id->list (ref-path r))
-       (lambda()(raise "arg")))
-      r))
+  (with-value r
+    (lambda(v)
+      (if (ref? v)
+          (hash-nref
+           (get-by-gid (ref-gid v))
+           (id->list (ref-path v))
+           (lambda()(raise "arg")))
+          v))))
 
+; This resolver is NOT allowed to fail, as opposed to the resolver in
+; support.rkt
 (define (resolve-deferred d get-by-gid)
 
   (log-marv-debug "resolve-deferred: ~a" d)
@@ -112,7 +116,7 @@
   ; (displayln (format "===> DTs: ~a" (pretty-format (deferred-terms d))))
   (define resolved (map handle-term (deferred-terms d)))
   (when (memf deferred? resolved) (raise "aiiiieee"))
-  (apply (deferred-op d) resolved))
+  (if (deferred-op d) (apply (deferred-op d) resolved) (car resolved)))
 
 (define (config-resolve cfg get-by-gid)
   (define (process _ v)

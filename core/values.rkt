@@ -14,6 +14,7 @@
          ival ival?
          ;  iref
          iref? vref?
+         with-value
          ref-split
          ref->id)
 
@@ -51,6 +52,10 @@
 
 
 (define (vref? v) (ref? (unpack-value v)))
+
+(define (with-value v proc)
+  (define result (proc (unpack-value v)))
+  (if (value? v) (value result (value-flags v)) result))
 
 (define/contract (ref-split r)
   (vref? . -> . (values symbol? symbol?))

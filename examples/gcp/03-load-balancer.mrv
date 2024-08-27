@@ -7,10 +7,10 @@ module main(name = "example-02-load-balancer") {
 
     defaults = {
         # env is a built-in function to read environment variables
-        project = env("MARV_GCP_PROJECT")
+        project = env("MARV_GCP_PROJECT"),
         region = env("MARV_GCP_REGION")
     }
 
-    network = net:network-base(defaults = defaults, name = name)
-    ig = ig:instance-group(defaults = defaults, name = name, vpc = network.vpc, subnet = network.primary-subnet)
+    network = net:network-base(defaults, name)
+    ig = ig:instance-group(defaults, name, network.vpc, network.primary-subnet)
 }
