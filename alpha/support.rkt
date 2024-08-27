@@ -146,7 +146,6 @@
 
   (define (try-resolve e)
 
-    ; TODO45 - resolve-ref here vs resources.rkt version
     (define (resolve-ref r)
       (log-marv-debug "-> attempting to resolve: ~a" r)
       (hash-nref
@@ -154,7 +153,6 @@
        (id->list (ref-path r))
        r))
 
-    ; TODO45
     (with-value e
       (lambda(v)
         (cond

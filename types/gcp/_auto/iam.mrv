@@ -6,34 +6,34 @@ API-ID="iam"
 # /resources/roles
 type roles = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/roles"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Role"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Role",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -44,30 +44,30 @@ export roles
 # /resources/iamPolicies
 type iamPolicies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/iamPolicies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -78,30 +78,30 @@ export iamPolicies
 # /resources/permissions
 type permissions = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/permissions"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -112,49 +112,49 @@ export permissions
 # /resources/locations/resources/workforcePools
 type locations_workforcePools = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/locations/resources/workforcePools"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.WorkforcePool(cfg)
-   response-type="iam.schemas.Operation"
-   method="POST"
-   url="https://iam.googleapis.com/v1/{+location}/workforcePools"
+   api-id=API-ID,
+   request-body=schemas.WorkforcePool(cfg),
+   response-type="iam.schemas.Operation",
+   method="POST",
+   url="https://iam.googleapis.com/v1/{+location}/workforcePools",
    required=["(location)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.WorkforcePool"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.WorkforcePool",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.WorkforcePool(cfg)
-   response-type="iam.schemas.Operation"
-   method="PATCH"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   request-body=schemas.WorkforcePool(cfg),
+   response-type="iam.schemas.Operation",
+   method="PATCH",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="DELETE"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="DELETE",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
@@ -164,34 +164,34 @@ export locations_workforcePools
 # /resources/locations/resources/workforcePools/resources/operations
 type locations_workforcePools_operations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/locations/resources/workforcePools/resources/operations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -202,35 +202,35 @@ export locations_workforcePools_operations
 # /resources/locations/resources/workforcePools/resources/subjects
 type locations_workforcePools_subjects = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/locations/resources/workforcePools/resources/subjects"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="DELETE"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="DELETE",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
@@ -240,49 +240,49 @@ export locations_workforcePools_subjects
 # /resources/locations/resources/workforcePools/resources/providers
 type locations_workforcePools_providers = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/locations/resources/workforcePools/resources/providers"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.WorkforcePoolProvider(cfg)
-   response-type="iam.schemas.Operation"
-   method="POST"
-   url="https://iam.googleapis.com/v1/{+parent}/providers"
+   api-id=API-ID,
+   request-body=schemas.WorkforcePoolProvider(cfg),
+   response-type="iam.schemas.Operation",
+   method="POST",
+   url="https://iam.googleapis.com/v1/{+parent}/providers",
    required=["(parent)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.WorkforcePoolProvider"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.WorkforcePoolProvider",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.WorkforcePoolProvider(cfg)
-   response-type="iam.schemas.Operation"
-   method="PATCH"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   request-body=schemas.WorkforcePoolProvider(cfg),
+   response-type="iam.schemas.Operation",
+   method="PATCH",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="DELETE"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="DELETE",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
@@ -292,34 +292,34 @@ export locations_workforcePools_providers
 # /resources/locations/resources/workforcePools/resources/providers/resources/operations
 type locations_workforcePools_providers_operations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/locations/resources/workforcePools/resources/providers/resources/operations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -330,44 +330,44 @@ export locations_workforcePools_providers_operations
 # /resources/locations/resources/workforcePools/resources/providers/resources/keys
 type locations_workforcePools_providers_keys = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/locations/resources/workforcePools/resources/providers/resources/keys"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.WorkforcePoolProviderKey(cfg)
-   response-type="iam.schemas.Operation"
-   method="POST"
-   url="https://iam.googleapis.com/v1/{+parent}/keys"
+   api-id=API-ID,
+   request-body=schemas.WorkforcePoolProviderKey(cfg),
+   response-type="iam.schemas.Operation",
+   method="POST",
+   url="https://iam.googleapis.com/v1/{+parent}/keys",
    required=["(parent)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.WorkforcePoolProviderKey"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.WorkforcePoolProviderKey",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="DELETE"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="DELETE",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
@@ -377,34 +377,34 @@ export locations_workforcePools_providers_keys
 # /resources/locations/resources/workforcePools/resources/providers/resources/keys/resources/operations
 type locations_workforcePools_providers_keys_operations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/locations/resources/workforcePools/resources/providers/resources/keys/resources/operations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -415,34 +415,34 @@ export locations_workforcePools_providers_keys_operations
 # /resources/locations/resources/workforcePools/resources/subjects/resources/operations
 type locations_workforcePools_subjects_operations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/locations/resources/workforcePools/resources/subjects/resources/operations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -453,49 +453,49 @@ export locations_workforcePools_subjects_operations
 # /resources/projects/resources/serviceAccounts
 type projects_serviceAccounts = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/projects/resources/serviceAccounts"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.CreateServiceAccountRequest(cfg)
-   response-type="iam.schemas.ServiceAccount"
-   method="POST"
-   url="https://iam.googleapis.com/v1/{+name}/serviceAccounts"
+   api-id=API-ID,
+   request-body=schemas.CreateServiceAccountRequest(cfg),
+   response-type="iam.schemas.ServiceAccount",
+   method="POST",
+   url="https://iam.googleapis.com/v1/{+name}/serviceAccounts",
    required=["(name)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.ServiceAccount"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.ServiceAccount",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.PatchServiceAccountRequest(cfg)
-   response-type="iam.schemas.ServiceAccount"
-   method="PATCH"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   request-body=schemas.PatchServiceAccountRequest(cfg),
+   response-type="iam.schemas.ServiceAccount",
+   method="PATCH",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Empty"
-   method="DELETE"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Empty",
+   method="DELETE",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
@@ -505,49 +505,49 @@ export projects_serviceAccounts
 # /resources/projects/resources/roles
 type projects_roles = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/projects/resources/roles"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.CreateRoleRequest(cfg)
-   response-type="iam.schemas.Role"
-   method="POST"
-   url="https://iam.googleapis.com/v1/{+parent}/roles"
+   api-id=API-ID,
+   request-body=schemas.CreateRoleRequest(cfg),
+   response-type="iam.schemas.Role",
+   method="POST",
+   url="https://iam.googleapis.com/v1/{+parent}/roles",
    required=["(parent)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Role"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Role",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Role(cfg)
-   response-type="iam.schemas.Role"
-   method="PATCH"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   request-body=schemas.Role(cfg),
+   response-type="iam.schemas.Role",
+   method="PATCH",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Role"
-   method="DELETE"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Role",
+   method="DELETE",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
@@ -557,86 +557,190 @@ export projects_roles
 # /resources/projects/resources/locations/resources/workloadIdentityPools
 type projects_locations_workloadIdentityPools = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/projects/resources/locations/resources/workloadIdentityPools"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.WorkloadIdentityPool(cfg)
-   response-type="iam.schemas.Operation"
-   method="POST"
-   url="https://iam.googleapis.com/v1/{+parent}/workloadIdentityPools"
+   api-id=API-ID,
+   request-body=schemas.WorkloadIdentityPool(cfg),
+   response-type="iam.schemas.Operation",
+   method="POST",
+   url="https://iam.googleapis.com/v1/{+parent}/workloadIdentityPools",
    required=["(parent)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.WorkloadIdentityPool"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.WorkloadIdentityPool",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.WorkloadIdentityPool(cfg)
-   response-type="iam.schemas.Operation"
-   method="PATCH"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   request-body=schemas.WorkloadIdentityPool(cfg),
+   response-type="iam.schemas.Operation",
+   method="PATCH",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="DELETE"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="DELETE",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
 }
 export projects_locations_workloadIdentityPools
 
+# /resources/projects/resources/locations/resources/oauthClients
+type projects_locations_oauthClients = {
+ origin(cfg)= {
+  driver="gcp",
+  type="gcp:iam:/resources/projects/resources/locations/resources/oauthClients"
+ }
+ identity(cfg) = cfg
+ create(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   request-body=schemas.OauthClient(cfg),
+   response-type="iam.schemas.OauthClient",
+   method="POST",
+   url="https://iam.googleapis.com/v1/{+parent}/oauthClients",
+   required=["(parent)"]
+  }
+ }
+ read(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="iam.schemas.OauthClient",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
+   required=["(name)"]
+  }
+ }
+ update(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   request-body=schemas.OauthClient(cfg),
+   response-type="iam.schemas.OauthClient",
+   method="PATCH",
+   url="https://iam.googleapis.com/v1/{+name}",
+   required=["(name)"]
+  }
+ }
+ delete(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="iam.schemas.OauthClient",
+   method="DELETE",
+   url="https://iam.googleapis.com/v1/{+name}",
+   required=["(name)"]
+  }
+ }
+}
+export projects_locations_oauthClients
+
+# /resources/projects/resources/locations/resources/oauthClients/resources/credentials
+type projects_locations_oauthClients_credentials = {
+ origin(cfg)= {
+  driver="gcp",
+  type="gcp:iam:/resources/projects/resources/locations/resources/oauthClients/resources/credentials"
+ }
+ identity(cfg) = cfg
+ create(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   request-body=schemas.OauthClientCredential(cfg),
+   response-type="iam.schemas.OauthClientCredential",
+   method="POST",
+   url="https://iam.googleapis.com/v1/{+parent}/credentials",
+   required=["(parent)"]
+  }
+ }
+ read(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="iam.schemas.OauthClientCredential",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
+   required=["(name)"]
+  }
+ }
+ update(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   request-body=schemas.OauthClientCredential(cfg),
+   response-type="iam.schemas.OauthClientCredential",
+   method="PATCH",
+   url="https://iam.googleapis.com/v1/{+name}",
+   required=["(name)"]
+  }
+ }
+ delete(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="iam.schemas.Empty",
+   method="DELETE",
+   url="https://iam.googleapis.com/v1/{+name}",
+   required=["(name)"]
+  }
+ }
+}
+export projects_locations_oauthClients_credentials
+
 # /resources/projects/resources/locations/resources/workloadIdentityPools/resources/operations
 type projects_locations_workloadIdentityPools_operations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/projects/resources/locations/resources/workloadIdentityPools/resources/operations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -647,49 +751,49 @@ export projects_locations_workloadIdentityPools_operations
 # /resources/projects/resources/locations/resources/workloadIdentityPools/resources/providers
 type projects_locations_workloadIdentityPools_providers = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/projects/resources/locations/resources/workloadIdentityPools/resources/providers"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.WorkloadIdentityPoolProvider(cfg)
-   response-type="iam.schemas.Operation"
-   method="POST"
-   url="https://iam.googleapis.com/v1/{+parent}/providers"
+   api-id=API-ID,
+   request-body=schemas.WorkloadIdentityPoolProvider(cfg),
+   response-type="iam.schemas.Operation",
+   method="POST",
+   url="https://iam.googleapis.com/v1/{+parent}/providers",
    required=["(parent)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.WorkloadIdentityPoolProvider"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.WorkloadIdentityPoolProvider",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.WorkloadIdentityPoolProvider(cfg)
-   response-type="iam.schemas.Operation"
-   method="PATCH"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   request-body=schemas.WorkloadIdentityPoolProvider(cfg),
+   response-type="iam.schemas.Operation",
+   method="PATCH",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="DELETE"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="DELETE",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
@@ -699,34 +803,34 @@ export projects_locations_workloadIdentityPools_providers
 # /resources/projects/resources/locations/resources/workloadIdentityPools/resources/providers/resources/operations
 type projects_locations_workloadIdentityPools_providers_operations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/projects/resources/locations/resources/workloadIdentityPools/resources/providers/resources/operations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -737,44 +841,44 @@ export projects_locations_workloadIdentityPools_providers_operations
 # /resources/projects/resources/locations/resources/workloadIdentityPools/resources/providers/resources/keys
 type projects_locations_workloadIdentityPools_providers_keys = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/projects/resources/locations/resources/workloadIdentityPools/resources/providers/resources/keys"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.WorkloadIdentityPoolProviderKey(cfg)
-   response-type="iam.schemas.Operation"
-   method="POST"
-   url="https://iam.googleapis.com/v1/{+parent}/keys"
+   api-id=API-ID,
+   request-body=schemas.WorkloadIdentityPoolProviderKey(cfg),
+   response-type="iam.schemas.Operation",
+   method="POST",
+   url="https://iam.googleapis.com/v1/{+parent}/keys",
    required=["(parent)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.WorkloadIdentityPoolProviderKey"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.WorkloadIdentityPoolProviderKey",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="DELETE"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="DELETE",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
@@ -784,34 +888,34 @@ export projects_locations_workloadIdentityPools_providers_keys
 # /resources/projects/resources/locations/resources/workloadIdentityPools/resources/providers/resources/keys/resources/operations
 type projects_locations_workloadIdentityPools_providers_keys_operations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/projects/resources/locations/resources/workloadIdentityPools/resources/providers/resources/keys/resources/operations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -822,34 +926,34 @@ export projects_locations_workloadIdentityPools_providers_keys_operations
 # /resources/projects/resources/locations/resources/workloadIdentityPools/resources/namespaces/resources/operations
 type projects_locations_workloadIdentityPools_namespaces_operations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/projects/resources/locations/resources/workloadIdentityPools/resources/namespaces/resources/operations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -860,34 +964,34 @@ export projects_locations_workloadIdentityPools_namespaces_operations
 # /resources/projects/resources/locations/resources/workloadIdentityPools/resources/namespaces/resources/managedIdentities/resources/operations
 type projects_locations_workloadIdentityPools_namespaces_managedIdentities_operations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/projects/resources/locations/resources/workloadIdentityPools/resources/namespaces/resources/managedIdentities/resources/operations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -898,34 +1002,34 @@ export projects_locations_workloadIdentityPools_namespaces_managedIdentities_ope
 # /resources/projects/resources/locations/resources/workloadIdentityPools/resources/namespaces/resources/managedIdentities/resources/workloadSources/resources/operations
 type projects_locations_workloadIdentityPools_namespaces_managedIdentities_workloadSources_operations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/projects/resources/locations/resources/workloadIdentityPools/resources/namespaces/resources/managedIdentities/resources/workloadSources/resources/operations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Operation"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Operation",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -936,44 +1040,44 @@ export projects_locations_workloadIdentityPools_namespaces_managedIdentities_wor
 # /resources/projects/resources/serviceAccounts/resources/keys
 type projects_serviceAccounts_keys = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/projects/resources/serviceAccounts/resources/keys"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.CreateServiceAccountKeyRequest(cfg)
-   response-type="iam.schemas.ServiceAccountKey"
-   method="POST"
-   url="https://iam.googleapis.com/v1/{+name}/keys"
+   api-id=API-ID,
+   request-body=schemas.CreateServiceAccountKeyRequest(cfg),
+   response-type="iam.schemas.ServiceAccountKey",
+   method="POST",
+   url="https://iam.googleapis.com/v1/{+name}/keys",
    required=["(name)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.ServiceAccountKey"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.ServiceAccountKey",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Empty"
-   method="DELETE"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Empty",
+   method="DELETE",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
@@ -983,49 +1087,49 @@ export projects_serviceAccounts_keys
 # /resources/organizations/resources/roles
 type organizations_roles = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:iam:/resources/organizations/resources/roles"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.CreateRoleRequest(cfg)
-   response-type="iam.schemas.Role"
-   method="POST"
-   url="https://iam.googleapis.com/v1/{+parent}/roles"
+   api-id=API-ID,
+   request-body=schemas.CreateRoleRequest(cfg),
+   response-type="iam.schemas.Role",
+   method="POST",
+   url="https://iam.googleapis.com/v1/{+parent}/roles",
    required=["(parent)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Role"
-   method="GET"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Role",
+   method="GET",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Role(cfg)
-   response-type="iam.schemas.Role"
-   method="PATCH"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   request-body=schemas.Role(cfg),
+   response-type="iam.schemas.Role",
+   method="PATCH",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="iam.schemas.Role"
-   method="DELETE"
-   url="https://iam.googleapis.com/v1/{+name}"
+   api-id=API-ID,
+   response-type="iam.schemas.Role",
+   method="DELETE",
+   url="https://iam.googleapis.com/v1/{+name}",
    required=["(name)"]
   }
  }

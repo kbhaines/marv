@@ -2,85 +2,129 @@
 ## AUTO-GENERATED FILE - DO NOT EDIT!
 
 
-# Schema for HmacKeysMetadata
-HmacKeysMetadata(c)=c << [items kind nextPageToken]
-
 # Schema for BucketAccessControls
-BucketAccessControls(c)=c << [kind items]
-
-# Schema for TestIamPermissionsResponse
-TestIamPermissionsResponse(c)=c << [permissions kind]
-
-# Schema for Objects
-Objects(c)=c << [prefixes items kind nextPageToken]
-
-# Schema for BucketAccessControl
-BucketAccessControl(c)=c << [id entity email selfLink entityId domain bucket projectTeam etag kind role]
-
-# Schema for ObjectAccessControl
-ObjectAccessControl(c)=c << [id entity selfLink entityId domain bucket projectTeam etag kind role generation email object]
-
-# Schema for Bucket
-Bucket(c)=c << [lifecycle selfLink updated etag id timeCreated metageneration logging website retentionPolicy autoclass customPlacementConfig name storageClass defaultEventBasedHold billing location cors labels owner projectNumber rpo defaultObjectAcl acl satisfiesPZS kind locationType versioning encryption iamConfiguration]
+BucketAccessControls(c)=c << [kind,items]
 
 # Schema for ServiceAccount
-ServiceAccount(c)=c << [email_address kind]
+ServiceAccount(c)=c << [email_address,kind]
 
 # Schema for HmacKey
-HmacKey(c)=c << [metadata secret kind]
+HmacKey(c)=c << [metadata,secret,kind]
 
 # Schema for ObjectAccessControls
-ObjectAccessControls(c)=c << [kind items]
+ObjectAccessControls(c)=c << [kind,items]
+
+# Schema for AnywhereCache
+AnywhereCache(c)=c << [state,zone,pendingUpdate,createTime,ttl,bucket,id,updateTime,selfLink,anywhereCacheId,kind,admissionPolicy]
 
 # Schema for Object
-Object(c)=c << [generation selfLink customerEncryption md5Hash id contentType timeCreated metageneration kmsKeyName cacheControl contentEncoding updated retentionExpirationTime eventBasedHold contentLanguage timeStorageClassUpdated name storageClass size owner bucket crc32c customTime metadata acl etag contentDisposition temporaryHold kind componentCount mediaLink timeDeleted]
+Object(c)=c << [generation,selfLink,customerEncryption,id,contentType,timeCreated,metageneration,kmsKeyName,cacheControl,contentEncoding,updated,retentionExpirationTime,eventBasedHold,contentLanguage,hardDeleteTime,md5Hash,name,storageClass,timeStorageClassUpdated,retention,softDeleteTime,size,owner,bucket,crc32c,customTime,metadata,acl,etag,contentDisposition,temporaryHold,kind,componentCount,mediaLink,timeDeleted]
+
+# Schema for Folder
+Folder(c)=c << [metageneration,selfLink,bucket,kind,pendingRenameInfo,id,updateTime,createTime,name]
+
+# Schema for HmacKeysMetadata
+HmacKeysMetadata(c)=c << [items,kind,nextPageToken]
 
 # Schema for Notification
-Notification(c)=c << [id object_name_prefix event_types topic kind selfLink custom_attributes etag payload_format]
+Notification(c)=c << [id,object_name_prefix,event_types,topic,kind,selfLink,custom_attributes,etag,payload_format]
 
 # Schema for Buckets
-Buckets(c)=c << [items kind nextPageToken]
+Buckets(c)=c << [items,kind,nextPageToken]
 
 # Schema for Channel
-Channel(c)=c << [expiration payload type token id params resourceId resourceUri kind address]
+Channel(c)=c << [expiration,payload,type,token,id,params,resourceId,resourceUri,kind,address]
+
+# Schema for Folders
+Folders(c)=c << [items,kind,nextPageToken]
+
+# Schema for TestIamPermissionsResponse
+TestIamPermissionsResponse(c)=c << [permissions,kind]
+
+# Schema for GoogleRpcStatus
+GoogleRpcStatus(c)=c << [code,message,details]
+
+# Schema for Objects
+Objects(c)=c << [prefixes,items,kind,nextPageToken]
+
+# Schema for BucketAccessControl
+BucketAccessControl(c)=c << [id,entity,email,selfLink,entityId,domain,bucket,projectTeam,etag,kind,role]
+
+# Schema for GoogleLongrunningListOperationsResponse
+GoogleLongrunningListOperationsResponse(c)=c << [operations,kind,nextPageToken]
+
+# Schema for ObjectAccessControl
+ObjectAccessControl(c)=c << [id,entity,selfLink,entityId,domain,bucket,projectTeam,etag,kind,role,generation,email,object]
+
+# Schema for GoogleLongrunningOperation
+GoogleLongrunningOperation(c)=c << [selfLink,done,name,error,response,metadata,kind]
+
+# Schema for BulkRestoreObjectsRequest
+BulkRestoreObjectsRequest(c)=c << [softDeletedBeforeTime,matchGlobs,softDeletedAfterTime,allowOverwrite,copySourceAcl]
+
+# Schema for BucketStorageLayout
+BucketStorageLayout(c)=c << [customPlacementConfig,location,bucket,hierarchicalNamespace,kind,locationType]
+
+# Schema for Bucket
+Bucket(c)=c << [selfLink,updated,etag,id,ipFilter,timeCreated,metageneration,logging,objectRetention,generation,lifecycle,satisfiesPZI,hardDeleteTime,website,retentionPolicy,autoclass,customPlacementConfig,name,storageClass,defaultEventBasedHold,billing,location,cors,labels,softDeleteTime,owner,hierarchicalNamespace,softDeletePolicy,projectNumber,rpo,defaultObjectAcl,acl,satisfiesPZS,kind,locationType,versioning,encryption,iamConfiguration]
 
 # Schema for Policy
-Policy(c)=c << [version resourceId bindings etag kind]
+Policy(c)=c << [version,resourceId,bindings,etag,kind]
 
 # Schema for Notifications
-Notifications(c)=c << [kind items]
+Notifications(c)=c << [kind,items]
 
 # Schema for HmacKeyMetadata
-HmacKeyMetadata(c)=c << [state selfLink accessId projectId etag kind id timeCreated serviceAccountEmail updated]
+HmacKeyMetadata(c)=c << [state,selfLink,accessId,projectId,etag,kind,id,timeCreated,serviceAccountEmail,updated]
 
 # Schema for ComposeRequest
-ComposeRequest(c)=c << [destination sourceObjects kind]
+ComposeRequest(c)=c << [destination,sourceObjects,kind]
+
+# Schema for ManagedFolder
+ManagedFolder(c)=c << [metageneration,selfLink,bucket,kind,id,updateTime,createTime,name]
+
+# Schema for AnywhereCaches
+AnywhereCaches(c)=c << [items,kind,nextPageToken]
+
+# Schema for ManagedFolders
+ManagedFolders(c)=c << [items,kind,nextPageToken]
 
 # Schema for Expr
-Expr(c)=c << [title location description expression]
+Expr(c)=c << [title,location,description,expression]
 
 # Schema for RewriteResponse
-RewriteResponse(c)=c << [resource done totalBytesRewritten rewriteToken kind objectSize]
+RewriteResponse(c)=c << [resource,done,totalBytesRewritten,rewriteToken,kind,objectSize]
 schemas={
-  HmacKeysMetadata=HmacKeysMetadata
-  BucketAccessControls=BucketAccessControls
-  TestIamPermissionsResponse=TestIamPermissionsResponse
-  Objects=Objects
-  BucketAccessControl=BucketAccessControl
-  ObjectAccessControl=ObjectAccessControl
-  Bucket=Bucket
-  ServiceAccount=ServiceAccount
-  HmacKey=HmacKey
-  ObjectAccessControls=ObjectAccessControls
-  Object=Object
-  Notification=Notification
-  Buckets=Buckets
-  Channel=Channel
-  Policy=Policy
-  Notifications=Notifications
-  HmacKeyMetadata=HmacKeyMetadata
-  ComposeRequest=ComposeRequest
-  Expr=Expr
+  BucketAccessControls=BucketAccessControls,
+  ServiceAccount=ServiceAccount,
+  HmacKey=HmacKey,
+  ObjectAccessControls=ObjectAccessControls,
+  AnywhereCache=AnywhereCache,
+  Object=Object,
+  Folder=Folder,
+  HmacKeysMetadata=HmacKeysMetadata,
+  Notification=Notification,
+  Buckets=Buckets,
+  Channel=Channel,
+  Folders=Folders,
+  TestIamPermissionsResponse=TestIamPermissionsResponse,
+  GoogleRpcStatus=GoogleRpcStatus,
+  Objects=Objects,
+  BucketAccessControl=BucketAccessControl,
+  GoogleLongrunningListOperationsResponse=GoogleLongrunningListOperationsResponse,
+  ObjectAccessControl=ObjectAccessControl,
+  GoogleLongrunningOperation=GoogleLongrunningOperation,
+  BulkRestoreObjectsRequest=BulkRestoreObjectsRequest,
+  BucketStorageLayout=BucketStorageLayout,
+  Bucket=Bucket,
+  Policy=Policy,
+  Notifications=Notifications,
+  HmacKeyMetadata=HmacKeyMetadata,
+  ComposeRequest=ComposeRequest,
+  ManagedFolder=ManagedFolder,
+  AnywhereCaches=AnywhereCaches,
+  ManagedFolders=ManagedFolders,
+  Expr=Expr,
   RewriteResponse=RewriteResponse
 }
 export schemas

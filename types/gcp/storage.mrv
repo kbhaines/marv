@@ -1,15 +1,10 @@
 #lang marv
 
-# WARNING: This shim file is incomplete. You need to define an 'API' type
-# relevant to the API being imported, and then remove this warning.
-
 import types/gcp/_auto/storage as _auto
 import types/gcp/base
 
-# Modify this example per API
-
 delete-self(state, oapi) = {
-  api= oapi.api <- { url=state.selfLink }
+  api= oapi.api <- { url=state.selfLink },
   config = {}
 }
 

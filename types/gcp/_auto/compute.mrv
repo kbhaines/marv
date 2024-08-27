@@ -6,44 +6,44 @@ API-ID="compute"
 # /resources/regionTargetTcpProxies
 type regionTargetTcpProxies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionTargetTcpProxies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetTcpProxy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetTcpProxies"
+   api-id=API-ID,
+   request-body=schemas.TargetTcpProxy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetTcpProxies",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.TargetTcpProxy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetTcpProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.TargetTcpProxy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetTcpProxies/{name}",
    required=["(targetTcpProxy region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetTcpProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetTcpProxies/{name}",
    required=["(targetTcpProxy region project)"]
   }
  }
@@ -53,39 +53,39 @@ export regionTargetTcpProxies
 # /resources/globalOperations
 type globalOperations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/globalOperations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/operations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/operations/{name}",
    required=["(project operation)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.#f"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/operations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.#f",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/operations/{name}",
    required=["(project operation)"]
   }
  }
@@ -95,44 +95,44 @@ export globalOperations
 # /resources/vpnTunnels
 type vpnTunnels = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/vpnTunnels"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.VpnTunnel(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/vpnTunnels"
+   api-id=API-ID,
+   request-body=schemas.VpnTunnel(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/vpnTunnels",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.VpnTunnel"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/vpnTunnels/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.VpnTunnel",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/vpnTunnels/{name}",
    required=["(vpnTunnel region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/vpnTunnels/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/vpnTunnels/{name}",
    required=["(vpnTunnel region project)"]
   }
  }
@@ -142,49 +142,49 @@ export vpnTunnels
 # /resources/networks
 type networks = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/networks"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Network(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networks"
+   api-id=API-ID,
+   request-body=schemas.Network(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networks",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Network"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Network",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networks/{name}",
    required=["(project network)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Network(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networks/{name}"
+   api-id=API-ID,
+   request-body=schemas.Network(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networks/{name}",
    required=["(project network)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networks/{name}",
    required=["(project network)"]
   }
  }
@@ -194,44 +194,44 @@ export networks
 # /resources/instanceTemplates
 type instanceTemplates = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/instanceTemplates"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.InstanceTemplate(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/instanceTemplates"
+   api-id=API-ID,
+   request-body=schemas.InstanceTemplate(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/instanceTemplates",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.InstanceTemplate"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/instanceTemplates/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.InstanceTemplate",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/instanceTemplates/{name}",
    required=["(project instanceTemplate)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/instanceTemplates/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/instanceTemplates/{name}",
    required=["(project instanceTemplate)"]
   }
  }
@@ -241,44 +241,44 @@ export instanceTemplates
 # /resources/regionInstantSnapshots
 type regionInstantSnapshots = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionInstantSnapshots"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.InstantSnapshot(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instantSnapshots"
+   api-id=API-ID,
+   request-body=schemas.InstantSnapshot(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instantSnapshots",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.InstantSnapshot"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instantSnapshots/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.InstantSnapshot",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instantSnapshots/{name}",
    required=["(region instantSnapshot project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instantSnapshots/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instantSnapshots/{name}",
    required=["(region instantSnapshot project)"]
   }
  }
@@ -288,34 +288,34 @@ export regionInstantSnapshots
 # /resources/nodeTypes
 type nodeTypes = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/nodeTypes"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.NodeType"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/nodeTypes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.NodeType",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/nodeTypes/{name}",
    required=["(nodeType zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -326,44 +326,44 @@ export nodeTypes
 # /resources/nodeTemplates
 type nodeTemplates = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/nodeTemplates"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.NodeTemplate(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/nodeTemplates"
+   api-id=API-ID,
+   request-body=schemas.NodeTemplate(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/nodeTemplates",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.NodeTemplate"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/nodeTemplates/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.NodeTemplate",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/nodeTemplates/{name}",
    required=["(nodeTemplate region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/nodeTemplates/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/nodeTemplates/{name}",
    required=["(nodeTemplate region project)"]
   }
  }
@@ -373,49 +373,49 @@ export nodeTemplates
 # /resources/securityPolicies
 type securityPolicies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/securityPolicies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SecurityPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/securityPolicies"
+   api-id=API-ID,
+   request-body=schemas.SecurityPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/securityPolicies",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.SecurityPolicy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/securityPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.SecurityPolicy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/securityPolicies/{name}",
    required=["(project securityPolicy)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SecurityPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/securityPolicies/{name}"
+   api-id=API-ID,
+   request-body=schemas.SecurityPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/securityPolicies/{name}",
    required=["(project securityPolicy)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/securityPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/securityPolicies/{name}",
    required=["(project securityPolicy)"]
   }
  }
@@ -425,30 +425,30 @@ export securityPolicies
 # /resources/regionInstances
 type regionInstances = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionInstances"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -459,34 +459,34 @@ export regionInstances
 # /resources/diskTypes
 type diskTypes = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/diskTypes"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.DiskType"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/diskTypes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.DiskType",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/diskTypes/{name}",
    required=["(diskType zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -497,49 +497,49 @@ export diskTypes
 # /resources/instanceGroupManagers
 type instanceGroupManagers = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/instanceGroupManagers"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.InstanceGroupManager(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers"
+   api-id=API-ID,
+   request-body=schemas.InstanceGroupManager(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers",
    required=["(zone project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.InstanceGroupManager"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.InstanceGroupManager",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers/{name}",
    required=["(instanceGroupManager zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.InstanceGroupManager(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers/{name}"
+   api-id=API-ID,
+   request-body=schemas.InstanceGroupManager(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers/{name}",
    required=["(instanceGroupManager zone project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers/{name}",
    required=["(instanceGroupManager zone project)"]
   }
  }
@@ -549,39 +549,39 @@ export instanceGroupManagers
 # /resources/instanceSettings
 type instanceSettings = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/instanceSettings"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.InstanceSettings"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceSettings"
+   api-id=API-ID,
+   response-type="compute.schemas.InstanceSettings",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceSettings",
    required=["(zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.InstanceSettings(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceSettings"
+   api-id=API-ID,
+   request-body=schemas.InstanceSettings(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceSettings",
    required=["(zone project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -592,49 +592,49 @@ export instanceSettings
 # /resources/interconnects
 type interconnects = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/interconnects"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Interconnect(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/interconnects"
+   api-id=API-ID,
+   request-body=schemas.Interconnect(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/interconnects",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Interconnect"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/interconnects/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Interconnect",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/interconnects/{name}",
    required=["(project interconnect)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Interconnect(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/interconnects/{name}"
+   api-id=API-ID,
+   request-body=schemas.Interconnect(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/interconnects/{name}",
    required=["(project interconnect)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/interconnects/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/interconnects/{name}",
    required=["(project interconnect)"]
   }
  }
@@ -644,44 +644,44 @@ export interconnects
 # /resources/machineImages
 type machineImages = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/machineImages"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.MachineImage(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/machineImages"
+   api-id=API-ID,
+   request-body=schemas.MachineImage(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/machineImages",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.MachineImage"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/machineImages/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.MachineImage",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/machineImages/{name}",
    required=["(project machineImage)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/machineImages/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/machineImages/{name}",
    required=["(project machineImage)"]
   }
  }
@@ -691,44 +691,44 @@ export machineImages
 # /resources/addresses
 type addresses = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/addresses"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Address(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/addresses"
+   api-id=API-ID,
+   request-body=schemas.Address(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/addresses",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Address"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/addresses/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Address",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/addresses/{name}",
    required=["(address region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/addresses/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/addresses/{name}",
    required=["(address region project)"]
   }
  }
@@ -738,44 +738,44 @@ export addresses
 # /resources/reservations
 type reservations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/reservations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Reservation(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/reservations"
+   api-id=API-ID,
+   request-body=schemas.Reservation(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/reservations",
    required=["(zone project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Reservation"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/reservations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Reservation",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/reservations/{name}",
    required=["(zone reservation project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/reservations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/reservations/{name}",
    required=["(zone reservation project)"]
   }
  }
@@ -785,49 +785,49 @@ export reservations
 # /resources/publicDelegatedPrefixes
 type publicDelegatedPrefixes = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/publicDelegatedPrefixes"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.PublicDelegatedPrefix(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/publicDelegatedPrefixes"
+   api-id=API-ID,
+   request-body=schemas.PublicDelegatedPrefix(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/publicDelegatedPrefixes",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.PublicDelegatedPrefix"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/publicDelegatedPrefixes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.PublicDelegatedPrefix",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/publicDelegatedPrefixes/{name}",
    required=["(publicDelegatedPrefix region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.PublicDelegatedPrefix(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/publicDelegatedPrefixes/{name}"
+   api-id=API-ID,
+   request-body=schemas.PublicDelegatedPrefix(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/publicDelegatedPrefixes/{name}",
    required=["(publicDelegatedPrefix region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/publicDelegatedPrefixes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/publicDelegatedPrefixes/{name}",
    required=["(publicDelegatedPrefix region project)"]
   }
  }
@@ -837,44 +837,44 @@ export publicDelegatedPrefixes
 # /resources/licenses
 type licenses = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/licenses"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.License(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/licenses"
+   api-id=API-ID,
+   request-body=schemas.License(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/licenses",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.License"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/licenses/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.License",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/licenses/{name}",
    required=["(license project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/licenses/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/licenses/{name}",
    required=["(license project)"]
   }
  }
@@ -884,49 +884,49 @@ export licenses
 # /resources/networkAttachments
 type networkAttachments = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/networkAttachments"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.NetworkAttachment(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkAttachments"
+   api-id=API-ID,
+   request-body=schemas.NetworkAttachment(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkAttachments",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.NetworkAttachment"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkAttachments/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.NetworkAttachment",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkAttachments/{name}",
    required=["(networkAttachment region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.NetworkAttachment(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkAttachments/{name}"
+   api-id=API-ID,
+   request-body=schemas.NetworkAttachment(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkAttachments/{name}",
    required=["(networkAttachment region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkAttachments/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkAttachments/{name}",
    required=["(networkAttachment region project)"]
   }
  }
@@ -936,44 +936,44 @@ export networkAttachments
 # /resources/routes
 type routes = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/routes"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Route(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/routes"
+   api-id=API-ID,
+   request-body=schemas.Route(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/routes",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Route"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/routes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Route",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/routes/{name}",
    required=["(project route)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/routes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/routes/{name}",
    required=["(project route)"]
   }
  }
@@ -983,49 +983,49 @@ export routes
 # /resources/regionBackendServices
 type regionBackendServices = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionBackendServices"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.BackendService(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/backendServices"
+   api-id=API-ID,
+   request-body=schemas.BackendService(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/backendServices",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.BackendService"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/backendServices/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.BackendService",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/backendServices/{name}",
    required=["(backendService region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.BackendService(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/backendServices/{name}"
+   api-id=API-ID,
+   request-body=schemas.BackendService(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/backendServices/{name}",
    required=["(backendService region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/backendServices/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/backendServices/{name}",
    required=["(backendService region project)"]
   }
  }
@@ -1035,49 +1035,49 @@ export regionBackendServices
 # /resources/targetHttpsProxies
 type targetHttpsProxies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/targetHttpsProxies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetHttpsProxy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpsProxies"
+   api-id=API-ID,
+   request-body=schemas.TargetHttpsProxy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpsProxies",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.TargetHttpsProxy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpsProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.TargetHttpsProxy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpsProxies/{name}",
    required=["(project targetHttpsProxy)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetHttpsProxy(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpsProxies/{name}"
+   api-id=API-ID,
+   request-body=schemas.TargetHttpsProxy(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpsProxies/{name}",
    required=["(project targetHttpsProxy)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpsProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpsProxies/{name}",
    required=["(project targetHttpsProxy)"]
   }
  }
@@ -1087,44 +1087,44 @@ export targetHttpsProxies
 # /resources/targetPools
 type targetPools = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/targetPools"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetPool(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetPools"
+   api-id=API-ID,
+   request-body=schemas.TargetPool(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetPools",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.TargetPool"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetPools/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.TargetPool",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetPools/{name}",
    required=["(targetPool region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetPools/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetPools/{name}",
    required=["(targetPool region project)"]
   }
  }
@@ -1134,49 +1134,49 @@ export targetPools
 # /resources/targetHttpProxies
 type targetHttpProxies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/targetHttpProxies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetHttpProxy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpProxies"
+   api-id=API-ID,
+   request-body=schemas.TargetHttpProxy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpProxies",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.TargetHttpProxy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.TargetHttpProxy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpProxies/{name}",
    required=["(project targetHttpProxy)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetHttpProxy(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpProxies/{name}"
+   api-id=API-ID,
+   request-body=schemas.TargetHttpProxy(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpProxies/{name}",
    required=["(project targetHttpProxy)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetHttpProxies/{name}",
    required=["(project targetHttpProxy)"]
   }
  }
@@ -1186,34 +1186,34 @@ export targetHttpProxies
 # /resources/projects
 type projects = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/projects"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Project"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Project",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{name}",
    required=["(project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -1224,49 +1224,49 @@ export projects
 # /resources/firewallPolicies
 type firewallPolicies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/firewallPolicies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.FirewallPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/locations/global/firewallPolicies"
+   api-id=API-ID,
+   request-body=schemas.FirewallPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/locations/global/firewallPolicies",
    required=["()"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.FirewallPolicy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/locations/global/firewallPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.FirewallPolicy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/locations/global/firewallPolicies/{name}",
    required=["(firewallPolicy)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.FirewallPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/locations/global/firewallPolicies/{name}"
+   api-id=API-ID,
+   request-body=schemas.FirewallPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/locations/global/firewallPolicies/{name}",
    required=["(firewallPolicy)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/locations/global/firewallPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/locations/global/firewallPolicies/{name}",
    required=["(firewallPolicy)"]
   }
  }
@@ -1276,49 +1276,49 @@ export firewallPolicies
 # /resources/regionSslPolicies
 type regionSslPolicies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionSslPolicies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SslPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslPolicies"
+   api-id=API-ID,
+   request-body=schemas.SslPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslPolicies",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.SslPolicy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.SslPolicy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslPolicies/{name}",
    required=["(sslPolicy region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SslPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslPolicies/{name}"
+   api-id=API-ID,
+   request-body=schemas.SslPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslPolicies/{name}",
    required=["(sslPolicy region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslPolicies/{name}",
    required=["(sslPolicy region project)"]
   }
  }
@@ -1328,34 +1328,34 @@ export regionSslPolicies
 # /resources/regionInstanceGroups
 type regionInstanceGroups = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionInstanceGroups"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.InstanceGroup"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceGroups/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.InstanceGroup",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceGroups/{name}",
    required=["(instanceGroup region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -1366,49 +1366,49 @@ export regionInstanceGroups
 # /resources/regionAutoscalers
 type regionAutoscalers = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionAutoscalers"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Autoscaler(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/autoscalers"
+   api-id=API-ID,
+   request-body=schemas.Autoscaler(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/autoscalers",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Autoscaler"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/autoscalers/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Autoscaler",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/autoscalers/{name}",
    required=["(autoscaler region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Autoscaler(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/autoscalers"
+   api-id=API-ID,
+   request-body=schemas.Autoscaler(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/autoscalers",
    required=["(region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/autoscalers/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/autoscalers/{name}",
    required=["(autoscaler region project)"]
   }
  }
@@ -1418,44 +1418,44 @@ export regionAutoscalers
 # /resources/networkEndpointGroups
 type networkEndpointGroups = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/networkEndpointGroups"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.NetworkEndpointGroup(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/networkEndpointGroups"
+   api-id=API-ID,
+   request-body=schemas.NetworkEndpointGroup(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/networkEndpointGroups",
    required=["(zone project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.NetworkEndpointGroup"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/networkEndpointGroups/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.NetworkEndpointGroup",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/networkEndpointGroups/{name}",
    required=["(networkEndpointGroup zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/networkEndpointGroups/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/networkEndpointGroups/{name}",
    required=["(networkEndpointGroup zone project)"]
   }
  }
@@ -1465,39 +1465,39 @@ export networkEndpointGroups
 # /resources/regionOperations
 type regionOperations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionOperations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/operations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/operations/{name}",
    required=["(operation region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.#f"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/operations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.#f",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/operations/{name}",
    required=["(operation region project)"]
   }
  }
@@ -1507,49 +1507,49 @@ export regionOperations
 # /resources/sslPolicies
 type sslPolicies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/sslPolicies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SslPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslPolicies"
+   api-id=API-ID,
+   request-body=schemas.SslPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslPolicies",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.SslPolicy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.SslPolicy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslPolicies/{name}",
    required=["(project sslPolicy)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SslPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslPolicies/{name}"
+   api-id=API-ID,
+   request-body=schemas.SslPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslPolicies/{name}",
    required=["(project sslPolicy)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslPolicies/{name}",
    required=["(project sslPolicy)"]
   }
  }
@@ -1559,49 +1559,49 @@ export sslPolicies
 # /resources/targetGrpcProxies
 type targetGrpcProxies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/targetGrpcProxies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetGrpcProxy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetGrpcProxies"
+   api-id=API-ID,
+   request-body=schemas.TargetGrpcProxy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetGrpcProxies",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.TargetGrpcProxy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetGrpcProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.TargetGrpcProxy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetGrpcProxies/{name}",
    required=["(project targetGrpcProxy)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetGrpcProxy(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetGrpcProxies/{name}"
+   api-id=API-ID,
+   request-body=schemas.TargetGrpcProxy(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetGrpcProxies/{name}",
    required=["(project targetGrpcProxy)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetGrpcProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetGrpcProxies/{name}",
    required=["(project targetGrpcProxy)"]
   }
  }
@@ -1611,49 +1611,49 @@ export targetGrpcProxies
 # /resources/images
 type images = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/images"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Image(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/images"
+   api-id=API-ID,
+   request-body=schemas.Image(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/images",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Image"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/images/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Image",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/images/{name}",
    required=["(project image)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Image(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/images/{name}"
+   api-id=API-ID,
+   request-body=schemas.Image(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/images/{name}",
    required=["(project image)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/images/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/images/{name}",
    required=["(project image)"]
   }
  }
@@ -1663,44 +1663,44 @@ export images
 # /resources/instanceGroups
 type instanceGroups = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/instanceGroups"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.InstanceGroup(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroups"
+   api-id=API-ID,
+   request-body=schemas.InstanceGroup(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroups",
    required=["(zone project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.InstanceGroup"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroups/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.InstanceGroup",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroups/{name}",
    required=["(instanceGroup zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroups/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroups/{name}",
    required=["(instanceGroup zone project)"]
   }
  }
@@ -1710,49 +1710,49 @@ export instanceGroups
 # /resources/regionTargetHttpsProxies
 type regionTargetHttpsProxies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionTargetHttpsProxies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetHttpsProxy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpsProxies"
+   api-id=API-ID,
+   request-body=schemas.TargetHttpsProxy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpsProxies",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.TargetHttpsProxy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpsProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.TargetHttpsProxy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpsProxies/{name}",
    required=["(targetHttpsProxy region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetHttpsProxy(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpsProxies/{name}"
+   api-id=API-ID,
+   request-body=schemas.TargetHttpsProxy(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpsProxies/{name}",
    required=["(targetHttpsProxy region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpsProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpsProxies/{name}",
    required=["(targetHttpsProxy region project)"]
   }
  }
@@ -1762,49 +1762,49 @@ export regionTargetHttpsProxies
 # /resources/httpHealthChecks
 type httpHealthChecks = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/httpHealthChecks"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.HttpHealthCheck(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpHealthChecks"
+   api-id=API-ID,
+   request-body=schemas.HttpHealthCheck(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpHealthChecks",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.HttpHealthCheck"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpHealthChecks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.HttpHealthCheck",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpHealthChecks/{name}",
    required=["(project httpHealthCheck)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.HttpHealthCheck(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpHealthChecks/{name}"
+   api-id=API-ID,
+   request-body=schemas.HttpHealthCheck(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpHealthChecks/{name}",
    required=["(project httpHealthCheck)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpHealthChecks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpHealthChecks/{name}",
    required=["(project httpHealthCheck)"]
   }
  }
@@ -1814,44 +1814,44 @@ export httpHealthChecks
 # /resources/instances
 type instances = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/instances"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Instance(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instances"
+   api-id=API-ID,
+   request-body=schemas.Instance(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instances",
    required=["(zone project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Instance"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instances/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Instance",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instances/{name}",
    required=["(instance zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instances/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instances/{name}",
    required=["(instance zone project)"]
   }
  }
@@ -1861,49 +1861,49 @@ export instances
 # /resources/autoscalers
 type autoscalers = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/autoscalers"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Autoscaler(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/autoscalers"
+   api-id=API-ID,
+   request-body=schemas.Autoscaler(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/autoscalers",
    required=["(zone project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Autoscaler"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/autoscalers/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Autoscaler",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/autoscalers/{name}",
    required=["(autoscaler zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Autoscaler(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/autoscalers"
+   api-id=API-ID,
+   request-body=schemas.Autoscaler(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/autoscalers",
    required=["(zone project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/autoscalers/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/autoscalers/{name}",
    required=["(autoscaler zone project)"]
   }
  }
@@ -1913,44 +1913,44 @@ export autoscalers
 # /resources/futureReservations
 type futureReservations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/futureReservations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.FutureReservation(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/futureReservations"
+   api-id=API-ID,
+   request-body=schemas.FutureReservation(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/futureReservations",
    required=["(zone project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.FutureReservation"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/futureReservations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.FutureReservation",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/futureReservations/{name}",
    required=["(futureReservation zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/futureReservations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/futureReservations/{name}",
    required=["(futureReservation zone project)"]
   }
  }
@@ -1960,44 +1960,44 @@ export futureReservations
 # /resources/sslCertificates
 type sslCertificates = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/sslCertificates"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SslCertificate(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslCertificates"
+   api-id=API-ID,
+   request-body=schemas.SslCertificate(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslCertificates",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.SslCertificate"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslCertificates/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.SslCertificate",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslCertificates/{name}",
    required=["(project sslCertificate)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslCertificates/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/sslCertificates/{name}",
    required=["(project sslCertificate)"]
   }
  }
@@ -2007,44 +2007,44 @@ export sslCertificates
 # /resources/instantSnapshots
 type instantSnapshots = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/instantSnapshots"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.InstantSnapshot(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instantSnapshots"
+   api-id=API-ID,
+   request-body=schemas.InstantSnapshot(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instantSnapshots",
    required=["(zone project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.InstantSnapshot"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instantSnapshots/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.InstantSnapshot",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instantSnapshots/{name}",
    required=["(zone instantSnapshot project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instantSnapshots/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instantSnapshots/{name}",
    required=["(zone instantSnapshot project)"]
   }
  }
@@ -2054,49 +2054,49 @@ export instantSnapshots
 # /resources/publicAdvertisedPrefixes
 type publicAdvertisedPrefixes = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/publicAdvertisedPrefixes"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.PublicAdvertisedPrefix(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicAdvertisedPrefixes"
+   api-id=API-ID,
+   request-body=schemas.PublicAdvertisedPrefix(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicAdvertisedPrefixes",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.PublicAdvertisedPrefix"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicAdvertisedPrefixes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.PublicAdvertisedPrefix",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicAdvertisedPrefixes/{name}",
    required=["(project publicAdvertisedPrefix)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.PublicAdvertisedPrefix(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicAdvertisedPrefixes/{name}"
+   api-id=API-ID,
+   request-body=schemas.PublicAdvertisedPrefix(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicAdvertisedPrefixes/{name}",
    required=["(project publicAdvertisedPrefix)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicAdvertisedPrefixes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicAdvertisedPrefixes/{name}",
    required=["(project publicAdvertisedPrefix)"]
   }
  }
@@ -2106,44 +2106,44 @@ export publicAdvertisedPrefixes
 # /resources/globalAddresses
 type globalAddresses = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/globalAddresses"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Address(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/addresses"
+   api-id=API-ID,
+   request-body=schemas.Address(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/addresses",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Address"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/addresses/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Address",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/addresses/{name}",
    required=["(project address)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/addresses/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/addresses/{name}",
    required=["(project address)"]
   }
  }
@@ -2153,30 +2153,30 @@ export globalAddresses
 # /resources/regionZones
 type regionZones = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionZones"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -2187,49 +2187,49 @@ export regionZones
 # /resources/routers
 type routers = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/routers"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Router(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/routers"
+   api-id=API-ID,
+   request-body=schemas.Router(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/routers",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Router"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/routers/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Router",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/routers/{name}",
    required=["(router region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Router(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/routers/{name}"
+   api-id=API-ID,
+   request-body=schemas.Router(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/routers/{name}",
    required=["(router region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/routers/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/routers/{name}",
    required=["(router region project)"]
   }
  }
@@ -2239,44 +2239,44 @@ export routers
 # /resources/disks
 type disks = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/disks"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Disk(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/disks"
+   api-id=API-ID,
+   request-body=schemas.Disk(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/disks",
    required=["(zone project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Disk"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/disks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Disk",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/disks/{name}",
    required=["(disk zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/disks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/disks/{name}",
    required=["(disk zone project)"]
   }
  }
@@ -2286,44 +2286,44 @@ export disks
 # /resources/regionNetworkEndpointGroups
 type regionNetworkEndpointGroups = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionNetworkEndpointGroups"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.NetworkEndpointGroup(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEndpointGroups"
+   api-id=API-ID,
+   request-body=schemas.NetworkEndpointGroup(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEndpointGroups",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.NetworkEndpointGroup"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEndpointGroups/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.NetworkEndpointGroup",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEndpointGroups/{name}",
    required=["(networkEndpointGroup region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEndpointGroups/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEndpointGroups/{name}",
    required=["(networkEndpointGroup region project)"]
   }
  }
@@ -2333,39 +2333,39 @@ export regionNetworkEndpointGroups
 # /resources/zoneOperations
 type zoneOperations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/zoneOperations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/operations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/operations/{name}",
    required=["(operation zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.#f"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/operations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.#f",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/operations/{name}",
    required=["(operation zone project)"]
   }
  }
@@ -2375,44 +2375,44 @@ export zoneOperations
 # /resources/regionTargetHttpProxies
 type regionTargetHttpProxies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionTargetHttpProxies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetHttpProxy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpProxies"
+   api-id=API-ID,
+   request-body=schemas.TargetHttpProxy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpProxies",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.TargetHttpProxy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.TargetHttpProxy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpProxies/{name}",
    required=["(targetHttpProxy region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetHttpProxies/{name}",
    required=["(targetHttpProxy region project)"]
   }
  }
@@ -2422,44 +2422,44 @@ export regionTargetHttpProxies
 # /resources/regionNotificationEndpoints
 type regionNotificationEndpoints = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionNotificationEndpoints"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.NotificationEndpoint(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/notificationEndpoints"
+   api-id=API-ID,
+   request-body=schemas.NotificationEndpoint(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/notificationEndpoints",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.NotificationEndpoint"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/notificationEndpoints/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.NotificationEndpoint",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/notificationEndpoints/{name}",
    required=["(notificationEndpoint region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/notificationEndpoints/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/notificationEndpoints/{name}",
    required=["(notificationEndpoint region project)"]
   }
  }
@@ -2469,49 +2469,49 @@ export regionNotificationEndpoints
 # /resources/packetMirrorings
 type packetMirrorings = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/packetMirrorings"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.PacketMirroring(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/packetMirrorings"
+   api-id=API-ID,
+   request-body=schemas.PacketMirroring(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/packetMirrorings",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.PacketMirroring"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/packetMirrorings/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.PacketMirroring",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/packetMirrorings/{name}",
    required=["(packetMirroring region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.PacketMirroring(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/packetMirrorings/{name}"
+   api-id=API-ID,
+   request-body=schemas.PacketMirroring(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/packetMirrorings/{name}",
    required=["(packetMirroring region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/packetMirrorings/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/packetMirrorings/{name}",
    required=["(packetMirroring region project)"]
   }
  }
@@ -2521,91 +2521,138 @@ export packetMirrorings
 # /resources/regionHealthChecks
 type regionHealthChecks = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionHealthChecks"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.HealthCheck(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthChecks"
+   api-id=API-ID,
+   request-body=schemas.HealthCheck(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthChecks",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.HealthCheck"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthChecks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.HealthCheck",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthChecks/{name}",
    required=["(healthCheck region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.HealthCheck(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthChecks/{name}"
+   api-id=API-ID,
+   request-body=schemas.HealthCheck(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthChecks/{name}",
    required=["(healthCheck region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthChecks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthChecks/{name}",
    required=["(healthCheck region project)"]
   }
  }
 }
 export regionHealthChecks
 
-# /resources/regionCommitments
-type regionCommitments = {
+# /resources/storagePools
+type storagePools = {
  origin(cfg)= {
-  driver="gcp"
-  type="gcp:compute:/resources/regionCommitments"
+  driver="gcp",
+  type="gcp:compute:/resources/storagePools"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Commitment(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/commitments"
-   required=["(region project)"]
+   api-id=API-ID,
+   request-body=schemas.StoragePool(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/storagePools",
+   required=["(zone project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Commitment"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/commitments/{name}"
-   required=["(commitment region project)"]
+   api-id=API-ID,
+   response-type="compute.schemas.StoragePool",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/storagePools/{name}",
+   required=["(storagePool zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/storagePools/{name}",
+   required=["(storagePool zone project)"]
+  }
+ }
+}
+export storagePools
+
+# /resources/regionCommitments
+type regionCommitments = {
+ origin(cfg)= {
+  driver="gcp",
+  type="gcp:compute:/resources/regionCommitments"
+ }
+ identity(cfg) = cfg
+ create(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   request-body=schemas.Commitment(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/commitments",
+   required=["(region project)"]
+  }
+ }
+ read(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="compute.schemas.Commitment",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/commitments/{name}",
+   required=["(commitment region project)"]
+  }
+ }
+ update(cfg)={
+  config=cfg,
+  api={
+   
+  }
+ }
+ delete(cfg)={
+  config=cfg,
   api={
    
   }
@@ -2616,49 +2663,49 @@ export regionCommitments
 # /resources/nodeGroups
 type nodeGroups = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/nodeGroups"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.NodeGroup(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/nodeGroups?initialNodeCount={initialNodeCount}"
+   api-id=API-ID,
+   request-body=schemas.NodeGroup(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/nodeGroups?initialNodeCount={initialNodeCount}",
    required=["(initialNodeCount zone project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.NodeGroup"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/nodeGroups/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.NodeGroup",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/nodeGroups/{name}",
    required=["(nodeGroup zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.NodeGroup(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/nodeGroups/{name}"
+   api-id=API-ID,
+   request-body=schemas.NodeGroup(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/nodeGroups/{name}",
    required=["(nodeGroup zone project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/nodeGroups/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/nodeGroups/{name}",
    required=["(nodeGroup zone project)"]
   }
  }
@@ -2668,34 +2715,34 @@ export nodeGroups
 # /resources/acceleratorTypes
 type acceleratorTypes = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/acceleratorTypes"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.AcceleratorType"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/acceleratorTypes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.AcceleratorType",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/acceleratorTypes/{name}",
    required=["(acceleratorType zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -2706,49 +2753,49 @@ export acceleratorTypes
 # /resources/globalForwardingRules
 type globalForwardingRules = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/globalForwardingRules"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.ForwardingRule(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/forwardingRules"
+   api-id=API-ID,
+   request-body=schemas.ForwardingRule(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/forwardingRules",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.ForwardingRule"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/forwardingRules/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.ForwardingRule",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/forwardingRules/{name}",
    required=["(project forwardingRule)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.ForwardingRule(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/forwardingRules/{name}"
+   api-id=API-ID,
+   request-body=schemas.ForwardingRule(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/forwardingRules/{name}",
    required=["(project forwardingRule)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/forwardingRules/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/forwardingRules/{name}",
    required=["(project forwardingRule)"]
   }
  }
@@ -2758,39 +2805,39 @@ export globalForwardingRules
 # /resources/snapshotSettings
 type snapshotSettings = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/snapshotSettings"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.SnapshotSettings"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/snapshotSettings"
+   api-id=API-ID,
+   response-type="compute.schemas.SnapshotSettings",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/snapshotSettings",
    required=["(project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SnapshotSettings(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/snapshotSettings"
+   api-id=API-ID,
+   request-body=schemas.SnapshotSettings(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/snapshotSettings",
    required=["(project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -2801,49 +2848,49 @@ export snapshotSettings
 # /resources/resourcePolicies
 type resourcePolicies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/resourcePolicies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.ResourcePolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/resourcePolicies"
+   api-id=API-ID,
+   request-body=schemas.ResourcePolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/resourcePolicies",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.ResourcePolicy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/resourcePolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.ResourcePolicy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/resourcePolicies/{name}",
    required=["(resourcePolicy region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.ResourcePolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/resourcePolicies/{name}"
+   api-id=API-ID,
+   request-body=schemas.ResourcePolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/resourcePolicies/{name}",
    required=["(resourcePolicy region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/resourcePolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/resourcePolicies/{name}",
    required=["(resourcePolicy region project)"]
   }
  }
@@ -2853,49 +2900,49 @@ export resourcePolicies
 # /resources/globalPublicDelegatedPrefixes
 type globalPublicDelegatedPrefixes = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/globalPublicDelegatedPrefixes"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.PublicDelegatedPrefix(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicDelegatedPrefixes"
+   api-id=API-ID,
+   request-body=schemas.PublicDelegatedPrefix(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicDelegatedPrefixes",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.PublicDelegatedPrefix"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicDelegatedPrefixes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.PublicDelegatedPrefix",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicDelegatedPrefixes/{name}",
    required=["(project publicDelegatedPrefix)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.PublicDelegatedPrefix(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicDelegatedPrefixes/{name}"
+   api-id=API-ID,
+   request-body=schemas.PublicDelegatedPrefix(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicDelegatedPrefixes/{name}",
    required=["(project publicDelegatedPrefix)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicDelegatedPrefixes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/publicDelegatedPrefixes/{name}",
    required=["(project publicDelegatedPrefix)"]
   }
  }
@@ -2905,44 +2952,44 @@ export globalPublicDelegatedPrefixes
 # /resources/snapshots
 type snapshots = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/snapshots"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Snapshot(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/snapshots"
+   api-id=API-ID,
+   request-body=schemas.Snapshot(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/snapshots",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Snapshot"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/snapshots/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Snapshot",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/snapshots/{name}",
    required=["(project snapshot)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/snapshots/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/snapshots/{name}",
    required=["(project snapshot)"]
   }
  }
@@ -2952,39 +2999,39 @@ export snapshots
 # /resources/globalOrganizationOperations
 type globalOrganizationOperations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/globalOrganizationOperations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/locations/global/operations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/locations/global/operations/{name}",
    required=["(operation)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.#f"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/locations/global/operations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.#f",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/locations/global/operations/{name}",
    required=["(operation)"]
   }
  }
@@ -2994,49 +3041,49 @@ export globalOrganizationOperations
 # /resources/regionInstanceGroupManagers
 type regionInstanceGroupManagers = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionInstanceGroupManagers"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.InstanceGroupManager(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceGroupManagers"
+   api-id=API-ID,
+   request-body=schemas.InstanceGroupManager(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceGroupManagers",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.InstanceGroupManager"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceGroupManagers/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.InstanceGroupManager",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceGroupManagers/{name}",
    required=["(instanceGroupManager region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.InstanceGroupManager(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceGroupManagers/{name}"
+   api-id=API-ID,
+   request-body=schemas.InstanceGroupManager(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceGroupManagers/{name}",
    required=["(instanceGroupManager region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceGroupManagers/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceGroupManagers/{name}",
    required=["(instanceGroupManager region project)"]
   }
  }
@@ -3046,49 +3093,49 @@ export regionInstanceGroupManagers
 # /resources/httpsHealthChecks
 type httpsHealthChecks = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/httpsHealthChecks"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.HttpsHealthCheck(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpsHealthChecks"
+   api-id=API-ID,
+   request-body=schemas.HttpsHealthCheck(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpsHealthChecks",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.HttpsHealthCheck"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpsHealthChecks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.HttpsHealthCheck",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpsHealthChecks/{name}",
    required=["(httpsHealthCheck project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.HttpsHealthCheck(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpsHealthChecks/{name}"
+   api-id=API-ID,
+   request-body=schemas.HttpsHealthCheck(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpsHealthChecks/{name}",
    required=["(httpsHealthCheck project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpsHealthChecks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/httpsHealthChecks/{name}",
    required=["(httpsHealthCheck project)"]
   }
  }
@@ -3098,44 +3145,44 @@ export httpsHealthChecks
 # /resources/regionSslCertificates
 type regionSslCertificates = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionSslCertificates"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SslCertificate(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslCertificates"
+   api-id=API-ID,
+   request-body=schemas.SslCertificate(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslCertificates",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.SslCertificate"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslCertificates/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.SslCertificate",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslCertificates/{name}",
    required=["(sslCertificate region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslCertificates/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/sslCertificates/{name}",
    required=["(sslCertificate region project)"]
   }
  }
@@ -3145,49 +3192,49 @@ export regionSslCertificates
 # /resources/backendServices
 type backendServices = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/backendServices"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.BackendService(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendServices"
+   api-id=API-ID,
+   request-body=schemas.BackendService(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendServices",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.BackendService"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendServices/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.BackendService",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendServices/{name}",
    required=["(project backendService)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.BackendService(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendServices/{name}"
+   api-id=API-ID,
+   request-body=schemas.BackendService(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendServices/{name}",
    required=["(project backendService)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendServices/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendServices/{name}",
    required=["(project backendService)"]
   }
  }
@@ -3197,44 +3244,44 @@ export backendServices
 # /resources/targetVpnGateways
 type targetVpnGateways = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/targetVpnGateways"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetVpnGateway(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetVpnGateways"
+   api-id=API-ID,
+   request-body=schemas.TargetVpnGateway(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetVpnGateways",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.TargetVpnGateway"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetVpnGateways/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.TargetVpnGateway",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetVpnGateways/{name}",
    required=["(targetVpnGateway region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetVpnGateways/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/targetVpnGateways/{name}",
    required=["(targetVpnGateway region project)"]
   }
  }
@@ -3244,34 +3291,34 @@ export targetVpnGateways
 # /resources/interconnectRemoteLocations
 type interconnectRemoteLocations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/interconnectRemoteLocations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.InterconnectRemoteLocation"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/interconnectRemoteLocations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.InterconnectRemoteLocation",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/interconnectRemoteLocations/{name}",
    required=["(project interconnectRemoteLocation)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -3282,49 +3329,49 @@ export interconnectRemoteLocations
 # /resources/firewalls
 type firewalls = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/firewalls"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Firewall(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewalls"
+   api-id=API-ID,
+   request-body=schemas.Firewall(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewalls",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Firewall"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewalls/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Firewall",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewalls/{name}",
    required=["(firewall project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Firewall(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewalls/{name}"
+   api-id=API-ID,
+   request-body=schemas.Firewall(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewalls/{name}",
    required=["(firewall project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewalls/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewalls/{name}",
    required=["(firewall project)"]
   }
  }
@@ -3334,44 +3381,44 @@ export firewalls
 # /resources/globalNetworkEndpointGroups
 type globalNetworkEndpointGroups = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/globalNetworkEndpointGroups"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.NetworkEndpointGroup(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networkEndpointGroups"
+   api-id=API-ID,
+   request-body=schemas.NetworkEndpointGroup(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networkEndpointGroups",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.NetworkEndpointGroup"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networkEndpointGroups/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.NetworkEndpointGroup",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networkEndpointGroups/{name}",
    required=["(project networkEndpointGroup)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networkEndpointGroups/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/networkEndpointGroups/{name}",
    required=["(project networkEndpointGroup)"]
   }
  }
@@ -3381,101 +3428,139 @@ export globalNetworkEndpointGroups
 # /resources/regionSecurityPolicies
 type regionSecurityPolicies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionSecurityPolicies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SecurityPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/securityPolicies"
+   api-id=API-ID,
+   request-body=schemas.SecurityPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/securityPolicies",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.SecurityPolicy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/securityPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.SecurityPolicy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/securityPolicies/{name}",
    required=["(securityPolicy region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SecurityPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/securityPolicies/{name}"
+   api-id=API-ID,
+   request-body=schemas.SecurityPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/securityPolicies/{name}",
    required=["(securityPolicy region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/securityPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/securityPolicies/{name}",
    required=["(securityPolicy region project)"]
   }
  }
 }
 export regionSecurityPolicies
 
+# /resources/storagePoolTypes
+type storagePoolTypes = {
+ origin(cfg)= {
+  driver="gcp",
+  type="gcp:compute:/resources/storagePoolTypes"
+ }
+ identity(cfg) = cfg
+ create(cfg)={
+  config=cfg,
+  api={
+   
+  }
+ }
+ read(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="compute.schemas.StoragePoolType",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/storagePoolTypes/{name}",
+   required=["(storagePoolType zone project)"]
+  }
+ }
+ update(cfg)={
+  config=cfg,
+  api={
+   
+  }
+ }
+ delete(cfg)={
+  config=cfg,
+  api={
+   
+  }
+ }
+}
+export storagePoolTypes
+
 # /resources/interconnectAttachments
 type interconnectAttachments = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/interconnectAttachments"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.InterconnectAttachment(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/interconnectAttachments"
+   api-id=API-ID,
+   request-body=schemas.InterconnectAttachment(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/interconnectAttachments",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.InterconnectAttachment"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/interconnectAttachments/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.InterconnectAttachment",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/interconnectAttachments/{name}",
    required=["(interconnectAttachment region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.InterconnectAttachment(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/interconnectAttachments/{name}"
+   api-id=API-ID,
+   request-body=schemas.InterconnectAttachment(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/interconnectAttachments/{name}",
    required=["(interconnectAttachment region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/interconnectAttachments/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/interconnectAttachments/{name}",
    required=["(interconnectAttachment region project)"]
   }
  }
@@ -3485,34 +3570,34 @@ export interconnectAttachments
 # /resources/regions
 type regions = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regions"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Region"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Region",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{name}",
    required=["(region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -3523,49 +3608,49 @@ export regions
 # /resources/subnetworks
 type subnetworks = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/subnetworks"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Subnetwork(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/subnetworks"
+   api-id=API-ID,
+   request-body=schemas.Subnetwork(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/subnetworks",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Subnetwork"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/subnetworks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Subnetwork",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/subnetworks/{name}",
    required=["(subnetwork region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Subnetwork(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/subnetworks/{name}"
+   api-id=API-ID,
+   request-body=schemas.Subnetwork(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/subnetworks/{name}",
    required=["(subnetwork region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/subnetworks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/subnetworks/{name}",
    required=["(subnetwork region project)"]
   }
  }
@@ -3575,49 +3660,49 @@ export subnetworks
 # /resources/regionHealthCheckServices
 type regionHealthCheckServices = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionHealthCheckServices"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.HealthCheckService(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthCheckServices"
+   api-id=API-ID,
+   request-body=schemas.HealthCheckService(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthCheckServices",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.HealthCheckService"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthCheckServices/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.HealthCheckService",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthCheckServices/{name}",
    required=["(healthCheckService region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.HealthCheckService(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthCheckServices/{name}"
+   api-id=API-ID,
+   request-body=schemas.HealthCheckService(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthCheckServices/{name}",
    required=["(healthCheckService region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthCheckServices/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/healthCheckServices/{name}",
    required=["(healthCheckService region project)"]
   }
  }
@@ -3627,34 +3712,34 @@ export regionHealthCheckServices
 # /resources/zones
 type zones = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/zones"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Zone"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Zone",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{name}",
    required=["(zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -3665,49 +3750,49 @@ export zones
 # /resources/networkEdgeSecurityServices
 type networkEdgeSecurityServices = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/networkEdgeSecurityServices"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.NetworkEdgeSecurityService(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEdgeSecurityServices"
+   api-id=API-ID,
+   request-body=schemas.NetworkEdgeSecurityService(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEdgeSecurityServices",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.NetworkEdgeSecurityService"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEdgeSecurityServices/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.NetworkEdgeSecurityService",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEdgeSecurityServices/{name}",
    required=["(networkEdgeSecurityService region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.NetworkEdgeSecurityService(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEdgeSecurityServices/{name}"
+   api-id=API-ID,
+   request-body=schemas.NetworkEdgeSecurityService(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEdgeSecurityServices/{name}",
    required=["(networkEdgeSecurityService region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEdgeSecurityServices/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/networkEdgeSecurityServices/{name}",
    required=["(networkEdgeSecurityService region project)"]
   }
  }
@@ -3717,49 +3802,49 @@ export networkEdgeSecurityServices
 # /resources/backendBuckets
 type backendBuckets = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/backendBuckets"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.BackendBucket(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendBuckets"
+   api-id=API-ID,
+   request-body=schemas.BackendBucket(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendBuckets",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.BackendBucket"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendBuckets/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.BackendBucket",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendBuckets/{name}",
    required=["(project backendBucket)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.BackendBucket(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendBuckets/{name}"
+   api-id=API-ID,
+   request-body=schemas.BackendBucket(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendBuckets/{name}",
    required=["(project backendBucket)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendBuckets/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/backendBuckets/{name}",
    required=["(project backendBucket)"]
   }
  }
@@ -3769,49 +3854,49 @@ export backendBuckets
 # /resources/healthChecks
 type healthChecks = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/healthChecks"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.HealthCheck(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/healthChecks"
+   api-id=API-ID,
+   request-body=schemas.HealthCheck(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/healthChecks",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.HealthCheck"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/healthChecks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.HealthCheck",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/healthChecks/{name}",
    required=["(project healthCheck)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.HealthCheck(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/healthChecks/{name}"
+   api-id=API-ID,
+   request-body=schemas.HealthCheck(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/healthChecks/{name}",
    required=["(project healthCheck)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/healthChecks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/healthChecks/{name}",
    required=["(project healthCheck)"]
   }
  }
@@ -3821,49 +3906,49 @@ export healthChecks
 # /resources/urlMaps
 type urlMaps = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/urlMaps"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.UrlMap(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/urlMaps"
+   api-id=API-ID,
+   request-body=schemas.UrlMap(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/urlMaps",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.UrlMap"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/urlMaps/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.UrlMap",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/urlMaps/{name}",
    required=["(project urlMap)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.UrlMap(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/urlMaps/{name}"
+   api-id=API-ID,
+   request-body=schemas.UrlMap(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/urlMaps/{name}",
    required=["(project urlMap)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/urlMaps/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/urlMaps/{name}",
    required=["(project urlMap)"]
   }
  }
@@ -3873,44 +3958,44 @@ export urlMaps
 # /resources/targetTcpProxies
 type targetTcpProxies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/targetTcpProxies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetTcpProxy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetTcpProxies"
+   api-id=API-ID,
+   request-body=schemas.TargetTcpProxy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetTcpProxies",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.TargetTcpProxy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetTcpProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.TargetTcpProxy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetTcpProxies/{name}",
    required=["(project targetTcpProxy)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetTcpProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetTcpProxies/{name}",
    required=["(project targetTcpProxy)"]
   }
  }
@@ -3920,44 +4005,44 @@ export targetTcpProxies
 # /resources/externalVpnGateways
 type externalVpnGateways = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/externalVpnGateways"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.ExternalVpnGateway(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/externalVpnGateways"
+   api-id=API-ID,
+   request-body=schemas.ExternalVpnGateway(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/externalVpnGateways",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.ExternalVpnGateway"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/externalVpnGateways/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.ExternalVpnGateway",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/externalVpnGateways/{name}",
    required=["(project externalVpnGateway)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/externalVpnGateways/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/externalVpnGateways/{name}",
    required=["(project externalVpnGateway)"]
   }
  }
@@ -3967,49 +4052,49 @@ export externalVpnGateways
 # /resources/organizationSecurityPolicies
 type organizationSecurityPolicies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/organizationSecurityPolicies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SecurityPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/locations/global/securityPolicies"
+   api-id=API-ID,
+   request-body=schemas.SecurityPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/locations/global/securityPolicies",
    required=["()"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.SecurityPolicy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/locations/global/securityPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.SecurityPolicy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/locations/global/securityPolicies/{name}",
    required=["(securityPolicy)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SecurityPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/locations/global/securityPolicies/{name}"
+   api-id=API-ID,
+   request-body=schemas.SecurityPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/locations/global/securityPolicies/{name}",
    required=["(securityPolicy)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/locations/global/securityPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/locations/global/securityPolicies/{name}",
    required=["(securityPolicy)"]
   }
  }
@@ -4019,49 +4104,49 @@ export organizationSecurityPolicies
 # /resources/networkFirewallPolicies
 type networkFirewallPolicies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/networkFirewallPolicies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.FirewallPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewallPolicies"
+   api-id=API-ID,
+   request-body=schemas.FirewallPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewallPolicies",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.FirewallPolicy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewallPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.FirewallPolicy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewallPolicies/{name}",
    required=["(project firewallPolicy)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.FirewallPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewallPolicies/{name}"
+   api-id=API-ID,
+   request-body=schemas.FirewallPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewallPolicies/{name}",
    required=["(project firewallPolicy)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewallPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/firewallPolicies/{name}",
    required=["(project firewallPolicy)"]
   }
  }
@@ -4071,44 +4156,44 @@ export networkFirewallPolicies
 # /resources/vpnGateways
 type vpnGateways = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/vpnGateways"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.VpnGateway(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/vpnGateways"
+   api-id=API-ID,
+   request-body=schemas.VpnGateway(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/vpnGateways",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.VpnGateway"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/vpnGateways/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.VpnGateway",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/vpnGateways/{name}",
    required=["(vpnGateway region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/vpnGateways/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/vpnGateways/{name}",
    required=["(vpnGateway region project)"]
   }
  }
@@ -4118,34 +4203,34 @@ export vpnGateways
 # /resources/regionDiskTypes
 type regionDiskTypes = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionDiskTypes"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.DiskType"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/diskTypes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.DiskType",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/diskTypes/{name}",
    required=["(diskType region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -4156,49 +4241,49 @@ export regionDiskTypes
 # /resources/forwardingRules
 type forwardingRules = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/forwardingRules"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.ForwardingRule(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/forwardingRules"
+   api-id=API-ID,
+   request-body=schemas.ForwardingRule(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/forwardingRules",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.ForwardingRule"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/forwardingRules/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.ForwardingRule",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/forwardingRules/{name}",
    required=["(forwardingRule region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.ForwardingRule(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/forwardingRules/{name}"
+   api-id=API-ID,
+   request-body=schemas.ForwardingRule(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/forwardingRules/{name}",
    required=["(forwardingRule region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/forwardingRules/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/forwardingRules/{name}",
    required=["(forwardingRule region project)"]
   }
  }
@@ -4208,34 +4293,34 @@ export forwardingRules
 # /resources/licenseCodes
 type licenseCodes = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/licenseCodes"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.LicenseCode"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/licenseCodes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.LicenseCode",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/licenseCodes/{name}",
    required=["(project licenseCode)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -4246,44 +4331,44 @@ export licenseCodes
 # /resources/targetSslProxies
 type targetSslProxies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/targetSslProxies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetSslProxy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetSslProxies"
+   api-id=API-ID,
+   request-body=schemas.TargetSslProxy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetSslProxies",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.TargetSslProxy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetSslProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.TargetSslProxy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetSslProxies/{name}",
    required=["(project targetSslProxy)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetSslProxies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/targetSslProxies/{name}",
    required=["(project targetSslProxy)"]
   }
  }
@@ -4293,34 +4378,34 @@ export targetSslProxies
 # /resources/imageFamilyViews
 type imageFamilyViews = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/imageFamilyViews"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.ImageFamilyView"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/imageFamilyViews/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.ImageFamilyView",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/imageFamilyViews/{name}",
    required=["(family zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -4331,44 +4416,44 @@ export imageFamilyViews
 # /resources/targetInstances
 type targetInstances = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/targetInstances"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.TargetInstance(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/targetInstances"
+   api-id=API-ID,
+   request-body=schemas.TargetInstance(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/targetInstances",
    required=["(zone project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.TargetInstance"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/targetInstances/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.TargetInstance",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/targetInstances/{name}",
    required=["(targetInstance zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/targetInstances/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/targetInstances/{name}",
    required=["(targetInstance zone project)"]
   }
  }
@@ -4378,44 +4463,44 @@ export targetInstances
 # /resources/regionInstanceTemplates
 type regionInstanceTemplates = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionInstanceTemplates"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.InstanceTemplate(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceTemplates"
+   api-id=API-ID,
+   request-body=schemas.InstanceTemplate(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceTemplates",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.InstanceTemplate"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceTemplates/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.InstanceTemplate",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceTemplates/{name}",
    required=["(instanceTemplate region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceTemplates/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/instanceTemplates/{name}",
    required=["(instanceTemplate region project)"]
   }
  }
@@ -4425,49 +4510,49 @@ export regionInstanceTemplates
 # /resources/serviceAttachments
 type serviceAttachments = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/serviceAttachments"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.ServiceAttachment(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/serviceAttachments"
+   api-id=API-ID,
+   request-body=schemas.ServiceAttachment(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/serviceAttachments",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.ServiceAttachment"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/serviceAttachments/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.ServiceAttachment",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/serviceAttachments/{name}",
    required=["(serviceAttachment region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.ServiceAttachment(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/serviceAttachments/{name}"
+   api-id=API-ID,
+   request-body=schemas.ServiceAttachment(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/serviceAttachments/{name}",
    required=["(serviceAttachment region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/serviceAttachments/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/serviceAttachments/{name}",
    required=["(serviceAttachment region project)"]
   }
  }
@@ -4477,34 +4562,34 @@ export serviceAttachments
 # /resources/machineTypes
 type machineTypes = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/machineTypes"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.MachineType"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/machineTypes/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.MachineType",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/machineTypes/{name}",
    required=["(zone project machineType)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -4515,49 +4600,49 @@ export machineTypes
 # /resources/regionUrlMaps
 type regionUrlMaps = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionUrlMaps"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.UrlMap(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/urlMaps"
+   api-id=API-ID,
+   request-body=schemas.UrlMap(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/urlMaps",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.UrlMap"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/urlMaps/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.UrlMap",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/urlMaps/{name}",
    required=["(urlMap region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.UrlMap(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/urlMaps/{name}"
+   api-id=API-ID,
+   request-body=schemas.UrlMap(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/urlMaps/{name}",
    required=["(urlMap region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/urlMaps/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/urlMaps/{name}",
    required=["(urlMap region project)"]
   }
  }
@@ -4567,49 +4652,49 @@ export regionUrlMaps
 # /resources/regionNetworkFirewallPolicies
 type regionNetworkFirewallPolicies = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionNetworkFirewallPolicies"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.FirewallPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/firewallPolicies"
+   api-id=API-ID,
+   request-body=schemas.FirewallPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/firewallPolicies",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.FirewallPolicy"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/firewallPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.FirewallPolicy",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/firewallPolicies/{name}",
    required=["(firewallPolicy region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.FirewallPolicy(cfg)
-   response-type="compute.schemas.Operation"
-   method="PATCH"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/firewallPolicies/{name}"
+   api-id=API-ID,
+   request-body=schemas.FirewallPolicy(cfg),
+   response-type="compute.schemas.Operation",
+   method="PATCH",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/firewallPolicies/{name}",
    required=["(firewallPolicy region project)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/firewallPolicies/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/firewallPolicies/{name}",
    required=["(firewallPolicy region project)"]
   }
  }
@@ -4619,44 +4704,44 @@ export regionNetworkFirewallPolicies
 # /resources/instanceGroupManagerResizeRequests
 type instanceGroupManagerResizeRequests = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/instanceGroupManagerResizeRequests"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.InstanceGroupManagerResizeRequest(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests"
+   api-id=API-ID,
+   request-body=schemas.InstanceGroupManagerResizeRequest(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests",
    required=["(instanceGroupManager zone project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.InstanceGroupManagerResizeRequest"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.InstanceGroupManagerResizeRequest",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{name}",
    required=["(instanceGroupManager resizeRequest zone project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{name}",
    required=["(instanceGroupManager resizeRequest zone project)"]
   }
  }
@@ -4666,34 +4751,34 @@ export instanceGroupManagerResizeRequests
 # /resources/interconnectLocations
 type interconnectLocations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/interconnectLocations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.InterconnectLocation"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/interconnectLocations/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.InterconnectLocation",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/global/interconnectLocations/{name}",
    required=["(project interconnectLocation)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -4704,44 +4789,44 @@ export interconnectLocations
 # /resources/regionDisks
 type regionDisks = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:compute:/resources/regionDisks"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Disk(cfg)
-   response-type="compute.schemas.Operation"
-   method="POST"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/disks"
+   api-id=API-ID,
+   request-body=schemas.Disk(cfg),
+   response-type="compute.schemas.Operation",
+   method="POST",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/disks",
    required=["(region project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Disk"
-   method="GET"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/disks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Disk",
+   method="GET",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/disks/{name}",
    required=["(disk region project)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="compute.schemas.Operation"
-   method="DELETE"
-   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/disks/{name}"
+   api-id=API-ID,
+   response-type="compute.schemas.Operation",
+   method="DELETE",
+   url="https://compute.googleapis.com/compute/beta/projects/{project}/regions/{region}/disks/{name}",
    required=["(disk region project)"]
   }
  }

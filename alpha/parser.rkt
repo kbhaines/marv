@@ -76,7 +76,13 @@ list-apply: (IDENTIFIER | list-expression) "[" num-expression "]"
 
 func-call-parameters: "(" (expression-list? [ /"," named-parameter-list] | named-parameter-list) ")"
 
-attribute-name: ( STRING | IDENTIFIER | "type" )
+attribute-name: STRING | IDENTIFIER | keywords
+
+; The problem of keywords will reduce or be eliminated when these functions are made
+; part of a wider library that can be imported.
+@keywords: "replace" | "type" | "lowercase" | "uppercase"| "env-read"
+         | "strf" | "base64encode" | "base64decode" | "urivars" | "uritemplate" | "assertion"
+
 attr-list: /"[" ( attribute-name [ /"," ] )* /"]"
 
 @alternate-expression: expression '|' expression | /'(' expression '|' expression /')'

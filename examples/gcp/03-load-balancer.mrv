@@ -3,7 +3,7 @@
 import "shared/network-base.mrv" as net
 import "shared/instance-group.mrv" as ig
 
-module main(name = "example-02-load-balancer") {
+module main(name = "example-03-load-balancer") {
 
     defaults = {
         # env is a built-in function to read environment variables
