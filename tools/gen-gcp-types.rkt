@@ -39,12 +39,14 @@
   (for ([type (disc-schemas disc)])
     (define schema (get-disc-schema disc type))
     (define properties (hash-keys (hash-ref schema 'properties)))
-    (displayln (format schema-template type type  (symbols->string properties))))
+    (displayln (format schema-template type type  (symbols->string properties ","))))
   (displayln "schemas={")
-  (for ([type (disc-schemas disc)])
-    (displayln (format "  ~a=~a" type type)))
+  (define schemas
+    (map
+     (lambda(type) (format "  ~a=~a" type type))
+     (disc-schemas disc)))
+  (displayln (string-join schemas ",\n"))
   (displayln "}\nexport schemas"))
-
 
 (define res-spec-verbs
   (hash
@@ -81,7 +83,7 @@
                    (api-resource-url-base api)
                    (map symbol->string (api-required-params api)))]
           [else ""]))
-      (string-replace spec "|" "\n   "))
+      (string-replace spec "|" ",\n   "))
 
     (define type (substring (string-replace res-path "/resources/" "_") 1))
     (define-values (create read update delete)
@@ -157,30 +159,30 @@ EOF
 # {{res-path}}
 type {{type}} = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:{{api}}:{{res-path}}"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    {{create}}
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
    {{read}}
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    {{update}}
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    {{delete}}
   }

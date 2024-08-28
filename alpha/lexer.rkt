@@ -1,7 +1,6 @@
 #lang racket/base
 
 (require brag/support)
-(require racket/string)
 
 (provide basic-lexer)
 
@@ -16,24 +15,27 @@
 (define-lex-abbrev identifier (:seq (:= 1 (:or "_" alphabetic))
                                     (:* (:or digits alphabetic (char-set "-_:")))))
 
-(define-lex-abbrev dotty-ident (:seq (:= 1 identifier) (:+ (:seq "." identifier))))
+;(define-lex-abbrev dotty-ident (:seq (:= 1 identifier) (:+ (:seq "." identifier))))
 
 (define basic-lexer
   (lexer-srcloc
    ;    ["\n" (token 'NEWLINE lexeme)]
-   [(:or "for/list" "->" "<-" "<<" ">>" "<" ">" "*" "-" "+" "/" "."
-         "module" "private" "import" "export" "as" "return" "strf"
-         "strvars" "expandvars" "base64encode" "base64decode" "using" "overlays" "abstracts"
+   [(:or "->" "<-" "<<" ">>" "<" ">"
+         "==" "!=" ":=" "++"
+         "for/list"  "module" "private" "import" "export" "as" "return" "strf"
+         "strvars" "expandvars" "base64encode" "base64decode" "using" "overlays" "abstracts" "assert"
+         "lowercase" "uppercase" "replace"
+         "lambda"
          "type" "in" "pprint" "env" "true" "false"
          "imm:" ) (token lexeme lexeme)]
-   [(:= 1 (char-set "[](){}=:,|")) lexeme]
+   [(:= 1 (char-set "+-/*.[](){}=:,|")) lexeme]
    [digits (token 'INTEGER (string->number lexeme))]
    [whitespace (token lexeme #:skip? #t)]
    [";" (token lexeme #:skip? #t)]
    [identifier (token 'IDENTIFIER (string->symbol lexeme)) ]
    [module-identifier (token 'MODULE-IDENTIFIER (string->symbol lexeme)) ]
    [filename (token 'FILENAME (string->symbol lexeme)) ]
-   [dotty-ident (token 'DOTTY-IDENT (string->symbol lexeme)) ]
+   ;   [dotty-ident (token 'DOTTY-IDENT (string->symbol lexeme)) ]
    [(from/stop-before "#" "\n") (token lexeme #:skip? #t)]
    ;    [(:or "print" "goto" "end"
    ;  "+" ":" ";") (token lexeme lexeme)]

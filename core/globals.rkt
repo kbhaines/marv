@@ -36,9 +36,9 @@
   (((listof symbol?)) (string?) . ->* . symbol?)
   (string->symbol (string-join (map symbol->string syms) joiner)))
 
-(define/contract (symbols->string symbols)
-  ((listof symbol?) . -> . string?)
-  (string-join (map symbol->string symbols) " "))
+(define/contract (symbols->string symbols [join " "])
+  (((listof symbol?)) (string?) . ->* . string?)
+  (string-join (map symbol->string symbols) join))
 
 (define (getenv-or-raise e)
   (or (getenv e) (raise (format "ERROR: ~a must be defined in environment" e))))

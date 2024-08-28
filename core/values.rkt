@@ -6,10 +6,15 @@
 
 (provide (struct-out value)
          (struct-out ref)
+         deferred
+         deferred-op deferred-terms deferred-deps
+         deferred?
          unpack-value
          update-val
          ival ival?
-         iref iref? vref?
+         ;  iref
+         iref? vref?
+         with-value
          ref-split
          ref->id)
 
@@ -33,11 +38,24 @@
       (value (fn (value-val v)) (value-flags v))
       (fn v)))
 
-(struct ref (path)  #:prefab)
-(define (iref r) (ival (ref r)))
+(struct ref (gid path)  #:prefab)
+
+(struct _deferred (op deps terms) #:prefab)
+(define (deferred op deps . terms) (_deferred op deps terms))
+(define deferred? _deferred?)
+(define deferred-op _deferred-op)
+(define deferred-deps _deferred-deps)
+(define deferred-terms _deferred-terms)
+
+; (define (iref r) (ival (ref r)))
 (define (iref? v) (and (ival? v) (ref? (unpack-value v))))
 
+
 (define (vref? v) (ref? (unpack-value v)))
+
+(define (with-value v proc)
+  (define result (proc (unpack-value v)))
+  (if (value? v) (value result (value-flags v)) result))
 
 (define/contract (ref-split r)
   (vref? . -> . (values symbol? symbol?))

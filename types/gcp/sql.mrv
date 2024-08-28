@@ -8,15 +8,16 @@ import types/gcp/_auto/sql as _auto
 # Modify this example per API
 
 delete-self(state, oapi) = {
-  api= oapi.api <- { url=state.selfLink }
+  api= oapi.api <- { url=state.selfLink },
   config = {}
 }
 
 type API<T> = {
- post-create(original, state) = state <- { project=original.project  region=original.region }
+ post-create(original, state) = 
+  state <- { project=original.project,  region=original.region }
  post-read(o, cfg) = post-create(o, cfg)
  post-update(original, cfg)=post-create(original, cfg)
- delete(state) = delete-self(state, T.delete(state))
+ #delete(state) = delete-self(state, T.delete(state))
  * = T.*
 }
 
@@ -38,8 +39,23 @@ export connect
 type sslCert=API<_auto:sslCerts>
 export sslCert
 
-# TODO41 - GCP replies with wrong targetLink following user-create
-type user=API<_auto:users>
+# TODO - GCP replies with wrong targetLink following user-create. The reply
+# needs to be intercepted in the driver processsing, in order to fix this
+type _user=API<_auto:users>
+type user = {
+   post-create(orig, state)= orig
+   delete(cfg)={
+    config=cfg,
+    api={
+     api-id="sql",
+     response-type="sql.schemas.Operation",
+     method="DELETE",
+     url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/users?name={name}",
+     required=["(project instance)"]
+    }
+ }
+  * = _user.*
+}
 export user
 
 type flag=API<_auto:flags>

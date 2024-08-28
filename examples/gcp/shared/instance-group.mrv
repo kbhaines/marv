@@ -2,12 +2,12 @@
 
 import types/gcp/compute as compute
 
-module instance-group(defaults name zone="b" vpc subnet) {
+module instance-group(defaults, name, vpc, subnet, zone="b") {
     node-disks = [ {
-        boot = true
-        autoDelete = true
+        boot = true,
+        autoDelete = true,
         initializeParams = {
-            sourceImage = "projects/debian-cloud/global/images/family/debian-12"
+            sourceImage = "projects/debian-cloud/global/images/family/debian-12",
             diskSizeGb = "10"
             # diskType = "zones/europe-west2-a/diskTypes/pd-standard"
         } 
@@ -28,35 +28,35 @@ module instance-group(defaults name zone="b" vpc subnet) {
 
     f-instance-template(machine-type) = defaults <- {
         properties = {
-            machineType = machine-type
-            tags = { items = [ "load-balanced-backend" ] }
+            machineType = machine-type,
+            tags = { items = [ "load-balanced-backend" ] },
             networkInterfaces = [ 
                 {
-                    network = imm: vpc
-                    subnetwork = imm: subnet
+                    network = imm: vpc,
+                    subnetwork = imm: subnet,
                     accessConfigs = [ { type = "ONE_TO_ONE_NAT" } ] 
                 } 
-            ]
+            ],
             disks = node-disks
         }
     }
 
-    instance-template = compute:instanceTemplate f-instance-template("f1-micro") <- { name = "instance-template1"}
+    instance-template := compute:instanceTemplate f-instance-template("f1-micro") <- { name = "instance-template1"}
 
     ################################################################################
     # Multiple parameters are space-separated
 
-    f-instance-group-manager(name size zone template) = defaults <- {
-        name = imm: name
-        zone = imm: zone
-        namedPorts = imm:[ {port = 80 name = "http" }]
-        instanceTemplate = imm: template
-        baseInstanceName = name
+    f-instance-group-manager(name, size, zone, template) = defaults <- {
+        name = imm: name,
+        zone = imm: zone,
+        namedPorts = imm:[ {port = 80, name = "http" }],
+        instanceTemplate = imm: template,
+        baseInstanceName = name,
         targetSize = size
     }
 
-    igm = compute:instanceGroupManager 
-        f-instance-group-manager(strf("~a-igm" name) 4 strf("~a-~a" defaults.region zone) instance-template.selfLink) <- {
+    igm := compute:instanceGroupManager 
+        f-instance-group-manager(strf("~a-igm" name), 4, strf("~a-~a" defaults.region zone), instance-template.selfLink) <- {
     #          statefulPolicy = {
     #               preservedState = {
     #                    disks = {
@@ -69,45 +69,45 @@ module instance-group(defaults name zone="b" vpc subnet) {
     ################################################################################
     # The rest of the example is straight-forward declarations
 
-    lb-basic-check = compute:regionHealthCheck defaults <- {
-        name = "lb-basic-check"
-        type = "HTTP"
+    lb-basic-check := compute:regionHealthCheck defaults <- {
+        name = "lb-basic-check",
+        type = "HTTP",
         httpHealthCheck = { portSpecification = "USE_SERVING_PORT" }
     }
 
-    region-backend-service = compute:regionBackendService defaults <- {
-        name = "backend-service"
+    region-backend-service := compute:regionBackendService defaults <- {
+        name = "backend-service",
         backends = {
-            group = imm: igm.selfLink
+            group = imm: igm.selfLink,
             balancingMode = "UTILIZATION"
-        }
-        healthChecks = [ lb-basic-check.selfLink ]
+        },
+        healthChecks = [ lb-basic-check.selfLink ],
         loadBalancingScheme = "EXTERNAL_MANAGED"
     }
 
-    region-url-map = compute:regionUrlMap defaults <- {
-        name = "urlmap"
+    region-url-map := compute:regionUrlMap defaults <- {
+        name = "urlmap",
         defaultService = imm: region-backend-service.selfLink
     }
 
-    region-target-proxies = compute:regionTargetHttpProxy defaults <- {
-        name = "proxy"
+    region-target-proxies := compute:regionTargetHttpProxy defaults <- {
+        name = "proxy",
         urlMap = imm: region-url-map.selfLink
     }
 
-    forwarding-rule = compute:forwardingRule defaults <- {
-        name = "forwarding-rule"
-        ipAddress = "10.0.1.99" # backend SN1
-        ipProtocol = "TCP"
-        portRange = "80-80"
-        target = imm: region-target-proxies.selfLink
-        loadBalancingScheme = "EXTERNAL_MANAGED"
-        network = imm: vpc
+    forwarding-rule := compute:forwardingRule defaults <- {
+        name = "forwarding-rule",
+        ipAddress = "10.0.1.99",  # backend SN1
+        ipProtocol = "TCP", 
+        portRange = "80-80", 
+        target = imm: region-target-proxies.selfLink, 
+        loadBalancingScheme = "EXTERNAL_MANAGED", 
+        network = imm: vpc, 
         networkTier = "STANDARD"
     }
 
     return {
-        name = igm.name
+        name = igm.name, 
         zone = igm.zone
     }
 }

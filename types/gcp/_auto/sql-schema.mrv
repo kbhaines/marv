@@ -2,221 +2,242 @@
 ## AUTO-GENERATED FILE - DO NOT EDIT!
 
 
-# Schema for GenerateEphemeralCertRequest
-GenerateEphemeralCertRequest(c)=c << [public_key access_token readTime validDuration]
-
 # Schema for InstancesRotateServerCaRequest
 InstancesRotateServerCaRequest(c)=c << [rotateServerCaContext]
 
 # Schema for DatabaseFlags
-DatabaseFlags(c)=c << [value name]
+DatabaseFlags(c)=c << [value,name]
 
 # Schema for InstancesReencryptRequest
 InstancesReencryptRequest(c)=c << [backupReencryptionConfig]
 
 # Schema for PasswordValidationPolicy
-PasswordValidationPolicy(c)=c << [disallowCompromisedCredentials minLength enablePasswordPolicy reuseInterval passwordChangeInterval complexity disallowUsernameSubstring]
+PasswordValidationPolicy(c)=c << [disallowCompromisedCredentials,minLength,enablePasswordPolicy,reuseInterval,passwordChangeInterval,complexity,disallowUsernameSubstring]
 
 # Schema for BackupContext
-BackupContext(c)=c << [backupId kind]
+BackupContext(c)=c << [backupId,kind]
 
 # Schema for SslCertsInsertResponse
-SslCertsInsertResponse(c)=c << [operation kind serverCaCert clientCert]
+SslCertsInsertResponse(c)=c << [operation,kind,serverCaCert,clientCert]
 
 # Schema for DemoteMasterConfiguration
-DemoteMasterConfiguration(c)=c << [kind mysqlReplicaConfiguration]
+DemoteMasterConfiguration(c)=c << [kind,mysqlReplicaConfiguration]
 
 # Schema for GenerateEphemeralCertResponse
 GenerateEphemeralCertResponse(c)=c << [ephemeralCert]
 
+# Schema for GenerateEphemeralCertRequest
+GenerateEphemeralCertRequest(c)=c << [public_key,access_token,readTime,validDuration]
+
+# Schema for SqlInstancesAcquireSsrsLeaseResponse
+SqlInstancesAcquireSsrsLeaseResponse(c)=c << [operationId]
+
 # Schema for OperationsListResponse
-OperationsListResponse(c)=c << [items kind nextPageToken]
+OperationsListResponse(c)=c << [items,kind,nextPageToken]
+
+# Schema for SqlInstancesReleaseSsrsLeaseResponse
+SqlInstancesReleaseSsrsLeaseResponse(c)=c << [operationId]
 
 # Schema for SyncFlags
-SyncFlags(c)=c << [value name]
+SyncFlags(c)=c << [value,name]
 
 # Schema for SqlScheduledMaintenance
-SqlScheduledMaintenance(c)=c << [canDefer canReschedule startTime scheduleDeadlineTime]
+SqlScheduledMaintenance(c)=c << [canDefer,canReschedule,startTime,scheduleDeadlineTime]
 
 # Schema for MySqlSyncConfig
 MySqlSyncConfig(c)=c << [initialSyncFlags]
 
 # Schema for ImportContext
-ImportContext(c)=c << [importUser csvImportOptions fileType uri database bakImportOptions kind]
+ImportContext(c)=c << [importUser,sqlImportOptions,csvImportOptions,fileType,uri,database,bakImportOptions,kind]
 
 # Schema for SqlInstancesResetReplicaSizeRequest
 SqlInstancesResetReplicaSizeRequest(c)=c << []
 
 # Schema for User
-User(c)=c << [project name sqlserverUserDetails kind password passwordPolicy instance dualPasswordType type etag host]
+User(c)=c << [project,name,sqlserverUserDetails,kind,password,passwordPolicy,instance,dualPasswordType,type,etag,host]
 
 # Schema for Reschedule
-Reschedule(c)=c << [rescheduleType scheduleTime]
+Reschedule(c)=c << [rescheduleType,scheduleTime]
 
 # Schema for OperationError
-OperationError(c)=c << [code message kind]
+OperationError(c)=c << [code,message,kind]
 
 # Schema for Flag
-Flag(c)=c << [allowedIntValues name appliesTo minValue kind maxValue inBeta requiresRestart allowedStringValues type]
+Flag(c)=c << [allowedIntValues,name,appliesTo,minValue,kind,maxValue,inBeta,requiresRestart,allowedStringValues,type]
 
 # Schema for DatabasesListResponse
-DatabasesListResponse(c)=c << [kind items]
+DatabasesListResponse(c)=c << [kind,items]
 
 # Schema for SqlInstancesStartExternalSyncRequest
-SqlInstancesStartExternalSyncRequest(c)=c << [skipVerification mysqlSyncConfig syncMode syncParallelLevel]
+SqlInstancesStartExternalSyncRequest(c)=c << [migrationType,skipVerification,mysqlSyncConfig,syncMode,syncParallelLevel]
 
 # Schema for BackupRun
-BackupRun(c)=c << [backupKind selfLink id timeZone endTime instance startTime location error type enqueuedTime diskEncryptionStatus windowStartTime diskEncryptionConfiguration description kind status]
+BackupRun(c)=c << [backupKind,id,timeZone,endTime,selfLink,maxChargeableBytes,instance,startTime,location,error,type,enqueuedTime,diskEncryptionStatus,windowStartTime,diskEncryptionConfiguration,description,kind,status]
 
 # Schema for InstancesFailoverRequest
 InstancesFailoverRequest(c)=c << [failoverContext]
 
 # Schema for DemoteMasterContext
-DemoteMasterContext(c)=c << [skipReplicationSetup verifyGtidConsistency replicaConfiguration kind masterInstanceName]
+DemoteMasterContext(c)=c << [skipReplicationSetup,verifyGtidConsistency,replicaConfiguration,kind,masterInstanceName]
 
 # Schema for InstanceReference
-InstanceReference(c)=c << [name region project]
+InstanceReference(c)=c << [name,region,project]
 
 # Schema for SqlInstancesGetDiskShrinkConfigResponse
-SqlInstancesGetDiskShrinkConfigResponse(c)=c << [minimalTargetSizeGb message kind]
+SqlInstancesGetDiskShrinkConfigResponse(c)=c << [minimalTargetSizeGb,message,kind]
 
 # Schema for AdvancedMachineFeatures
 AdvancedMachineFeatures(c)=c << [threadsPerCore]
 
 # Schema for FailoverContext
-FailoverContext(c)=c << [kind settingsVersion]
+FailoverContext(c)=c << [kind,settingsVersion]
 
 # Schema for LocationPreference
-LocationPreference(c)=c << [zone secondaryZone kind followGaeApplication]
+LocationPreference(c)=c << [zone,secondaryZone,kind,followGaeApplication]
 
 # Schema for IpConfiguration
-IpConfiguration(c)=c << [enablePrivatePathForGoogleCloudServices authorizedNetworks ipv4Enabled requireSsl pscConfig privateNetwork sslMode allocatedIpRange]
+IpConfiguration(c)=c << [enablePrivatePathForGoogleCloudServices,authorizedNetworks,serverCaMode,ipv4Enabled,requireSsl,pscConfig,privateNetwork,sslMode,allocatedIpRange]
 
 # Schema for UsersListResponse
-UsersListResponse(c)=c << [items kind nextPageToken]
+UsersListResponse(c)=c << [items,kind,nextPageToken]
 
 # Schema for InstancesDemoteRequest
 InstancesDemoteRequest(c)=c << [demoteContext]
 
 # Schema for TruncateLogContext
-TruncateLogContext(c)=c << [logType kind]
+TruncateLogContext(c)=c << [logType,kind]
 
 # Schema for SqlInstancesRescheduleMaintenanceRequestBody
 SqlInstancesRescheduleMaintenanceRequestBody(c)=c << [reschedule]
 
 # Schema for SqlInstancesVerifyExternalSyncSettingsRequest
-SqlInstancesVerifyExternalSyncSettingsRequest(c)=c << [verifyReplicationOnly verifyConnectionOnly mysqlSyncConfig syncMode]
+SqlInstancesVerifyExternalSyncSettingsRequest(c)=c << [migrationType,verifyReplicationOnly,verifyConnectionOnly,mysqlSyncConfig,syncMode,syncParallelLevel]
 
 # Schema for DataCacheConfig
 DataCacheConfig(c)=c << [dataCacheEnabled]
 
 # Schema for SslCertsListResponse
-SslCertsListResponse(c)=c << [kind items]
+SslCertsListResponse(c)=c << [kind,items]
 
 # Schema for UserPasswordValidationPolicy
-UserPasswordValidationPolicy(c)=c << [passwordExpirationDuration allowedFailedAttempts enableFailedAttemptsCheck status enablePasswordVerification]
+UserPasswordValidationPolicy(c)=c << [passwordExpirationDuration,allowedFailedAttempts,enableFailedAttemptsCheck,status,enablePasswordVerification]
 
 # Schema for RotateServerCaContext
-RotateServerCaContext(c)=c << [nextVersion kind]
+RotateServerCaContext(c)=c << [nextVersion,kind]
 
 # Schema for InstancesTruncateLogRequest
 InstancesTruncateLogRequest(c)=c << [truncateLogContext]
 
 # Schema for SqlInstancesVerifyExternalSyncSettingsResponse
-SqlInstancesVerifyExternalSyncSettingsResponse(c)=c << [warnings errors kind]
+SqlInstancesVerifyExternalSyncSettingsResponse(c)=c << [warnings,errors,kind]
+
+# Schema for GeminiInstanceConfig
+GeminiInstanceConfig(c)=c << [googleVacuumMgmtEnabled,activeQueryEnabled,oomSessionCancelEnabled,indexAdvisorEnabled,entitled,flagRecommenderEnabled]
 
 # Schema for DemoteContext
-DemoteContext(c)=c << [sourceRepresentativeInstanceName kind]
+DemoteContext(c)=c << [sourceRepresentativeInstanceName,kind]
 
 # Schema for OperationMetadata
-OperationMetadata(c)=c << [endTime createTime target apiVersion verb statusDetail cancelRequested]
+OperationMetadata(c)=c << [endTime,createTime,target,apiVersion,verb,statusDetail,cancelRequested]
 
 # Schema for InstancesListResponse
-InstancesListResponse(c)=c << [warnings items kind nextPageToken]
+InstancesListResponse(c)=c << [warnings,items,kind,nextPageToken]
 
 # Schema for InstancesExportRequest
 InstancesExportRequest(c)=c << [exportContext]
 
 # Schema for SqlInstancesGetLatestRecoveryTimeResponse
-SqlInstancesGetLatestRecoveryTimeResponse(c)=c << [latestRecoveryTime kind]
+SqlInstancesGetLatestRecoveryTimeResponse(c)=c << [latestRecoveryTime,kind]
 
 # Schema for OnPremisesConfiguration
-OnPremisesConfiguration(c)=c << [dumpFilePath caCertificate clientKey sourceInstance kind clientCertificate hostPort password username]
+OnPremisesConfiguration(c)=c << [dumpFilePath,caCertificate,clientKey,sourceInstance,kind,clientCertificate,hostPort,password,username]
 
 # Schema for PasswordStatus
-PasswordStatus(c)=c << [locked passwordExpirationTime]
+PasswordStatus(c)=c << [locked,passwordExpirationTime]
 
 # Schema for Empty
 Empty(c)=c << []
 
 # Schema for BackupConfiguration
-BackupConfiguration(c)=c << [startTime location enabled kind pointInTimeRecoveryEnabled backupRetentionSettings binaryLogEnabled transactionLogRetentionDays replicationLogArchivingEnabled]
+BackupConfiguration(c)=c << [startTime,enabled,kind,location,transactionalLogStorageState,pointInTimeRecoveryEnabled,backupRetentionSettings,binaryLogEnabled,transactionLogRetentionDays,replicationLogArchivingEnabled]
 
 # Schema for IpMapping
-IpMapping(c)=c << [type ipAddress timeToRetire]
+IpMapping(c)=c << [type,ipAddress,timeToRetire]
 
 # Schema for SqlServerAuditConfig
-SqlServerAuditConfig(c)=c << [uploadInterval bucket kind retentionInterval]
+SqlServerAuditConfig(c)=c << [uploadInterval,bucket,kind,retentionInterval]
 
 # Schema for ApiWarning
-ApiWarning(c)=c << [code region message]
-
-# Schema for ConnectSettings
-ConnectSettings(c)=c << [serverCaCert dnsName region ipAddresses backendType kind databaseVersion pscEnabled]
+ApiWarning(c)=c << [code,region,message]
 
 # Schema for SqlServerDatabaseDetails
-SqlServerDatabaseDetails(c)=c << [compatibilityLevel recoveryModel]
+SqlServerDatabaseDetails(c)=c << [compatibilityLevel,recoveryModel]
+
+# Schema for ConnectSettings
+ConnectSettings(c)=c << [serverCaCert,dnsName,region,serverCaMode,ipAddresses,backendType,kind,databaseVersion,pscEnabled]
+
+# Schema for AvailableDatabaseVersion
+AvailableDatabaseVersion(c)=c << [displayName,name,majorVersion]
 
 # Schema for SqlServerUserDetails
-SqlServerUserDetails(c)=c << [disabled serverRoles]
+SqlServerUserDetails(c)=c << [disabled,serverRoles]
 
 # Schema for BackupRunsListResponse
-BackupRunsListResponse(c)=c << [items kind nextPageToken]
+BackupRunsListResponse(c)=c << [items,kind,nextPageToken]
 
 # Schema for SslCertsCreateEphemeralRequest
-SslCertsCreateEphemeralRequest(c)=c << [access_token public_key]
+SslCertsCreateEphemeralRequest(c)=c << [access_token,public_key]
 
 # Schema for Settings
-Settings(c)=c << [connectorEnforcement passwordValidationPolicy insightsConfig edition denyMaintenancePeriods dataDiskSizeGb timeZone databaseFlags pricingPlan tier activeDirectoryConfig sqlServerAuditConfig collation crashSafeReplicationEnabled activationPolicy availabilityType ipConfiguration userLabels backupConfiguration replicationType authorizedGaeApplications maintenanceWindow advancedMachineFeatures dataCacheConfig deletionProtectionEnabled kind storageAutoResize settingsVersion locationPreference databaseReplicationEnabled dataDiskType storageAutoResizeLimit]
+Settings(c)=c << [connectorEnforcement,passwordValidationPolicy,edition,denyMaintenancePeriods,dataDiskSizeGb,timeZone,databaseFlags,pricingPlan,tier,enableGoogleMlIntegration,insightsConfig,enableDataplexIntegration,activeDirectoryConfig,sqlServerAuditConfig,collation,crashSafeReplicationEnabled,activationPolicy,availabilityType,ipConfiguration,userLabels,backupConfiguration,replicationType,authorizedGaeApplications,maintenanceWindow,advancedMachineFeatures,dataCacheConfig,deletionProtectionEnabled,kind,storageAutoResize,settingsVersion,locationPreference,databaseReplicationEnabled,dataDiskType,storageAutoResizeLimit]
 
 # Schema for BinLogCoordinates
-BinLogCoordinates(c)=c << [binLogFileName binLogPosition kind]
+BinLogCoordinates(c)=c << [binLogFileName,binLogPosition,kind]
 
 # Schema for MaintenanceWindow
-MaintenanceWindow(c)=c << [day hour updateTrack kind]
+MaintenanceWindow(c)=c << [day,hour,updateTrack,kind]
 
 # Schema for DiskEncryptionStatus
-DiskEncryptionStatus(c)=c << [kmsKeyVersionName kind]
+DiskEncryptionStatus(c)=c << [kmsKeyVersionName,kind]
 
 # Schema for DatabaseInstance
-DatabaseInstance(c)=c << [serverCaCert selfLink suspensionReason backendType dnsName state pscServiceAttachmentLink ipv6Address scheduledMaintenance availableMaintenanceVersions maintenanceVersion region replicaNames project onPremisesConfiguration failoverReplica maxDiskSize settings sqlNetworkArchitecture outOfDiskReport connectionName secondaryGceZone replicaConfiguration satisfiesPzs ipAddresses serviceAccountEmailAddress currentDiskSize rootPassword primaryDnsName instanceType createTime name writeEndpoint diskEncryptionStatus databaseInstalledVersion databaseVersion etag diskEncryptionConfiguration kind masterInstanceName gceZone]
+DatabaseInstance(c)=c << [serverCaCert,backendType,switchTransactionLogsToCloudStorageEnabled,dnsName,state,pscServiceAttachmentLink,ipv6Address,scheduledMaintenance,availableMaintenanceVersions,maintenanceVersion,region,replicaNames,project,selfLink,geminiConfig,onPremisesConfiguration,failoverReplica,upgradableDatabaseVersions,maxDiskSize,settings,sqlNetworkArchitecture,outOfDiskReport,connectionName,secondaryGceZone,replicaConfiguration,satisfiesPzs,ipAddresses,serviceAccountEmailAddress,currentDiskSize,rootPassword,primaryDnsName,instanceType,createTime,name,suspensionReason,satisfiesPzi,writeEndpoint,diskEncryptionStatus,databaseInstalledVersion,databaseVersion,replicationCluster,etag,diskEncryptionConfiguration,kind,masterInstanceName,gceZone]
 
 # Schema for CloneContext
-CloneContext(c)=c << [binLogCoordinates pointInTime pitrTimestampMs destinationInstanceName allocatedIpRange databaseNames kind preferredZone]
+CloneContext(c)=c << [binLogCoordinates,pointInTime,pitrTimestampMs,destinationInstanceName,preferredSecondaryZone,allocatedIpRange,databaseNames,kind,preferredZone]
 
 # Schema for SqlActiveDirectoryConfig
-SqlActiveDirectoryConfig(c)=c << [domain kind]
+SqlActiveDirectoryConfig(c)=c << [domain,kind]
 
 # Schema for InstancesImportRequest
 InstancesImportRequest(c)=c << [importContext]
 
-# Schema for InstancesRestoreBackupRequest
-InstancesRestoreBackupRequest(c)=c << [restoreBackupContext]
+# Schema for AcquireSsrsLeaseContext
+AcquireSsrsLeaseContext(c)=c << [reportDatabase,setupLogin,duration,serviceLogin]
 
 # Schema for InstancesDemoteMasterRequest
 InstancesDemoteMasterRequest(c)=c << [demoteMasterContext]
 
 # Schema for Tier
-Tier(c)=c << [region tier kind DiskQuota RAM]
+Tier(c)=c << [region,tier,kind,DiskQuota,RAM]
 
 # Schema for Database
-Database(c)=c << [project selfLink name sqlserverDatabaseDetails kind instance collation etag charset]
+Database(c)=c << [project,selfLink,name,sqlserverDatabaseDetails,kind,instance,collation,etag,charset]
+
+# Schema for InstancesRestoreBackupRequest
+InstancesRestoreBackupRequest(c)=c << [restoreBackupContext]
+
+# Schema for ReplicationCluster
+ReplicationCluster(c)=c << [drReplica,psaWriteEndpoint,failoverDrReplicaName]
 
 # Schema for SslCertDetail
-SslCertDetail(c)=c << [certInfo certPrivateKey]
+SslCertDetail(c)=c << [certInfo,certPrivateKey]
 
 # Schema for InstancesListServerCasResponse
-InstancesListServerCasResponse(c)=c << [certs activeVersion kind]
+InstancesListServerCasResponse(c)=c << [certs,activeVersion,kind]
+
+# Schema for InstancesAcquireSsrsLeaseRequest
+InstancesAcquireSsrsLeaseRequest(c)=c << [acquireSsrsLeaseContext]
 
 # Schema for InstancesCloneRequest
 InstancesCloneRequest(c)=c << [cloneContext]
@@ -225,158 +246,165 @@ InstancesCloneRequest(c)=c << [cloneContext]
 SslCertsInsertRequest(c)=c << [commonName]
 
 # Schema for SslCert
-SslCert(c)=c << [cert commonName selfLink createTime certSerialNumber expirationTime kind instance sha1Fingerprint]
+SslCert(c)=c << [cert,commonName,selfLink,createTime,certSerialNumber,expirationTime,kind,instance,sha1Fingerprint]
 
 # Schema for MySqlReplicaConfiguration
-MySqlReplicaConfiguration(c)=c << [caCertificate clientKey sslCipher kind masterHeartbeatPeriod connectRetryInterval dumpFilePath verifyServerCertificate clientCertificate password username]
+MySqlReplicaConfiguration(c)=c << [caCertificate,clientKey,sslCipher,kind,masterHeartbeatPeriod,connectRetryInterval,dumpFilePath,verifyServerCertificate,clientCertificate,password,username]
 
 # Schema for AclEntry
-AclEntry(c)=c << [value name expirationTime kind]
+AclEntry(c)=c << [value,name,expirationTime,kind]
 
 # Schema for InsightsConfig
-InsightsConfig(c)=c << [queryInsightsEnabled queryPlansPerMinute queryStringLength recordClientAddress recordApplicationTags]
+InsightsConfig(c)=c << [queryInsightsEnabled,queryPlansPerMinute,queryStringLength,recordClientAddress,recordApplicationTags]
 
 # Schema for DemoteMasterMySqlReplicaConfiguration
-DemoteMasterMySqlReplicaConfiguration(c)=c << [caCertificate clientKey clientCertificate kind password username]
+DemoteMasterMySqlReplicaConfiguration(c)=c << [caCertificate,clientKey,clientCertificate,kind,password,username]
 
 # Schema for OperationErrors
-OperationErrors(c)=c << [errors kind]
+OperationErrors(c)=c << [errors,kind]
 
 # Schema for DiskEncryptionConfiguration
-DiskEncryptionConfiguration(c)=c << [kmsKeyName kind]
+DiskEncryptionConfiguration(c)=c << [kmsKeyName,kind]
 
 # Schema for Operation
-Operation(c)=c << [endTime selfLink error importContext operationType exportContext startTime backupContext insertTime name targetLink apiWarning targetProject targetId user kind status]
+Operation(c)=c << [endTime,selfLink,error,importContext,operationType,exportContext,startTime,backupContext,insertTime,acquireSsrsLeaseContext,name,targetLink,apiWarning,targetProject,targetId,user,kind,status]
 
 # Schema for BackupRetentionSettings
-BackupRetentionSettings(c)=c << [retainedBackups retentionUnit]
+BackupRetentionSettings(c)=c << [retainedBackups,retentionUnit]
 
 # Schema for BackupReencryptionConfig
-BackupReencryptionConfig(c)=c << [backupType backupLimit]
+BackupReencryptionConfig(c)=c << [backupType,backupLimit]
 
 # Schema for FlagsListResponse
-FlagsListResponse(c)=c << [kind items]
+FlagsListResponse(c)=c << [kind,items]
 
 # Schema for PerformDiskShrinkContext
 PerformDiskShrinkContext(c)=c << [targetSizeGb]
 
 # Schema for RestoreBackupContext
-RestoreBackupContext(c)=c << [project instanceId backupRunId kind]
+RestoreBackupContext(c)=c << [project,instanceId,backupRunId,kind]
 
 # Schema for SqlOutOfDiskReport
-SqlOutOfDiskReport(c)=c << [sqlMinRecommendedIncreaseSizeGb sqlOutOfDiskState]
+SqlOutOfDiskReport(c)=c << [sqlMinRecommendedIncreaseSizeGb,sqlOutOfDiskState]
 
 # Schema for DenyMaintenancePeriod
-DenyMaintenancePeriod(c)=c << [time endDate startDate]
+DenyMaintenancePeriod(c)=c << [time,endDate,startDate]
 
 # Schema for ReplicaConfiguration
-ReplicaConfiguration(c)=c << [cascadableReplica failoverTarget kind mysqlReplicaConfiguration]
+ReplicaConfiguration(c)=c << [cascadableReplica,failoverTarget,kind,mysqlReplicaConfiguration]
 
 # Schema for PscConfig
-PscConfig(c)=c << [allowedConsumerProjects pscEnabled]
+PscConfig(c)=c << [allowedConsumerProjects,pscEnabled]
 
 # Schema for TiersListResponse
-TiersListResponse(c)=c << [kind items]
+TiersListResponse(c)=c << [kind,items]
 
 # Schema for ExportContext
-ExportContext(c)=c << [bakExportOptions csvExportOptions offload uri databases kind sqlExportOptions fileType]
+ExportContext(c)=c << [bakExportOptions,csvExportOptions,offload,uri,databases,kind,sqlExportOptions,fileType]
 
 # Schema for SqlExternalSyncSettingError
-SqlExternalSyncSettingError(c)=c << [detail type kind]
+SqlExternalSyncSettingError(c)=c << [detail,type,kind]
 schemas={
-  GenerateEphemeralCertRequest=GenerateEphemeralCertRequest
-  InstancesRotateServerCaRequest=InstancesRotateServerCaRequest
-  DatabaseFlags=DatabaseFlags
-  InstancesReencryptRequest=InstancesReencryptRequest
-  PasswordValidationPolicy=PasswordValidationPolicy
-  BackupContext=BackupContext
-  SslCertsInsertResponse=SslCertsInsertResponse
-  DemoteMasterConfiguration=DemoteMasterConfiguration
-  GenerateEphemeralCertResponse=GenerateEphemeralCertResponse
-  OperationsListResponse=OperationsListResponse
-  SyncFlags=SyncFlags
-  SqlScheduledMaintenance=SqlScheduledMaintenance
-  MySqlSyncConfig=MySqlSyncConfig
-  ImportContext=ImportContext
-  SqlInstancesResetReplicaSizeRequest=SqlInstancesResetReplicaSizeRequest
-  User=User
-  Reschedule=Reschedule
-  OperationError=OperationError
-  Flag=Flag
-  DatabasesListResponse=DatabasesListResponse
-  SqlInstancesStartExternalSyncRequest=SqlInstancesStartExternalSyncRequest
-  BackupRun=BackupRun
-  InstancesFailoverRequest=InstancesFailoverRequest
-  DemoteMasterContext=DemoteMasterContext
-  InstanceReference=InstanceReference
-  SqlInstancesGetDiskShrinkConfigResponse=SqlInstancesGetDiskShrinkConfigResponse
-  AdvancedMachineFeatures=AdvancedMachineFeatures
-  FailoverContext=FailoverContext
-  LocationPreference=LocationPreference
-  IpConfiguration=IpConfiguration
-  UsersListResponse=UsersListResponse
-  InstancesDemoteRequest=InstancesDemoteRequest
-  TruncateLogContext=TruncateLogContext
-  SqlInstancesRescheduleMaintenanceRequestBody=SqlInstancesRescheduleMaintenanceRequestBody
-  SqlInstancesVerifyExternalSyncSettingsRequest=SqlInstancesVerifyExternalSyncSettingsRequest
-  DataCacheConfig=DataCacheConfig
-  SslCertsListResponse=SslCertsListResponse
-  UserPasswordValidationPolicy=UserPasswordValidationPolicy
-  RotateServerCaContext=RotateServerCaContext
-  InstancesTruncateLogRequest=InstancesTruncateLogRequest
-  SqlInstancesVerifyExternalSyncSettingsResponse=SqlInstancesVerifyExternalSyncSettingsResponse
-  DemoteContext=DemoteContext
-  OperationMetadata=OperationMetadata
-  InstancesListResponse=InstancesListResponse
-  InstancesExportRequest=InstancesExportRequest
-  SqlInstancesGetLatestRecoveryTimeResponse=SqlInstancesGetLatestRecoveryTimeResponse
-  OnPremisesConfiguration=OnPremisesConfiguration
-  PasswordStatus=PasswordStatus
-  Empty=Empty
-  BackupConfiguration=BackupConfiguration
-  IpMapping=IpMapping
-  SqlServerAuditConfig=SqlServerAuditConfig
-  ApiWarning=ApiWarning
-  ConnectSettings=ConnectSettings
-  SqlServerDatabaseDetails=SqlServerDatabaseDetails
-  SqlServerUserDetails=SqlServerUserDetails
-  BackupRunsListResponse=BackupRunsListResponse
-  SslCertsCreateEphemeralRequest=SslCertsCreateEphemeralRequest
-  Settings=Settings
-  BinLogCoordinates=BinLogCoordinates
-  MaintenanceWindow=MaintenanceWindow
-  DiskEncryptionStatus=DiskEncryptionStatus
-  DatabaseInstance=DatabaseInstance
-  CloneContext=CloneContext
-  SqlActiveDirectoryConfig=SqlActiveDirectoryConfig
-  InstancesImportRequest=InstancesImportRequest
-  InstancesRestoreBackupRequest=InstancesRestoreBackupRequest
-  InstancesDemoteMasterRequest=InstancesDemoteMasterRequest
-  Tier=Tier
-  Database=Database
-  SslCertDetail=SslCertDetail
-  InstancesListServerCasResponse=InstancesListServerCasResponse
-  InstancesCloneRequest=InstancesCloneRequest
-  SslCertsInsertRequest=SslCertsInsertRequest
-  SslCert=SslCert
-  MySqlReplicaConfiguration=MySqlReplicaConfiguration
-  AclEntry=AclEntry
-  InsightsConfig=InsightsConfig
-  DemoteMasterMySqlReplicaConfiguration=DemoteMasterMySqlReplicaConfiguration
-  OperationErrors=OperationErrors
-  DiskEncryptionConfiguration=DiskEncryptionConfiguration
-  Operation=Operation
-  BackupRetentionSettings=BackupRetentionSettings
-  BackupReencryptionConfig=BackupReencryptionConfig
-  FlagsListResponse=FlagsListResponse
-  PerformDiskShrinkContext=PerformDiskShrinkContext
-  RestoreBackupContext=RestoreBackupContext
-  SqlOutOfDiskReport=SqlOutOfDiskReport
-  DenyMaintenancePeriod=DenyMaintenancePeriod
-  ReplicaConfiguration=ReplicaConfiguration
-  PscConfig=PscConfig
-  TiersListResponse=TiersListResponse
-  ExportContext=ExportContext
+  InstancesRotateServerCaRequest=InstancesRotateServerCaRequest,
+  DatabaseFlags=DatabaseFlags,
+  InstancesReencryptRequest=InstancesReencryptRequest,
+  PasswordValidationPolicy=PasswordValidationPolicy,
+  BackupContext=BackupContext,
+  SslCertsInsertResponse=SslCertsInsertResponse,
+  DemoteMasterConfiguration=DemoteMasterConfiguration,
+  GenerateEphemeralCertResponse=GenerateEphemeralCertResponse,
+  GenerateEphemeralCertRequest=GenerateEphemeralCertRequest,
+  SqlInstancesAcquireSsrsLeaseResponse=SqlInstancesAcquireSsrsLeaseResponse,
+  OperationsListResponse=OperationsListResponse,
+  SqlInstancesReleaseSsrsLeaseResponse=SqlInstancesReleaseSsrsLeaseResponse,
+  SyncFlags=SyncFlags,
+  SqlScheduledMaintenance=SqlScheduledMaintenance,
+  MySqlSyncConfig=MySqlSyncConfig,
+  ImportContext=ImportContext,
+  SqlInstancesResetReplicaSizeRequest=SqlInstancesResetReplicaSizeRequest,
+  User=User,
+  Reschedule=Reschedule,
+  OperationError=OperationError,
+  Flag=Flag,
+  DatabasesListResponse=DatabasesListResponse,
+  SqlInstancesStartExternalSyncRequest=SqlInstancesStartExternalSyncRequest,
+  BackupRun=BackupRun,
+  InstancesFailoverRequest=InstancesFailoverRequest,
+  DemoteMasterContext=DemoteMasterContext,
+  InstanceReference=InstanceReference,
+  SqlInstancesGetDiskShrinkConfigResponse=SqlInstancesGetDiskShrinkConfigResponse,
+  AdvancedMachineFeatures=AdvancedMachineFeatures,
+  FailoverContext=FailoverContext,
+  LocationPreference=LocationPreference,
+  IpConfiguration=IpConfiguration,
+  UsersListResponse=UsersListResponse,
+  InstancesDemoteRequest=InstancesDemoteRequest,
+  TruncateLogContext=TruncateLogContext,
+  SqlInstancesRescheduleMaintenanceRequestBody=SqlInstancesRescheduleMaintenanceRequestBody,
+  SqlInstancesVerifyExternalSyncSettingsRequest=SqlInstancesVerifyExternalSyncSettingsRequest,
+  DataCacheConfig=DataCacheConfig,
+  SslCertsListResponse=SslCertsListResponse,
+  UserPasswordValidationPolicy=UserPasswordValidationPolicy,
+  RotateServerCaContext=RotateServerCaContext,
+  InstancesTruncateLogRequest=InstancesTruncateLogRequest,
+  SqlInstancesVerifyExternalSyncSettingsResponse=SqlInstancesVerifyExternalSyncSettingsResponse,
+  GeminiInstanceConfig=GeminiInstanceConfig,
+  DemoteContext=DemoteContext,
+  OperationMetadata=OperationMetadata,
+  InstancesListResponse=InstancesListResponse,
+  InstancesExportRequest=InstancesExportRequest,
+  SqlInstancesGetLatestRecoveryTimeResponse=SqlInstancesGetLatestRecoveryTimeResponse,
+  OnPremisesConfiguration=OnPremisesConfiguration,
+  PasswordStatus=PasswordStatus,
+  Empty=Empty,
+  BackupConfiguration=BackupConfiguration,
+  IpMapping=IpMapping,
+  SqlServerAuditConfig=SqlServerAuditConfig,
+  ApiWarning=ApiWarning,
+  SqlServerDatabaseDetails=SqlServerDatabaseDetails,
+  ConnectSettings=ConnectSettings,
+  AvailableDatabaseVersion=AvailableDatabaseVersion,
+  SqlServerUserDetails=SqlServerUserDetails,
+  BackupRunsListResponse=BackupRunsListResponse,
+  SslCertsCreateEphemeralRequest=SslCertsCreateEphemeralRequest,
+  Settings=Settings,
+  BinLogCoordinates=BinLogCoordinates,
+  MaintenanceWindow=MaintenanceWindow,
+  DiskEncryptionStatus=DiskEncryptionStatus,
+  DatabaseInstance=DatabaseInstance,
+  CloneContext=CloneContext,
+  SqlActiveDirectoryConfig=SqlActiveDirectoryConfig,
+  InstancesImportRequest=InstancesImportRequest,
+  AcquireSsrsLeaseContext=AcquireSsrsLeaseContext,
+  InstancesDemoteMasterRequest=InstancesDemoteMasterRequest,
+  Tier=Tier,
+  Database=Database,
+  InstancesRestoreBackupRequest=InstancesRestoreBackupRequest,
+  ReplicationCluster=ReplicationCluster,
+  SslCertDetail=SslCertDetail,
+  InstancesListServerCasResponse=InstancesListServerCasResponse,
+  InstancesAcquireSsrsLeaseRequest=InstancesAcquireSsrsLeaseRequest,
+  InstancesCloneRequest=InstancesCloneRequest,
+  SslCertsInsertRequest=SslCertsInsertRequest,
+  SslCert=SslCert,
+  MySqlReplicaConfiguration=MySqlReplicaConfiguration,
+  AclEntry=AclEntry,
+  InsightsConfig=InsightsConfig,
+  DemoteMasterMySqlReplicaConfiguration=DemoteMasterMySqlReplicaConfiguration,
+  OperationErrors=OperationErrors,
+  DiskEncryptionConfiguration=DiskEncryptionConfiguration,
+  Operation=Operation,
+  BackupRetentionSettings=BackupRetentionSettings,
+  BackupReencryptionConfig=BackupReencryptionConfig,
+  FlagsListResponse=FlagsListResponse,
+  PerformDiskShrinkContext=PerformDiskShrinkContext,
+  RestoreBackupContext=RestoreBackupContext,
+  SqlOutOfDiskReport=SqlOutOfDiskReport,
+  DenyMaintenancePeriod=DenyMaintenancePeriod,
+  ReplicaConfiguration=ReplicaConfiguration,
+  PscConfig=PscConfig,
+  TiersListResponse=TiersListResponse,
+  ExportContext=ExportContext,
   SqlExternalSyncSettingError=SqlExternalSyncSettingError
 }
 export schemas

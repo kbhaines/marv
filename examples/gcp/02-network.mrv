@@ -1,58 +1,61 @@
 #lang marv
 
 import types/gcp/compute as compute
+import types/gcp/storage as storage
 
 defaults = {
-    project = env("MARV_GCP_PROJECT") 
+    project = env("MARV_GCP_PROJECT"),
     region = env("MARV_GCP_REGION") 
 }
 
-module main {
+module main() {
 
     name = "my-network"
     primary-cidr = "10.0.1.0/24"
     proxy-cidr="10.0.2.0/24"
 
-    vpc = compute:network defaults <- {
-        name = imm: name
-        description = strf("VPC for ~a" name)
-        autoCreateSubnetworks = false
+    vpc := compute:network defaults <- {
+        name = imm: name,
+        description = strf("VPC for ~a" name),
+        autoCreateSubnetworks = false,
         routingConfig = { routingMode = "REGIONAL" }
     } 
 
-    primary-sn = compute:subnetwork defaults <- {
-        name = strf("~a-primary" name)
-        description = strf("Primary subnet for ~a" name)
+    networkDefaults = defaults <- {
         network = imm: vpc.selfLink
-        ipCidrRange =  imm: primary-cidr
     }
 
-    proxy-sn = compute:subnetwork defaults <- {
-        name = strf("~a-proxy" name)
-        description = strf("Proxy subnet for ~a" name)
-        ipCidrRange = imm: proxy-cidr
-        network = imm: vpc.selfLink
-        purpose = "REGIONAL_MANAGED_PROXY"
+    primary-sn := compute:subnetwork networkDefaults <- {
+        name = strf("~a-primary" name),
+        description = strf("Primary subnet for ~a" name),
+        ipCidrRange = imm: primary-cidr
+    }
+
+    proxy-sn := compute:subnetwork networkDefaults <- {
+        name = strf("~a-proxy" name),
+        description = strf("Proxy subnet for ~a" name),
+        ipCidrRange = imm: proxy-cidr,
+        purpose = "REGIONAL_MANAGED_PROXY",
         role = "ACTIVE"
     }
 
     google-source-range = [ "130.211.0.0/22", "35.191.0.0/16" ]
     
-    fw-health-check = compute:firewall defaults <- {
-        name = strf("~a-fw-allow-health-check" name)
-        sourceRanges = google-source-range
-        targetTags =  [ "load-balanced-backend" ]
-        allowed = [ { IPProtocol = "tcp" } ]
+    fw-health-check := compute:firewall defaults <- {
+        name = strf("~a-fw-allow-health-check" name),
+        sourceRanges = google-source-range,
+        targetTags =  [ "load-balanced-backend" ],
+        allowed = [ { IPProtocol = "tcp" } ],
         direction = "INGRESS"
     }
 
-    fw-proxies = compute:firewall defaults <- {
-        name = strf("~a-fw-allow-proxies" name)
-        sourceRanges = [ proxy-sn.ipCidrRange ]
-        targetTags =  [ "load-balanced-backend" ]
-        allowed = [ { IPProtocol = "tcp" ports = [ "80" ] }
-                    { IPProtocol = "tcp" ports = [ "443" ] }
-                    { IPProtocol = "tcp" ports = [ "8080" ] } ]
+    fw-proxies := compute:firewall defaults <- {
+        name = strf("~a-fw-allow-proxies" name),
+        sourceRanges = [ proxy-sn.ipCidrRange ],
+        targetTags =  [ "load-balanced-backend" ],
+        allowed = [ { IPProtocol = "tcp", ports = [ "80" ] },
+                    { IPProtocol = "tcp", ports = [ "443" ] },
+                    { IPProtocol = "tcp", ports = [ "8080" ] } ],
         direction = "INGRESS"
     }
 }

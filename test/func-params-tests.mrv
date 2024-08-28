@@ -1,0 +1,23 @@
+#lang marv
+
+func(fp1, fp2, fp3=3) = fp1 + fp3
+
+module kvsModules(mp1, mp2, mp3=6) {
+    pprint("*MODULE*")
+    return { result1=func(mp1, mp2),
+             result2=func(mp1,mp2, fp3=mp3)}
+}
+
+module main() {
+    pprint("** FUNC PARAMS **")
+    assert(4 == func(1,2))
+    assert(16 == func(10,11, fp3=6))
+
+    k1 = kvsModules(1,2)
+    assert(4 == k1.result1)
+    assert(7 == k1.result2)
+
+    k2 = kvsModules(1,2, mp3=10)
+    assert(4 == k2.result1)
+    assert(11 == k2.result2)
+}

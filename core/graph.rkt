@@ -24,7 +24,6 @@
   (remove-vertex! graph root)
   graph)
 
-(require racket/pretty)
 (define (validated-graph edges modl)
   (define graph (directed-graph edges))
   (define res-keys (set-add (list->set (resource-keys modl)) root))
@@ -38,4 +37,6 @@
       (raise (format "Reference failures: ~a" fails))))
 
 (define (resource-edges id res)
-  (append (list(list root id)) (map (lambda (r) (list (ref->id (cdr r)) id)) (resource-refs res))))
+  (append (list(list root id))
+          (map (lambda(dep) (list (ref-gid dep) id))
+               (resource-deps res))))

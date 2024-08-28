@@ -1,75 +1,107 @@
 #lang brag
 
 marv-spec: module-import* outer-decl* marv-module*
-
 module-import: /"import" [ STRING | MODULE-IDENTIFIER ] [ "as" IDENTIFIER ]
-
 outer-decl: func-decl | type-decl | type-template | var-decl | module-export
+
+marv-module: [ "private" ] /"module" IDENTIFIER "(" @arguments ")" /"{" statement+ [ module-return ] /"}"
+module-parameter: IDENTIFIER [ "=" expression ]
+module-return: /"return" /"{" return-parameter-list /"}"
+
+@return-parameter-list: return-parameter (/"," return-parameter)*
+return-parameter: ( STRING | IDENTIFIER | "type" ) /"=" expression
 
 module-export: /"export" [ IDENTIFIER+ [ "as" IDENTIFIER ] ]+
 
-marv-module: [ "private" ] /"module" IDENTIFIER ["(" module-parameter+ ")"] /"{" statement* [ module-return ] /"}"
-module-parameter: IDENTIFIER [ "=" expression ]
-module-return: "return" /"{" return-parameter+ /"}"
-return-parameter: ( STRING | IDENTIFIER | "type" ) /"=" expression
+arguments: identifier-list? [/"," named-parameter-list?] | named-parameter-list
+@identifier-list: IDENTIFIER (/"," IDENTIFIER)*
+@named-parameter-list: named-parameter (/"," named-parameter)*
+@named-parameter: ( STRING | IDENTIFIER | "type" ) "=" expression
 
-statement: decl | pprint
-decl: var-decl | res-decl | module-invoke | func-decl
+; type is explicitly allowed as it's common, but we need 'type' as a lexical token
+; also allow STRING to allow user to avoid marv keywords
 
-pprint: /"pprint" expression
+statement: decl | pprint | assertion
+decl: var-decl | res-decl | func-decl
+
+pprint: /"pprint" /"(" expression /")"
 comment: COMMENT
 var-decl: IDENTIFIER /"=" expression
 
-# TODO - mandatory at least one parameter, or func calls of e.g. C2.xxx(C1.yyy(B.zzz))
-# may fail to parse correctly.
-func-decl: IDENTIFIER /"(" (IDENTIFIER [ /"," ])+ /")" /"=" expression
-func-call: func-ident /"(" (expression [ /"," ])+ /")"
-func-ident: (DOTTY-IDENT | IDENTIFIER)
+res-decl: IDENTIFIER /":=" type-id map-expression
 
-boolean: "true" | "false"
+; TODO lambda?
+@lambda-func: "lambda" func-spec
+func-decl: IDENTIFIER func-spec
+func-spec: /"(" @arguments /")" /"=" expression
+
 type-id: IDENTIFIER
-api-id: DOTTY-IDENT
 
-expression: boolean | string-expression | num-expression | map-expression | alternate-expression | expr-list
-@expr-list: "[" (expression [ /"," ])* "]"
+; NOTES:
+; added @xterm here and type-tests starts working...
+; Order of map/num expression matters...
+; lambda-func before map doesn't work
 
-@string-expression: STRING | IDENTIFIER | built-in | func-call | reference
+expression: @xterm | map-expression | lambda-func | list-expression | num-expression | string-expression | boolean-expression |alternate-expression | built-in
 
-num-expression: num-term [ num-operator num-term ]
-@num-term: INTEGER | IDENTIFIER | built-in | func-call | reference | num-parens-expr
-@num-operator: '+' | '-' | '/' | '*'
-@num-parens-expr: /"(" num-expression /")"
+num-expression: num-term ( "+" | "-" ) num-expression | num-term
+num-term: num-primary ( "*" | "/" ) num-term | num-primary
+@num-primary: INTEGER | @xterm | /"(" num-expression /")"
 
-map-expression: map-term ( [ map-operator map-term ] | "<<" attr-list )
+string-expression: string-term [ string-operator string-term ]
+@string-operator: '++'
+@string-term: STRING | @xterm
+
+boolean-expression: boolean | ( expression comparison-operator expression )
+@boolean: "true" | "false"
+@comparison-operator: "==" | "!="
+
+list-expression: list-spec
+@list-spec: "[" expression-list? "]" | @xterm
+@expression-list: expression ( /"," expression )*
+; Wonder if this list/comma separation being option has been a root
+; factor in the parsing problems?
+
+map-expression: map-term [ map-operator map-term | "<<" attr-list ]
 @map-operator: "<-" | "->"
-@map-term: map-spec | IDENTIFIER | func-call | reference | map-parens-expr | map-expression
-map-spec: /"{" [( STRING | IDENTIFIER | "type" ) /"=" [ "imm:" ] expression [ /"," ]]* /"}"
-@map-parens-expr: /"(" map-expression /")"
+; Order is important - xterm first
+@map-term: @xterm | map-spec | /"(" map-expression /")"
+map-spec: /"{" (map-element [ /"," map-element]*)? /"}"
+@map-element:( STRING | IDENTIFIER | "type" ) /"=" [ "imm:" ] expression
+
+xterm: (func-apply | dot-apply | list-apply | IDENTIFIER )
+func-apply: (IDENTIFIER | dot-apply | list-apply | func-apply) @func-call-parameters
+dot-apply:  (IDENTIFIER | map-expression) "." @attribute-name [ "|" expression ]
+list-apply: (IDENTIFIER | list-expression) "[" num-expression "]"
+
+func-call-parameters: "(" (expression-list? [ /"," named-parameter-list] | named-parameter-list) ")"
+
+attribute-name: STRING | IDENTIFIER | keywords
+
+; The problem of keywords will reduce or be eliminated when these functions are made
+; part of a wider library that can be imported.
+@keywords: "replace" | "type" | "lowercase" | "uppercase"| "env-read"
+         | "strf" | "base64encode" | "base64decode" | "urivars" | "uritemplate" | "assertion"
 
 attr-list: /"[" ( attribute-name [ /"," ] )* /"]"
-attribute-name: ( STRING | IDENTIFIER | "type" )
 
 @alternate-expression: expression '|' expression | /'(' expression '|' expression /')'
 
-built-in: env-read | strf | base64encode | base64decode | urivars | uritemplate
+built-in: env-read | strf | base64encode | base64decode | urivars | uritemplate |assertion
+        | "lowercase" /"(" string-expression /")"
+        | "uppercase" /"(" string-expression /")"
+        | "replace" /"(" string-expression /"," string-expression /"," string-expression /")"
+
 env-read: /"env" /"(" STRING /")"
 strf: /"strf" /"(" string-expression [ /"," ]( expression [ /"," ] ) + /")"
 base64encode: /"base64encode" /"(" string-expression /")"
 base64decode: /"base64decode" /"(" string-expression /")"
 urivars: /"strvars" /"(" string-expression /")"
-uritemplate: /"expandvars" /"(" expression [ /"," ] map-expression /")"
-
-reference: DOTTY-IDENT
-
-res-decl: IDENTIFIER /"=" type-id map-expression
-module-invoke: IDENTIFIER /"=" ( MODULE-IDENTIFIER | IDENTIFIER ) /"(" (named-parameter [ /"," ] )* /")"
-
-; type is explicitly allowed as it's common, and we need 'type' as a lexical token
-; also allow STRING to allow user to avoid marv keywords
-named-parameter: ( STRING | IDENTIFIER | "type" ) /"=" expression
-
-type-parameters: type-id /"<" ( IDENTIFIER [/","] )+ /">"
-type-template: /"type" type-parameters /"=" /"{" func-decl+ [ type-wild ]* /"}"
+uritemplate: /"expandvars" /"(" expression /"," map-expression /")"
+assertion: /"assert" /"(" expression comparison-operator expression /")"
 
 type-decl: /"type" type-id /"=" ( /"{" func-decl+ [ type-wild ]* /"}" | type-parameters )
 type-wild: /"*" /"=" IDENTIFIER /"." /"*"
+
+type-parameters: type-id /"<" identifier-list /">"
+type-template: /"type" type-parameters /"=" /"{" func-decl+ [ type-wild ]* /"}"

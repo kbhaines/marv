@@ -3,14 +3,14 @@
 import types/gcp/storage as storage
 
 defaults = {
-    project = env("MARV_GCP_PROJECT") 
+    project = env("MARV_GCP_PROJECT"),
     region = env("MARV_GCP_REGION") 
 }
 
-module main {
+module main() {
 
-    my-bucket = storage:bucket defaults <- {
-        name = strf("~a-mybucket" defaults.project)
+    my-bucket := storage:bucket defaults <- {
+        name = strf("~a-mybucket" defaults.project),
         storageClass = "NEARLINE"
     }
     

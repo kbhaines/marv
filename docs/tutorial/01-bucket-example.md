@@ -22,13 +22,13 @@ Start by copy/pasting this code into a new file `hello-world.mrv`:
 
 import types/gcp/storage as storage
 
-module main {
+module main() {
 
     my-project = env("MARV_GCP_PROJECT")
 
-    hello-bucket = storage:bucket {
-        project = my-project
-        region = env("MARV_GCP_REGION")
+    hello-bucket := storage:bucket {
+        project = my-project,
+        region = env("MARV_GCP_REGION"),
         name = strf("~a-hello-world" my-project)
     }
 }
@@ -72,7 +72,7 @@ tools; this will be covered in a separate tutorial.
 All resources must be declared inside a module, and there must be a `main`
 module declared in the top-level file passed on the command line:
 
-    module main {...}
+    module main() {...}
 
 First up, we declare a variable that gets its value from the `MARV_GCP_PROJECT`
 environment variable:
@@ -82,12 +82,12 @@ environment variable:
 Now we come to our bucket’s resource declaration: `hello-bucket` is a `bucket`
 resource (from the `storage` module, imported earlier):
 
-    hello-bucket = storage:bucket ...
+    hello-bucket := storage:bucket ...
 
 > ## Note
 > A resource declaration is generally of the form:
 > 
->     name = type { config... }
+>     name := type { config... }
 >   
 > `type` is the kind of resource supported by the cloud provider, such as
 `instance` or `secret` (NB this isn't *strictly* true, but it suffices for now!)
@@ -96,13 +96,13 @@ Finally, we have the body of our resource declaration:
 
 ```
 {
-    project = my-project
-    region = env("MARV_GCP_REGION")
+    project = my-project,
+    region = env("MARV_GCP_REGION"),
     name = strf("~a-hello-world" my-project)
 }
 ```
 
-This is a `config-object` which is basically a set of `name=value` attributes, enclosed in `{  }`. 
+This is a `config-object` which is a comma-separated list of `name=value` attributes, enclosed in `{  }` (actually, this is a *map* in Marv syntax)
 
 `name` is assigned the results of the `strf` function which replaces `~a` by the
 value of the `project`, which is from the `MARV_GCP_PROJECT` environment

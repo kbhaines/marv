@@ -36,8 +36,7 @@
   (get-plan-for mod refresh?))
 
 (define (resource-origin res)
-  (define (type-fn verb . args) (apply ((resource-type-fn res) verb) args))
-  (type-fn 'origin (resource-config res)))
+  ((resource-type-fn res) 'origin (resource-config res)))
 
 (define/contract (get-plan-for rsset refresh?)
   (resource-set/c boolean? . -> . plan?)
@@ -99,7 +98,7 @@
     (displayln (format "Refreshing ~a" k))
 
     (define res (resource-ref rsset k))
-    (define (type-fn verb . args) (apply ((resource-type-fn res) verb) args))
+    (define type-fn (resource-type-fn res))
     (define driver-id (string->symbol(state-entry-driver (state-ref k))))
     (define cmd (type-fn 'read (state-ref-config k)))
     (define reply-cfg (send-to-driver driver-id cmd))
@@ -114,16 +113,7 @@
 
 (define/contract (deref-config cfg)
   (config/c . -> . config/c)
-
-  (define (get-ref ref)
-    (define-values (res-id attr) (ref-split ref))
-    (unpack-value (hash-nref (state-ref-config res-id) (id->list attr))))
-
-  (define (deref-attr _ a)
-    (update-val a (lambda (v) (if (ref? v) (get-ref v) v))))
-
-  ; TODO - refactor to resource-update-config-fn
-  (hash-apply cfg deref-attr))
+  (config-resolve cfg state-ref-config))
 
 (define (apply-changes mod (refresh? #t))
 
@@ -131,7 +121,7 @@
     (display (format "CREATING ~a" id))
     (flush-output)
     (define res (deref-resource id))
-    (define (type-fn verb . args) (apply ((resource-type-fn res) verb) args))
+    (define type-fn (resource-type-fn res))
     (define res-cfg (resource-config res))
     (define driver-id (get-driver-id type-fn res))
     (define cmd (type-fn 'create res-cfg))
@@ -157,7 +147,7 @@
     (display (format "UPDATING ~a" id))
     (flush-output)
     (define res (deref-resource id))
-    (define (type-fn verb . args) (apply ((resource-type-fn res) verb) args))
+    (define type-fn (resource-type-fn res))
     (define res-cfg (resource-config res))
     (define driver-id (get-driver-id type-fn res))
     (define cmd (type-fn 'update res-cfg))
@@ -167,8 +157,8 @@
 
   (define (deref-resource id)
     (define res (hash-ref mod id))
-    (resource (resource-type-fn res)
-              (unwrap-values (deref-config (resource-config res)))))
+    (update-resource-config res (unwrap-values (deref-config (resource-config res)))))
+
   (define plan (get-plan-for mod refresh?))
 
   (define (delete-replacements res-op)
@@ -191,7 +181,7 @@
 
 (define (has-immutable-ref-to-replaced-resource? new acc-ops)
   (define (match? _ v)
-    (and (iref? v) (op-replace? (hash-ref acc-ops (ref->id v)))))
+    (and (iref? v) (op-replace? (hash-ref acc-ops (ref-gid (unpack-value v))))))
   (match-resource-attr? new match?))
 
 (define (has-immutable-ref-to-updated-attr? new acc-ops) (ref-updated-attr? iref? new acc-ops))
@@ -205,7 +195,10 @@
   (match-resource-attr? new match?))
 
 (define (get-ref-diff ref acc-ops)
-  (define-values (id attr) (ref-split ref))
+  ; (define-values (id attr) (ref-split ref))
+  (define uref (unpack-value ref))
+  (define id (ref-gid uref))
+  (define attr (ref-path uref))
   (match (hash-ref acc-ops id)
     [(op-update _ diff) (hash-ref diff attr #f)]
     [(op-replace _ diff) (hash-ref diff attr #f)]

@@ -1,8 +1,12 @@
 #lang racket/base
 
 (require racket/string)
-(require racket/syntax)
-(require (for-syntax racket/base racket/syntax  syntax/parse racket/pretty marv/core/globals))
+(require racket/format)
+(require (for-syntax racket/base
+                     racket/syntax
+                     syntax/parse
+                     racket/pretty
+                     marv/core/globals))
 
 (require racket/pretty)
 (require racket/contract)
@@ -11,8 +15,6 @@
 (require marv/core/values)
 (require marv/core/globals)
 (require marv/log)
-
-; (require (for-syntax marv/core/values))
 
 ; TODO - swap prefix usage to m- on the provided (define a macro?)
 
@@ -29,12 +31,12 @@
            (require racket/pretty)
            MODULE ...
            )]
-      [else (raise "nowt")]))
+      [_ (raise "nowt")]))
 
   (define (m-outer-decl stx)
     (syntax-parse stx
       [(_ OUTER) (syntax/loc stx OUTER)]
-      [else (raise "nowt-outer-decl")]))
+      [_ (raise "nowt-outer-decl")]))
 
   (define (m-module-export stx)
 
@@ -48,34 +50,36 @@
 
     (syntax-parse stx
       [(_ spec:export-spec ...) (syntax/loc stx (provide spec.spec ...))]
-      [else (raise "nowt-module-export")]))
+      [_ (raise "nowt-module-export")]))
+
+  (define-splicing-syntax-class named-argument
+    #:attributes (name value)
+    #:literals (expression)
+    (pattern (~seq name:id "=" value)))
 
   (define (m-marv-module stx)
-    (syntax-parse stx
+
+    (syntax-parse stx #:datum-literals (statement module-return)
       [(_ (~optional (~and private? "private"))
-          mod-id:expr (~optional (~seq "(" PARAMS ... ")")
-                                 #:defaults ([(PARAMS 1) null]))
-          STMT ...
-          (~optional (~seq "return" RETURN)
-                     #:defaults ([RETURN #'void])))
+          mod-id:expr (~seq "(" IDS:id ... NAMED-ARGUMENTS:named-argument ... ")")
+          (statement STMT) ...
+          (~optional RETURN #:defaults ([RETURN #'(hash)])))
        #:with MAYBE-PRIVATE (if (attribute private?) #'(void) #'(provide mod-id))
        (syntax/loc stx
          (begin
-           (define (mod-id resid-prefix params)
-             (log-marv-debug "** Generating module: ~a=~a(~a)" resid-prefix 'mod-id params)
-             (define rs
-               (with-module-ctx resid-prefix params
-                 (lambda ()
-                   PARAMS ...
-                   STMT ...
-                   (define rs (gen-resources))
-                   RETURN
-                   rs
-                   )))
-             (log-marv-debug "** generation completed for ~a.~a" resid-prefix 'mod-id)
-             rs)
+           (define (mod-id IDS ... [keywp (hash)])
+             (define NAMED-ARGUMENTS.name
+               (hash-ref keywp 'NAMED-ARGUMENTS.name NAMED-ARGUMENTS.value)) ...
+             (define resid-prefix (get-resource-prefix))
+             (log-marv-debug "** Invoking module: ~a=~a(~a)" resid-prefix 'mod-id keywp)
+             STMT ...
+             (define returns RETURN)
+             (log-marv-debug "** module invocation completed for ~a.~a" resid-prefix 'mod-id)
+             (log-marv-debug "-> resources: ~a" (ordered-resource-ids))
+             (log-marv-debug "-> returns: ~a" returns)
+             returns)
            MAYBE-PRIVATE))]
-      [else (raise "invalid module spec m-marv-module")]))
+      [_ (displayln stx)(raise "invalid module spec m-marv-module")]))
 
   (define (m-module-parameter stx)
     (syntax-parse stx
@@ -84,8 +88,12 @@
 
   (define (m-module-return stx)
     (syntax-parse stx
-      [(_ "return" RETURNS ...) (syntax/loc stx (set-return (make-immutable-hasheq (list RETURNS ...))))]
-      [else (raise "m-module-return f*")]))
+      [(_ RETURNS ...) (syntax/loc stx (make-immutable-hasheq (list RETURNS ...)))]
+      [_ (raise "m-module-return f*")]))
+
+  (define (m-return-parameter stx)
+    (syntax-parse stx
+      [(_ NAME VALUE) (syntax/loc stx (cons 'NAME VALUE))]))
 
   (define (m-module-import stx)
     (syntax-parse stx
@@ -105,181 +113,234 @@
        (define alias (format-id #f "~a:" (syntax-e #'ALIAS)))
        (define filename (syntax-e #'FILENAME))
        (datum->syntax stx `(require (prefix-in ,alias ,filename))) ]
-      [else (raise "m-import")]))
-
-  (define (m-return-parameter stx)
-    (syntax-parse stx
-      [(_ NAME VALUE) (syntax/loc stx (cons 'NAME VALUE))]))
+      [_ (raise "m-import")]))
 
   (define (m-statement stx)
     (syntax-parse stx
       [(_ STMT) (syntax/loc stx STMT)]
-      [else (raise "nowt-stmt")]))
+      [_ (raise "nowt-stmt")]))
 
   (define (m-decl stx)
     (syntax-parse stx
       [(_ DECL) (syntax/loc stx DECL)]
-      [else (raise "nowt-decl")]))
+      [_ (raise "nowt-decl")]))
 
   (define (m-var-decl stx)
     (syntax-parse stx
-      [(_ id:expr EXPR) (syntax/loc stx (define id EXPR))]
-      [else (raise "nowt-var-decl")]))
-
-  (define (m-config-func-decl stx)
-    (syntax-parse stx
-      [(_ id:expr param ... CONF-OBJ)
+      [(_ id:expr EXPR)
        (syntax/loc stx
-         (define (id param ...) CONF-OBJ))]
-      [else (raise "config-func-decl")]))
+         (define id (with-resource-prefix 'id (lambda()EXPR))))]
+      [_ (raise "nowt-var-decl")]))
 
   (define (m-func-call stx)
     (syntax-parse stx
-      [(_ func param ...) (syntax/loc stx (func param ...))]
-      [else (raise "func-call")]))
+      #:literals (expression)
+      [(_ func "(" (expression exprs) ... NAMED-PARAMETERS:named-argument ... ")")
+       (syntax/loc stx
+         (apply func (expression exprs) ...
+                (make-immutable-hash
+                 (list (cons 'NAMED-PARAMETERS.name NAMED-PARAMETERS.value) ...))))]
+      ; TODO45 - possibly not needed, but might be optimal
+      [(_ func "(" (expression exprs) ... ")")
+       (syntax/loc stx
+         (apply func (expression exprs) ...))]
+      [_ (raise "func-call")]))
 
-  (define (m-func-ident stx)
-    (syntax-parse stx
-      [(_ ident)
-       (define id-parts (split-symbol (syntax-e #'ident)))
-       (define root (format-id stx "~a" (car id-parts)))
-       (define rst (datum->syntax stx (cdr id-parts)))
-       (with-syntax ([root root]
-                     [rst rst])
-         (syntax/loc stx (find-function root 'root 'rst)))]
-      [else (raise "func-ident")]))
+  (define-syntax-class func-decl-class
+    (pattern (func-decl ID:id fs:func-spec-class)
+      #:attr func-id #'ID
+      #:attr func-lambda (attribute fs.funcspec)
+      #:attr func-body (attribute fs.BODY)
+      #:attr decl #'(define ID fs.funcspec)))
+
+  (define-syntax-class func-spec-class
+    (pattern (func-spec IDS:id ... NAMED-ARGUMENTS:named-argument ... BODY)
+      #:attr funcspec
+      #'(lambda (IDS ... [ keywp (hash)])
+          (define NAMED-ARGUMENTS.name
+            (hash-ref keywp 'NAMED-ARGUMENTS.name NAMED-ARGUMENTS.value)) ...
+          BODY)))
 
   (define (m-func-decl stx)
-    (syntax-parse stx
-      [(_ id:expr param ... BODY)
-       (syntax/loc stx
-         (define (id param ...) BODY))]
-      [else (raise "func-decl")]))
-
-  (define-splicing-syntax-class m-type-id
-    #:description "type id"
-    (pattern (~seq (~literal type-id) tid:id)))
-
-  (define-splicing-syntax-class m-type-parameters
-    #:description "type parameters"
-    #:literals (type-parameters type-id)
-    (pattern (type-parameters tid:type-id ident:id ... )))
+    (syntax-parse stx [fd:func-decl-class (attribute fd.decl)]))
 
   (define-splicing-syntax-class type-body
     #:description "body declaration"
-    #:literals (func-decl expression)
+    #:literals (func-decl-class expression)
     (pattern (func-decl func-id:id param-id ... (expression confex))))
 
   (define (m-type-decl stx)
     (syntax-parse stx
       #:datum-literals (type-parameters type-wild type-id)
-      [(_ (type-id tid:expr) body:type-body ... (type-wild wildcard) ...)
+      [(_ (type-id tid:expr) body:func-decl-class ... (type-wild wildcard) ...)
        (with-syntax ([srcloc (src-location stx)])
          (syntax/loc stx
-           (begin
-             (define (tid func-id [allow-missing? #f])
-               (log-marv-debug "type-fn ~a.~a:~a called" 'tid func-id srcloc)
-               (define (body.func-id body.param-id ... ) body.confex) ...
-               (case func-id
-                 ['type 'tid]
-                 ['body.func-id body.func-id] ...
-                 [else
-                  (define (fin)
-                    (if allow-missing? #f
-                        (raise (format "exception in type ~a, method ~a not found" 'tid func-id))))
-                  (log-marv-debug "looking in wildcards:")
-                  (log-marv-debug "  ~a" wildcard) ...
-                  (or (wildcard func-id #t) ... (fin))])
-               ))))]
-      [(_ (type-id tid) (type-parameters (type-id base-tid) params ...))
-       (syntax/loc stx
-         (begin
-           (define (tid func-id [allow-missing? #f]) (base-tid func-id params ... allow-missing?))
-           ))]
+           (define tid
+             (let* ([ body.func-id body.func-lambda ] ...)
+               (make-immutable-hasheq
+                (append
+                 (hash->list wildcard) ...
+                 (list
+                  (cons 'body.func-id body.func-id) ...)))))))]
+      [(_ (type-id tid) (type-parameters (type-id template-id) params ...))
+       (syntax/loc stx (define tid (template-id params ... )))]
       ))
 
   (define (m-type-template stx)
     (syntax-parse stx
       #:datum-literals (type-parameters type-id type-wild)
-      [(_ (type-parameters (type-id tid) params ...) body:type-body ... (type-wild wildcard) ...)
+      [(_ (type-parameters (type-id template-id) params ...) body:func-decl-class ... (type-wild wildcard) ...)
        (syntax/loc stx
-         (begin
-           (define (tid func-id params ... [allow-missing? #f])
-             (log-marv-debug "type-template ~a" 'tid)
-             (define (body.func-id body.param-id ...) body.confex) ...
-             (case func-id
-               ['type 'tid]
-               ['body.func-id body.func-id] ...
-               [else
-                (define (final)
-                  (if allow-missing? #f
-                      (raise (format "exception in type ~a, method ~a not found" 'tid func-id))))
-                (log-marv-debug "looking in wildcards:")
-                (log-marv-debug "  ~a" wildcard) ...
-                (or (wildcard func-id #t) ... (final))])
-             )))]
+         (define (template-id params ... [allow-missing? #f])
+           ;  (log-marv-debug "type-template ~a" 'template-id)
+           body.decl  ...
+           (make-immutable-hasheq
+            (append
+             (hash->list wildcard) ...
+             (list
+              (cons 'body.func-id body.func-id) ...)))))]
       ))
 
   (define (m-generic-placeholder stx)stx)
 
   (define (m-built-in stx)
     (syntax-parse stx
+      [(_ "lowercase" expr ) (syntax/loc stx (resolve-terms string-downcase expr))]
+      [(_ "uppercase" expr ) (syntax/loc stx (resolve-terms string-downcase expr))]
+      [(_ "replace" expr from to ) (syntax/loc stx (resolve-terms string-replace expr (regexp from) to))]
       [(_ BUILTIN) (syntax/loc stx BUILTIN)]
-      [else (raise "nowt-builtin")]))
+      [_ (raise "nowt-builtin")]))
 
   (define (m-env-read stx)
     (syntax-parse stx
       [(_ env-var:string) (syntax/loc stx (getenv-or-raise env-var))]
-      [else (raise "m-env-read")]))
+      [_ (raise "m-env-read")]))
+
+  (define (m-assertion stx)
+
+    (define (assert inv-op fn expr1 expr2)
+      (with-syntax
+          ([locn (src-location stx)]
+           [fn (datum->syntax stx fn)]
+           [op inv-op]
+           [expr1 expr1]
+           [expr2 expr2])
+        (syntax/loc stx
+          (or (fn expr1 expr2)
+              (raise/src
+               locn
+               (~a "assertion failure: '" expr1 "' " op " '" expr2 "'"))))))
+
+    (syntax-parse stx
+      [(_ expr1 "==" expr2) (assert "does not equal" equal? #'expr1 #'expr2)]
+      [(_ expr1 "!=" expr2) (assert "equals" (compose1 not equal?) #'expr1 #'expr2)]
+      [_ (raise "m-assertion")]))
 
   (define (m-strf stx)
     (syntax-parse stx
-      [(_ str:string expr ... ) (syntax/loc stx (format str expr ...))]
-      [else (raise "m-strf")]))
+      [(_ str:expr expr ... ) (syntax/loc stx (resolve-terms format str expr ...))]
+      [_ (raise "m-strf")]))
 
   (define (m-urivars stx)
     (syntax-parse stx
       [(_ str:expr) (syntax/loc stx (uri-vars str))]
-      [else (raise "m-urivars")]))
+      [_ (raise "m-urivars")]))
 
   (define (m-uritemplate stx)
     (syntax-parse stx
       [(_ str:expr CFG) (syntax/loc stx (uri-template str CFG))]
-      [else (raise "m-uritemplate")]))
+      [_ (raise "m-uritemplate")]))
 
   (define (m-base64encode stx)
     (syntax-parse stx
       [(_ ex:expr) (syntax/loc stx (b64enc ex))]
-      [else (raise "m-base64encode")]))
+      [_ (raise "m-base64encode")]))
 
   (define (m-base64decode stx)
     (syntax-parse stx
       [(_ ex:expr) (syntax/loc stx (b64dec ex))]
-      [else (raise "m-base64decode")]))
+      [_ (raise "m-base64decode")]))
 
   (define (m-pprint stx)
     (syntax-parse stx
-      [(_ ident:expr) (syntax/loc stx (pretty-print ident))]))
+      [(_ exp:expr) (syntax/loc stx (pretty-print exp))]))
 
   (define (m-expression stx)
     (syntax-parse stx
-      [(_ term1 "|" term2) (syntax/loc stx (with-handlers ([exn:fail? (lambda(_) term2)]) term1))]
-      [(_ "[" terms ... "]") (syntax/loc stx (list terms ...))]
-      ; TODO - add type checking
+      #:literals (expression)
+      [(_ term1 "|" term2)
+       (syntax/loc stx
+         (with-handlers
+             ([exn:fail? (lambda(_) term2)]) term1))]
+      [(_ "lambda" fs:func-spec-class) (attribute fs.funcspec) ]
+      ; TODO45 - add type checking
       [(_ term:string) (syntax/loc stx term)]
-      [(_ term) (syntax/loc stx term)]
+      ; TODO45 - for compile speed, add some concrete type checks
+      ; e.g. string, to avoid calling check-for-ref
+      [(_ term) (syntax/loc stx (check-for-ref term))]
       ))
 
-  (define (m-string-expression stx) (syntax-parse stx [(_ str) (syntax/loc stx str)]))
+  (define (m-func-apply stx)
+    (syntax-parse stx
+      #:literals (expression)
+      [(_ func-exp "(" (expression exprs) ... ")")
+       (syntax/loc stx (apply func-exp (list (expression exprs) ...)))]
+      [(_ func "(" (expression exprs) ... NAMED-PARAMETERS:named-argument ... ")")
+       (syntax/loc stx
+         (apply func
+                (list (expression exprs) ...
+                      (make-immutable-hash
+                       (list (cons 'NAMED-PARAMETERS.name NAMED-PARAMETERS.value) ...)))))]
+      ))
+
+  (define (m-dot-apply stx)
+    (syntax-parse stx
+      [(_ map-expr "." ident:id "|" alternative)
+       (syntax/loc stx (resolve-terms dot-op map-expr 'ident alternative))]
+      [(_ map-expr "." ident:id)
+       (syntax/loc stx (resolve-terms dot-op map-expr 'ident))]
+      ; [(_ map-expr "." ident:id (func-apply ))
+      ))
+
+  (define (m-list-apply stx)
+    (syntax-parse stx
+      [(_ list-exp "[" expr "]")
+       (syntax/loc stx (resolve-terms list-ref list-exp expr ))]
+      ))
+
+  (define (m-boolean-expression stx)
+    (syntax-parse stx
+      [(_ "true") (syntax/loc stx #t)]
+      [(_ "false") (syntax/loc stx #f)]
+      [(_ expr1 "==" expr2 ) (syntax/loc stx (resolve-terms equal? expr1 expr2))]
+      [(_ expr1 "!=" expr2 ) (syntax/loc stx (resolve-terms (compose1 not equal?) expr1 expr2))]
+      ))
+
+  (define (m-string-expression stx)
+    (syntax-parse stx
+      [(_ str1 "++" str2) (syntax/loc stx (resolve-terms string-append str1 str2))]
+      [(_ str) (syntax/loc stx str)]
+      [_ (raise "string-expr")]
+      ))
 
   (define (m-num-expression stx)
     (syntax-parse stx
       [(_ term) (syntax/loc stx term)]
-      [(_ term1 "+" term2) (syntax/loc stx (+ term1 term2))]
-      [(_ term1 "-" term2) (syntax/loc stx (- term1 term2))]
-      [(_ term1 "*" term2) (syntax/loc stx (* term1 term2))]
-      [(_ term1 "/" term2) (syntax/loc stx (/ term1 term2))]
+      [(_ term1 "+" term2) (syntax/loc stx (resolve-terms + term1 term2))]
+      [(_ term1 "-" term2) (syntax/loc stx (resolve-terms - term1 term2))]
       ))
+
+  (define (m-num-term stx)
+    (syntax-parse stx
+      [(_ term) (syntax/loc stx term)]
+      [(_ term1 "*" term2) (syntax/loc stx (resolve-terms * term1 term2))]
+      [(_ term1 "/" term2) (syntax/loc stx (resolve-terms / term1 term2))]
+      ))
+
+  (define (m-list-expression stx)
+    (syntax-parse stx
+      [(_ "[" expr ... "]") #'(resolve-terms list expr ...)]
+      [(_ expr) #'expr]))
 
   (define (m-map-expression stx)
 
@@ -287,23 +348,32 @@
       (with-syntax
           ([locn (src-location stx)]
            [test1? test1?] [test2? test2?] [op op] [term1 term1] [term2 term2])
-        (syntax/loc stx (check-operator-types locn test1? test2? op term1 term2))))
+        (syntax/loc stx
+          (begin
+            ; TODO45- reinstate type checking
+            ; (check-operator-types locn test1? test2? term1 term2)
+            (resolve-terms op term1 term2)))))
 
     (syntax-parse stx
-      [(_ term) (syntax/loc stx term)]
+      [(_ term)
+       (syntax/loc stx term)]
+      ; TODO45 - map-expr can support resources too?
+
+      ;  (with-syntax ([stxa (src-location stx)])
+      ;  (syntax/loc stx
+      ;  (begin
+      ;  (unless (or (hash? term) (resource? term))
+      ;  (raise (~a "not a map:" term "~n" stxa))) term)))]
+
       [(_ term1 "<-" term2) (check-terms stx #'hash? #'hash? #'config-overlay #'term2 #'term1)]
-      [(_ term1 "<-" term2) (check-terms stx #'hash? #'hash? #'config-overlay #'term1 #'term2)]
+      [(_ term1 "->" term2) (check-terms stx #'hash? #'hash? #'config-overlay #'term1 #'term2)]
       [(_ term1 "<<" term2) (check-terms stx #'hash? #'(listof symbol?) #'config-reduce #'term1 #'term2)]
       ))
-
-  (define (m-boolean stx)
-    (syntax-parse stx
-      [(_ "true") (syntax/loc stx val) #'#t]
-      [(_ "false") (syntax/loc stx val) #'#f]))
 
   (define (m-map-spec stx)
 
     (define (this-name stx) (format-id #f "this_~a" (syntax-e stx)))
+    (define (xid x)x)
 
     (define-splicing-syntax-class attr-decl
       #:description "attribute declaration"
@@ -319,90 +389,52 @@
 
     (syntax-parse stx
       [(_ attr:attr-decl ...)
-       ; TODO - this_* declarations don't work when referenced
-       ;  #'(let* ([attr.tname attr.raw-expr] ... )
-       ;      (make-immutable-hasheq (list (cons 'attr.name attr.expr) ...))) ]
-       #'(make-immutable-hasheq (list (cons 'attr.name attr.expr) ...)) ]
-      [else (displayln stx)(raise "m-map-spec")]))
+       ; TODO45 - should resolve-terms wrap make-imm-hash and 'list'?
+       ; TODO45 - compile speed; the internal lambda might be causing slow-down
+       #'(make-immutable-hasheq
+          (list (cons 'attr.name (resolve-terms #f attr.expr)) ...)) ]
+      [_ (displayln stx)(raise "m-map-spec")]))
 
   (define (m-alist stx)
     (syntax-parse stx
       [(_ EXPR ...)
        (syntax/loc stx (list EXPR ...))]
-      [else (raise "m-alist")]))
+      [_ (raise "m-alist")]))
 
   (define (m-attribute-name stx)
-    (displayln stx)
     (syntax-parse stx
       [(_ sname:string)
        (define id (format-id #f "~a" (syntax-e #'sname)))
        (with-syntax ([name id]) (syntax/loc stx 'name))]
       [(_ name:id) (syntax/loc stx 'name)]
-      [else (raise "m-attribute-name")]))
+      [_ (raise "m-attribute-name")]))
 
   (define (m-attr-list stx)
     (syntax-parse stx
       [(_ ATTR ...)
        (syntax/loc stx (list ATTR ...))]
-      [else (raise "m-attr-list")]))
+      [_ (raise "m-attr-list")]))
 
   (define (m-config-expr stx)
     (syntax-parse stx
       [(_ CFEXPR) #'CFEXPR]
-      [else (raise "m-config-expr")]))
-
-  (define (m-config-merge stx)
-    (syntax-parse stx
-      [(_ LEFT "->" RIGHT) (syntax/loc stx (config-overlay LEFT RIGHT))]
-      [(_ LEFT "<-" RIGHT) (syntax/loc stx (config-overlay RIGHT LEFT))]
-      [else (raise "m-config-merge")]))
-
-  (define (m-config-take stx)
-    (syntax-parse stx
-      [(_ CFEXPR ATTRLIST) (syntax/loc stx (config-reduce CFEXPR ATTRLIST))]
-      [else (raise "m-config-take")]))
-
-  (define (m-config-ident stx)
-    (syntax-parse stx
-      [(_ CFIDENT) (syntax/loc stx CFIDENT)]
-      [else (raise "m-config-ident")]))
+      [_ (raise "m-config-expr")]))
 
   (define (m-keyword stx)
     (syntax-parse stx
       [(_ keyword) (syntax/loc stx keyword)]))
 
-  (define (m-reference stx)
-    (syntax-parse stx
-      [(_ ref:id)
-       (define splitref (split-symbol (syntax-e #'ref)))
-       (define root (format-id stx "~a" (car splitref)))
-       (define tail (datum->syntax stx (cdr splitref)))
-       ; RAW version:  #`(handle-ref #,r0 'r '#,rs)
-       (with-syntax
-           ([root root]
-            [tail tail])
-         (syntax/loc stx (handle-ref root 'root 'tail)))]))
-
   (define (m-res-decl stx)
     (syntax-parse stx
-      [(_ name:expr ((~literal type-id) tid:id) cfg)
+      [(_ name:id ((~literal type-id) tid:id) cfg)
        #`(define name
            (with-src-handlers #,(src-location stx)  "valid type" 'tid
-             (lambda()(def-res tid 'name cfg))))]
+             (lambda()
+               (with-resource-prefix 'name
+                 (lambda() (def-res tid cfg))))))]
       ))
 
-  (define (m-module-invoke stx)
-    (syntax-parse stx
-      [(_ var-id:expr mod-id:expr PARAMS ...)
-       (syntax/loc stx
-         (define var-id (module-call 'var-id mod-id (make-immutable-hasheq (list PARAMS ...)) )))]))
 
-  (define (m-named-parameter stx)
-    (syntax-parse stx
-      ; NB string has to be first!
-      [(_ param-name:string EXPR) (syntax/loc stx (cons (string->symbol param-name) EXPR))]
-      [(_ param-name:expr EXPR) (syntax/loc stx (cons 'param-name EXPR))]
-      ))
   )
 
 (define-syntax marv-spec m-marv-spec)
@@ -416,26 +448,28 @@
 (define-syntax statement m-statement)
 (define-syntax decl m-decl)
 (define-syntax var-decl m-var-decl)
-(define-syntax config-func-decl m-config-func-decl)
 (define-syntax func-decl m-func-decl)
 (define-syntax type-decl m-type-decl)
 (define-syntax type-template m-type-template)
 (define-syntax res-decl m-res-decl)
-(define-syntax module-invoke m-module-invoke)
-(define-syntax named-parameter m-named-parameter)
 (define-syntax func-call m-func-call)
-(define-syntax func-ident m-func-ident)
 (define-syntax expression m-expression)
+(define-syntax func-apply m-func-apply)
+(define-syntax dot-apply m-dot-apply)
+(define-syntax list-apply m-list-apply)
+(define-syntax boolean-expression m-boolean-expression)
 (define-syntax string-expression m-string-expression)
+(define-syntax list-expression m-list-expression)
 (define-syntax map-expression m-map-expression)
 (define-syntax num-expression m-num-expression)
-(define-syntax reference m-reference)
+(define-syntax num-term m-num-term)
 (define-syntax map-spec m-map-spec)
 (define-syntax alist m-alist)
 (define-syntax attr-list m-attr-list)
 (define-syntax attribute-name m-attribute-name)
 (define-syntax keyword m-keyword)
 (define-syntax built-in m-built-in)
+(define-syntax assertion m-assertion)
 (define-syntax env-read m-env-read)
 (define-syntax strf m-strf)
 (define-syntax urivars m-urivars)
@@ -443,26 +477,19 @@
 (define-syntax base64encode m-base64encode)
 (define-syntax base64decode m-base64decode)
 (define-syntax pprint m-pprint)
-(define-syntax boolean m-boolean)
 (define-syntax config-expr m-config-expr)
-(define-syntax config-merge m-config-merge)
-(define-syntax config-take m-config-take)
-(define-syntax config-ident m-config-ident)
 
-(define-syntax api-id m-generic-placeholder)
-(define-syntax transformer-id m-generic-placeholder)
 (define-syntax type-id m-generic-placeholder)
-(define-syntax func-id m-generic-placeholder)
 (define-syntax type-parameters m-generic-placeholder)
 (define-syntax type-wild m-generic-placeholder)
 
 (provide marv-spec outer-decl marv-module module-parameter decl var-decl res-decl
-         module-invoke named-parameter module-return return-parameter
+         module-return return-parameter
          module-import
          module-export
-         api-id transformer-id type-id
-         func-call func-ident config-func-decl func-decl type-decl type-template
-         expression string-expression num-expression map-expression reference statement map-spec alist attr-list attribute-name
-         config-expr config-merge config-ident config-take
-         keyword built-in env-read pprint strf urivars uritemplate base64encode base64decode
-         boolean)
+         type-id
+         func-call func-decl type-decl type-template
+         expression func-apply dot-apply list-apply boolean-expression string-expression num-expression num-term
+         list-expression map-expression statement map-spec alist attr-list attribute-name
+         config-expr
+         keyword built-in assertion env-read pprint strf urivars uritemplate  base64encode base64decode)

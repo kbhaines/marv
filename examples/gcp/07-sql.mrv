@@ -5,28 +5,29 @@ import types/gcp/sql as sql
 module main(name = "example-07-sql") {
 
     defaults = {
-        project = env("MARV_GCP_PROJECT")
+        project = env("MARV_GCP_PROJECT"),
         region = env("MARV_GCP_REGION")
     }
 
-    db-host = sql:instance defaults <- {
-        name = "example-instance1"
-        instanceType = "CLOUD_SQL_INSTANCE"
-        databaseVersion = "POSTGRES_15"
+    db-host := sql:instance defaults <- {
+        name = "example-instance2",
+        instanceType = "CLOUD_SQL_INSTANCE",
+        databaseVersion = "POSTGRES_15",
         settings = {
-            dataDiskSizeGb = 10
+            dataDiskSizeGb = 10,
             tier = "db-custom-1-3840"
         }
     }
 
-    database =  sql:database defaults <- {
-        instance = db-host.name
-        name = "my-database"
+    database :=  sql:database defaults <- {
+        instance = db-host.name,
+        name = "marv-database"
     }
 
-    user = sql:user defaults <- {
-        instance = db-host.name
-        name = "marv-user"
-        password = "super-secret"
-    }
+# TODO users can't be created at the moment
+#   user := sql:user defaults <- {
+#       instance = db-host.name,
+#       name = "marv-user",
+#       password = "super-secret"
+#   }
 }

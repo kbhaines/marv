@@ -2,31 +2,52 @@
 #lang racket/base
 
 (require racket/contract)
+(require racket/pretty)
 (require racket/string)
 (require marv/core/config)
+(require marv/log)
+(require marv/utils/hash)
+(require marv/core/values)
 
 (provide hash->attribute
          flat-attributes
          res-id/c prefix-id list->id id->list
-         resource
          resource-call
+         resource-type-fn
          resource-origin
          resource/c
          origin/c
          resource-set/c
-         (struct-out resource)
+         config-resolve
+         resource? resource-gid resource-type resource-deps resource-config
+         mk-resource update-resource-config
          (struct-out attribute))
 
 (struct attribute (name value) #:prefab)
-(struct resource (type-fn config) #:prefab)
+
+; Don't provide 'resource' to clients; we want them to use mk-resource.
+(struct resource (gid type deps config) #:prefab)
+
+(define (mk-resource gid type deps config)
+  (resource gid type deps (type-call type 'identity config)))
+
+(define (type-call type verb . args)
+  (apply (hash-ref type verb) args))
+
+(define (update-resource-config r new-config)
+  (resource (resource-gid r) (resource-type r) (resource-deps r) new-config))
 
 (define res-id/c symbol?)
 
 (define origin/c hash?)
 
+(define/contract (resource-type-fn res)
+  (resource? . -> . any/c)
+  (lambda(verb . args)(apply type-call (resource-type res) verb args)))
+
 (define/contract (resource-call verb res)
   (symbol? resource? . -> . any/c)
-  (((resource-type-fn res) verb) (resource-config res)))
+  (type-call (resource-type res) verb (resource-config res)))
 
 (define/contract (resource-origin res)
   (resource? . -> . origin/c)
@@ -44,7 +65,9 @@
   ((listof symbol?) . -> . res-id/c)
   (string->symbol (string-join (map symbol->string lst) ".")))
 
-(define resource/c (struct/c resource procedure? config/c))
+(define type? hash?)
+
+(define resource/c (struct/c resource symbol? type? list? config/c))
 
 (define resource-set/c (hash/c res-id/c resource/c))
 
@@ -66,3 +89,41 @@
           [else (cons a acc)]))
 
   (foldl flat '() attrs))
+
+
+; used to finalise all deferred computations and references in the
+; given 'cfg', making the values concrete so they can be sent to an API (for example).
+; This resolver is NOT allowed to fail, as opposed to the resolver in
+; support.rkt
+
+(define (config-resolve cfg get-by-gid)
+
+  (define (process _ v)
+    (when (and (value? v) (deferred? (unpack-value v))) (raise "invariant violation; value wraps deferred"))
+    (if (deferred? v)
+        (resolve-deferred v)
+        (resolve-ref v)))
+
+  (define (resolve-deferred d)
+
+    (log-marv-debug "resolve-deferred: ~a" d)
+
+    (define (handle-term t)
+      ; We can still have values packed inside deferred terms
+      (define tr (resolve-ref (unpack-value t)))
+      (if (deferred? tr) (resolve-deferred tr) tr))
+
+    (define resolved (map handle-term (deferred-terms d)))
+    (when (memf deferred? resolved) (raise "unabled to compute deferred term"))
+    (if (deferred-op d) (apply (deferred-op d) resolved) (car resolved)))
+
+  (define (resolve-ref v)
+    (define uv (unpack-value v))
+    (if (ref? uv)
+        (hash-nref
+         (get-by-gid (ref-gid uv))
+         (id->list (ref-path uv))
+         (lambda()(raise "resolve-ref: unable to resolve")))
+        uv))
+
+  (hash-apply cfg process))

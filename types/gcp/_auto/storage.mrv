@@ -3,236 +3,316 @@
 
 import types/gcp/_auto/storage-schema
 API-ID="storage"
-# /resources/notifications
-type notifications = {
- origin(cfg)= {
-  driver="gcp"
-  type="gcp:storage:/resources/notifications"
- }
- identity(cfg) = cfg
- create(cfg)={
-  config=cfg
-  api={
-   api-id=API-ID
-   request-body=schemas.Notification(cfg)
-   response-type="storage.schemas.Notification"
-   method="POST"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/notificationConfigs"
-   required=["(bucket)"]
-  }
- }
- read(cfg)={
-  config=cfg
-  api={
-   api-id=API-ID
-   response-type="storage.schemas.Notification"
-   method="GET"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/notificationConfigs/{name}"
-   required=["(notification bucket)"]
-  }
- }
- update(cfg)={
-  config=cfg
-  api={
-   
-  }
- }
- delete(cfg)={
-  config=cfg
-  api={
-   api-id=API-ID
-   response-type="storage.schemas.#f"
-   method="DELETE"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/notificationConfigs/{name}"
-   required=["(notification bucket)"]
-  }
- }
-}
-export notifications
-
 # /resources/objectAccessControls
 type objectAccessControls = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:storage:/resources/objectAccessControls"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.ObjectAccessControl(cfg)
-   response-type="storage.schemas.ObjectAccessControl"
-   method="POST"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{object}/acl"
+   api-id=API-ID,
+   request-body=schemas.ObjectAccessControl(cfg),
+   response-type="storage.schemas.ObjectAccessControl",
+   method="POST",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{object}/acl",
    required=["(object bucket)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="storage.schemas.ObjectAccessControl"
-   method="GET"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{object}/acl/{name}"
+   api-id=API-ID,
+   response-type="storage.schemas.ObjectAccessControl",
+   method="GET",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{object}/acl/{name}",
    required=["(entity object bucket)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.ObjectAccessControl(cfg)
-   response-type="storage.schemas.ObjectAccessControl"
-   method="PATCH"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{object}/acl/{name}"
+   api-id=API-ID,
+   request-body=schemas.ObjectAccessControl(cfg),
+   response-type="storage.schemas.ObjectAccessControl",
+   method="PATCH",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{object}/acl/{name}",
    required=["(entity object bucket)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="storage.schemas.#f"
-   method="DELETE"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{object}/acl/{name}"
+   api-id=API-ID,
+   response-type="storage.schemas.#f",
+   method="DELETE",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{object}/acl/{name}",
    required=["(entity object bucket)"]
   }
  }
 }
 export objectAccessControls
 
-# /resources/bucketAccessControls
-type bucketAccessControls = {
+# /resources/operations
+type operations = {
  origin(cfg)= {
-  driver="gcp"
-  type="gcp:storage:/resources/bucketAccessControls"
+  driver="gcp",
+  type="gcp:storage:/resources/operations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.BucketAccessControl(cfg)
-   response-type="storage.schemas.BucketAccessControl"
-   method="POST"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/acl"
+   
+  }
+ }
+ read(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="storage.schemas.GoogleLongrunningOperation",
+   method="GET",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/operations/{name}",
+   required=["(operationId bucket)"]
+  }
+ }
+ update(cfg)={
+  config=cfg,
+  api={
+   
+  }
+ }
+ delete(cfg)={
+  config=cfg,
+  api={
+   
+  }
+ }
+}
+export operations
+
+# /resources/notifications
+type notifications = {
+ origin(cfg)= {
+  driver="gcp",
+  type="gcp:storage:/resources/notifications"
+ }
+ identity(cfg) = cfg
+ create(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   request-body=schemas.Notification(cfg),
+   response-type="storage.schemas.Notification",
+   method="POST",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/notificationConfigs",
    required=["(bucket)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="storage.schemas.BucketAccessControl"
-   method="GET"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/acl/{name}"
+   api-id=API-ID,
+   response-type="storage.schemas.Notification",
+   method="GET",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/notificationConfigs/{name}",
+   required=["(notification bucket)"]
+  }
+ }
+ update(cfg)={
+  config=cfg,
+  api={
+   
+  }
+ }
+ delete(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="storage.schemas.#f",
+   method="DELETE",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/notificationConfigs/{name}",
+   required=["(notification bucket)"]
+  }
+ }
+}
+export notifications
+
+# /resources/managedFolders
+type managedFolders = {
+ origin(cfg)= {
+  driver="gcp",
+  type="gcp:storage:/resources/managedFolders"
+ }
+ identity(cfg) = cfg
+ create(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   request-body=schemas.ManagedFolder(cfg),
+   response-type="storage.schemas.ManagedFolder",
+   method="POST",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/managedFolders",
+   required=["(bucket)"]
+  }
+ }
+ read(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="storage.schemas.ManagedFolder",
+   method="GET",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/managedFolders/{name}",
+   required=["(bucket managedFolder)"]
+  }
+ }
+ update(cfg)={
+  config=cfg,
+  api={
+   
+  }
+ }
+ delete(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="storage.schemas.#f",
+   method="DELETE",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/managedFolders/{name}",
+   required=["(bucket managedFolder)"]
+  }
+ }
+}
+export managedFolders
+
+# /resources/bucketAccessControls
+type bucketAccessControls = {
+ origin(cfg)= {
+  driver="gcp",
+  type="gcp:storage:/resources/bucketAccessControls"
+ }
+ identity(cfg) = cfg
+ create(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   request-body=schemas.BucketAccessControl(cfg),
+   response-type="storage.schemas.BucketAccessControl",
+   method="POST",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/acl",
+   required=["(bucket)"]
+  }
+ }
+ read(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="storage.schemas.BucketAccessControl",
+   method="GET",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/acl/{name}",
    required=["(entity bucket)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.BucketAccessControl(cfg)
-   response-type="storage.schemas.BucketAccessControl"
-   method="PATCH"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/acl/{name}"
+   api-id=API-ID,
+   request-body=schemas.BucketAccessControl(cfg),
+   response-type="storage.schemas.BucketAccessControl",
+   method="PATCH",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/acl/{name}",
    required=["(entity bucket)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="storage.schemas.#f"
-   method="DELETE"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/acl/{name}"
+   api-id=API-ID,
+   response-type="storage.schemas.#f",
+   method="DELETE",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/acl/{name}",
    required=["(entity bucket)"]
   }
  }
 }
 export bucketAccessControls
 
-# /resources/buckets
-type buckets = {
+# /resources/folders
+type folders = {
  origin(cfg)= {
-  driver="gcp"
-  type="gcp:storage:/resources/buckets"
+  driver="gcp",
+  type="gcp:storage:/resources/folders"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Bucket(cfg)
-   response-type="storage.schemas.Bucket"
-   method="POST"
-   url="https://storage.googleapis.com/storage/v1/b?project={project}"
-   required=["(project)"]
+   api-id=API-ID,
+   request-body=schemas.Folder(cfg),
+   response-type="storage.schemas.Folder",
+   method="POST",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/folders",
+   required=["(bucket)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="storage.schemas.Bucket"
-   method="GET"
-   url="https://storage.googleapis.com/storage/v1/b/{name}"
-   required=["(bucket)"]
+   api-id=API-ID,
+   response-type="storage.schemas.Folder",
+   method="GET",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/folders/{name}",
+   required=["(bucket folder)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Bucket(cfg)
-   response-type="storage.schemas.Bucket"
-   method="PATCH"
-   url="https://storage.googleapis.com/storage/v1/b/{name}"
-   required=["(bucket)"]
+   
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="storage.schemas.#f"
-   method="DELETE"
-   url="https://storage.googleapis.com/storage/v1/b/{name}"
-   required=["(bucket)"]
+   api-id=API-ID,
+   response-type="storage.schemas.#f",
+   method="DELETE",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/folders/{name}",
+   required=["(bucket folder)"]
   }
  }
 }
-export buckets
+export folders
 
 # /resources/channels
 type channels = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:storage:/resources/channels"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -240,52 +320,147 @@ type channels = {
 }
 export channels
 
-# /resources/defaultObjectAccessControls
-type defaultObjectAccessControls = {
+# /resources/anywhereCaches
+type anywhereCaches = {
  origin(cfg)= {
-  driver="gcp"
-  type="gcp:storage:/resources/defaultObjectAccessControls"
+  driver="gcp",
+  type="gcp:storage:/resources/anywhereCaches"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.ObjectAccessControl(cfg)
-   response-type="storage.schemas.ObjectAccessControl"
-   method="POST"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/defaultObjectAcl"
+   api-id=API-ID,
+   request-body=schemas.AnywhereCache(cfg),
+   response-type="storage.schemas.GoogleLongrunningOperation",
+   method="POST",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/anywhereCaches",
    required=["(bucket)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="storage.schemas.ObjectAccessControl"
-   method="GET"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/defaultObjectAcl/{name}"
+   api-id=API-ID,
+   response-type="storage.schemas.AnywhereCache",
+   method="GET",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/anywhereCaches/{name}",
+   required=["(anywhereCacheId bucket)"]
+  }
+ }
+ update(cfg)={
+  config=cfg,
+  api={
+   
+  }
+ }
+ delete(cfg)={
+  config=cfg,
+  api={
+   
+  }
+ }
+}
+export anywhereCaches
+
+# /resources/buckets
+type buckets = {
+ origin(cfg)= {
+  driver="gcp",
+  type="gcp:storage:/resources/buckets"
+ }
+ identity(cfg) = cfg
+ create(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   request-body=schemas.Bucket(cfg),
+   response-type="storage.schemas.Bucket",
+   method="POST",
+   url="https://storage.googleapis.com/storage/v1/b?project={project}",
+   required=["(project)"]
+  }
+ }
+ read(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="storage.schemas.Bucket",
+   method="GET",
+   url="https://storage.googleapis.com/storage/v1/b/{name}",
+   required=["(bucket)"]
+  }
+ }
+ update(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   request-body=schemas.Bucket(cfg),
+   response-type="storage.schemas.Bucket",
+   method="PATCH",
+   url="https://storage.googleapis.com/storage/v1/b/{name}",
+   required=["(bucket)"]
+  }
+ }
+ delete(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="storage.schemas.#f",
+   method="DELETE",
+   url="https://storage.googleapis.com/storage/v1/b/{name}",
+   required=["(bucket)"]
+  }
+ }
+}
+export buckets
+
+# /resources/defaultObjectAccessControls
+type defaultObjectAccessControls = {
+ origin(cfg)= {
+  driver="gcp",
+  type="gcp:storage:/resources/defaultObjectAccessControls"
+ }
+ identity(cfg) = cfg
+ create(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   request-body=schemas.ObjectAccessControl(cfg),
+   response-type="storage.schemas.ObjectAccessControl",
+   method="POST",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/defaultObjectAcl",
+   required=["(bucket)"]
+  }
+ }
+ read(cfg)={
+  config=cfg,
+  api={
+   api-id=API-ID,
+   response-type="storage.schemas.ObjectAccessControl",
+   method="GET",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/defaultObjectAcl/{name}",
    required=["(entity bucket)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.ObjectAccessControl(cfg)
-   response-type="storage.schemas.ObjectAccessControl"
-   method="PATCH"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/defaultObjectAcl/{name}"
+   api-id=API-ID,
+   request-body=schemas.ObjectAccessControl(cfg),
+   response-type="storage.schemas.ObjectAccessControl",
+   method="PATCH",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/defaultObjectAcl/{name}",
    required=["(entity bucket)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="storage.schemas.#f"
-   method="DELETE"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/defaultObjectAcl/{name}"
+   api-id=API-ID,
+   response-type="storage.schemas.#f",
+   method="DELETE",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/defaultObjectAcl/{name}",
    required=["(entity bucket)"]
   }
  }
@@ -295,49 +470,49 @@ export defaultObjectAccessControls
 # /resources/objects
 type objects = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:storage:/resources/objects"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Object(cfg)
-   response-type="storage.schemas.Object"
-   method="POST"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o"
+   api-id=API-ID,
+   request-body=schemas.Object(cfg),
+   response-type="storage.schemas.Object",
+   method="POST",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o",
    required=["(bucket)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="storage.schemas.Object"
-   method="GET"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{name}"
+   api-id=API-ID,
+   response-type="storage.schemas.Object",
+   method="GET",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{name}",
    required=["(object bucket)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Object(cfg)
-   response-type="storage.schemas.Object"
-   method="PATCH"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{name}"
+   api-id=API-ID,
+   request-body=schemas.Object(cfg),
+   response-type="storage.schemas.Object",
+   method="PATCH",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{name}",
    required=["(object bucket)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="storage.schemas.#f"
-   method="DELETE"
-   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{name}"
+   api-id=API-ID,
+   response-type="storage.schemas.#f",
+   method="DELETE",
+   url="https://storage.googleapis.com/storage/v1/b/{bucket}/o/{name}",
    required=["(object bucket)"]
   }
  }
@@ -347,34 +522,34 @@ export objects
 # /resources/projects/resources/serviceAccount
 type projects_serviceAccount = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:storage:/resources/projects/resources/serviceAccount"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="storage.schemas.ServiceAccount"
-   method="GET"
-   url="https://storage.googleapis.com/storage/v1/projects/{projectId}/serviceAccount"
+   api-id=API-ID,
+   response-type="storage.schemas.ServiceAccount",
+   method="GET",
+   url="https://storage.googleapis.com/storage/v1/projects/{projectId}/serviceAccount",
    required=["(projectId)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -385,39 +560,39 @@ export projects_serviceAccount
 # /resources/projects/resources/hmacKeys
 type projects_hmacKeys = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:storage:/resources/projects/resources/hmacKeys"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="storage.schemas.HmacKeyMetadata"
-   method="GET"
-   url="https://storage.googleapis.com/storage/v1/projects/{projectId}/hmacKeys/{name}"
+   api-id=API-ID,
+   response-type="storage.schemas.HmacKeyMetadata",
+   method="GET",
+   url="https://storage.googleapis.com/storage/v1/projects/{projectId}/hmacKeys/{name}",
    required=["(accessId projectId)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="storage.schemas.#f"
-   method="DELETE"
-   url="https://storage.googleapis.com/storage/v1/projects/{projectId}/hmacKeys/{name}"
+   api-id=API-ID,
+   response-type="storage.schemas.#f",
+   method="DELETE",
+   url="https://storage.googleapis.com/storage/v1/projects/{projectId}/hmacKeys/{name}",
    required=["(accessId projectId)"]
   }
  }

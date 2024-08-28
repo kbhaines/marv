@@ -6,34 +6,34 @@ API-ID="sql"
 # /resources/operations
 type operations = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:sql:/resources/operations"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="sql.schemas.Operation"
-   method="GET"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/operations/{name}"
+   api-id=API-ID,
+   response-type="sql.schemas.Operation",
+   method="GET",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/operations/{name}",
    required=["(project operation)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -44,49 +44,49 @@ export operations
 # /resources/databases
 type databases = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:sql:/resources/databases"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Database(cfg)
-   response-type="sql.schemas.Operation"
-   method="POST"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/databases"
+   api-id=API-ID,
+   request-body=schemas.Database(cfg),
+   response-type="sql.schemas.Operation",
+   method="POST",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/databases",
    required=["(project instance)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="sql.schemas.Database"
-   method="GET"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/databases/{name}"
+   api-id=API-ID,
+   response-type="sql.schemas.Database",
+   method="GET",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/databases/{name}",
    required=["(project instance database)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.Database(cfg)
-   response-type="sql.schemas.Operation"
-   method="PATCH"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/databases/{name}"
+   api-id=API-ID,
+   request-body=schemas.Database(cfg),
+   response-type="sql.schemas.Operation",
+   method="PATCH",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/databases/{name}",
    required=["(project instance database)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="sql.schemas.Operation"
-   method="DELETE"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/databases/{name}"
+   api-id=API-ID,
+   response-type="sql.schemas.Operation",
+   method="DELETE",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/databases/{name}",
    required=["(project instance database)"]
   }
  }
@@ -96,30 +96,30 @@ export databases
 # /resources/tiers
 type tiers = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:sql:/resources/tiers"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -130,49 +130,49 @@ export tiers
 # /resources/instances
 type instances = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:sql:/resources/instances"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.DatabaseInstance(cfg)
-   response-type="sql.schemas.Operation"
-   method="POST"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances"
+   api-id=API-ID,
+   request-body=schemas.DatabaseInstance(cfg),
+   response-type="sql.schemas.Operation",
+   method="POST",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances",
    required=["(project)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="sql.schemas.DatabaseInstance"
-   method="GET"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{name}"
+   api-id=API-ID,
+   response-type="sql.schemas.DatabaseInstance",
+   method="GET",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{name}",
    required=["(project instance)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.DatabaseInstance(cfg)
-   response-type="sql.schemas.Operation"
-   method="PATCH"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{name}"
+   api-id=API-ID,
+   request-body=schemas.DatabaseInstance(cfg),
+   response-type="sql.schemas.Operation",
+   method="PATCH",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{name}",
    required=["(project instance)"]
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="sql.schemas.Operation"
-   method="DELETE"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{name}"
+   api-id=API-ID,
+   response-type="sql.schemas.Operation",
+   method="DELETE",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{name}",
    required=["(project instance)"]
   }
  }
@@ -182,44 +182,44 @@ export instances
 # /resources/backupRuns
 type backupRuns = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:sql:/resources/backupRuns"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.BackupRun(cfg)
-   response-type="sql.schemas.Operation"
-   method="POST"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/backupRuns"
+   api-id=API-ID,
+   request-body=schemas.BackupRun(cfg),
+   response-type="sql.schemas.Operation",
+   method="POST",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/backupRuns",
    required=["(project instance)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="sql.schemas.BackupRun"
-   method="GET"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/backupRuns/{name}"
+   api-id=API-ID,
+   response-type="sql.schemas.BackupRun",
+   method="GET",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/backupRuns/{name}",
    required=["(id project instance)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="sql.schemas.Operation"
-   method="DELETE"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/backupRuns/{name}"
+   api-id=API-ID,
+   response-type="sql.schemas.Operation",
+   method="DELETE",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/backupRuns/{name}",
    required=["(id project instance)"]
   }
  }
@@ -229,34 +229,34 @@ export backupRuns
 # /resources/connect
 type connect = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:sql:/resources/connect"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="sql.schemas.ConnectSettings"
-   method="GET"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/connectSettings"
+   api-id=API-ID,
+   response-type="sql.schemas.ConnectSettings",
+   method="GET",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/connectSettings",
    required=["(project instance)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -267,44 +267,44 @@ export connect
 # /resources/sslCerts
 type sslCerts = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:sql:/resources/sslCerts"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.SslCertsInsertRequest(cfg)
-   response-type="sql.schemas.SslCertsInsertResponse"
-   method="POST"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/sslCerts"
+   api-id=API-ID,
+   request-body=schemas.SslCertsInsertRequest(cfg),
+   response-type="sql.schemas.SslCertsInsertResponse",
+   method="POST",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/sslCerts",
    required=["(project instance)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="sql.schemas.SslCert"
-   method="GET"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/sslCerts/{name}"
+   api-id=API-ID,
+   response-type="sql.schemas.SslCert",
+   method="GET",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/sslCerts/{name}",
    required=["(project instance sha1Fingerprint)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="sql.schemas.Operation"
-   method="DELETE"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/sslCerts/{name}"
+   api-id=API-ID,
+   response-type="sql.schemas.Operation",
+   method="DELETE",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/sslCerts/{name}",
    required=["(project instance sha1Fingerprint)"]
   }
  }
@@ -314,44 +314,44 @@ export sslCerts
 # /resources/users
 type users = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:sql:/resources/users"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   request-body=schemas.User(cfg)
-   response-type="sql.schemas.Operation"
-   method="POST"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/users"
+   api-id=API-ID,
+   request-body=schemas.User(cfg),
+   response-type="sql.schemas.Operation",
+   method="POST",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/users",
    required=["(project instance)"]
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="sql.schemas.User"
-   method="GET"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/users/{name}"
+   api-id=API-ID,
+   response-type="sql.schemas.User",
+   method="GET",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/users/{name}",
    required=["(project instance name)"]
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
-   api-id=API-ID
-   response-type="sql.schemas.Operation"
-   method="DELETE"
-   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/users"
+   api-id=API-ID,
+   response-type="sql.schemas.Operation",
+   method="DELETE",
+   url="https://sqladmin.googleapis.com/v1/projects/{project}/instances/{instance}/users",
    required=["(project instance)"]
   }
  }
@@ -361,30 +361,30 @@ export users
 # /resources/flags
 type flags = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:sql:/resources/flags"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
@@ -395,30 +395,30 @@ export flags
 # /resources/projects/resources/instances
 type projects_instances = {
  origin(cfg)= {
-  driver="gcp"
+  driver="gcp",
   type="gcp:sql:/resources/projects/resources/instances"
  }
  identity(cfg) = cfg
  create(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  read(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  update(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }
  }
  delete(cfg)={
-  config=cfg
+  config=cfg,
   api={
    
   }

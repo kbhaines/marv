@@ -1,5 +1,8 @@
 #lang racket/base
 
+; See racket-docs 17.3.4:
+; https://docs.racket-lang.org/guide/language-collection.html
+
 (module reader racket/base
   (require syntax/strip-context)
   (require "parser.rkt" "tokenizer.rkt")
