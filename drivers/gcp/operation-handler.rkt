@@ -70,7 +70,7 @@
   (cond
     [is-operation?
      (define done? (equal? "DONE" (hash-ref resp 'status)))
-     (define delete? (string-suffix? (hash-ref resp 'operationType #f) "delete"))
+     (define delete? (string-contains? (hash-ref resp 'operationType #f) "DELETE"))
      (define errors (hash-nref resp '(error items) #f))
      (define poll-next
        (and (not done?)
